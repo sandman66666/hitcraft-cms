@@ -1,0 +1,189 @@
+@tailwind base;
+
+@layer base {
+  :root {
+    --primary-gradient: linear-gradient(to right, #8a44c8, #df0c39);
+  }
+
+  html {
+    height: 100%;
+  }
+
+  body {
+    margin: 0 auto;
+    max-width: 1920px;
+    min-height: 100%;
+    position: relative;
+    z-index: 1;
+    font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+}
+
+@tailwind components;
+
+@layer components {
+  /* Navbar Styles */
+  .nav-container {
+    @apply fixed top-0 left-0 right-0 z-50 bg-white;
+  }
+
+  .nav-content {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-10;
+  }
+
+  .nav-logo {
+    @apply h-3 w-auto transition-opacity duration-200 max-w-[100px];
+  }
+
+  .nav-logo:hover {
+    @apply opacity-80;
+  }
+
+  .nav-links {
+    @apply hidden md:flex items-center space-x-8;
+  }
+
+  .nav-link {
+    @apply text-gray-700 hover:text-gray-900 px-3 py-1 text-sm font-medium transition-colors relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute left-0 right-0 -bottom-0.5 h-0.5 scale-x-0 transition-transform duration-200 origin-left;
+    background: var(--primary-gradient);
+  }
+
+  .nav-link:hover::after {
+    @apply scale-x-100;
+  }
+
+  .nav-button {
+    @apply text-white px-6 py-1 rounded-lg text-sm font-medium transition-all duration-300;
+    background: var(--primary-gradient);
+  }
+
+  .nav-button:hover {
+    @apply opacity-90 -translate-y-0.5;
+  }
+
+  .nav-user-avatar {
+    @apply w-8 h-8 rounded-full overflow-hidden text-white flex items-center justify-center text-sm font-medium;
+    background: var(--primary-gradient);
+  }
+
+  .nav-mobile {
+    @apply md:hidden flex items-center px-4 py-1;
+  }
+
+  .nav-mobile-button {
+    @apply w-full text-white px-4 py-1 rounded-lg text-sm font-medium transition-opacity;
+    background: var(--primary-gradient);
+  }
+
+  .nav-mobile-button:hover {
+    @apply opacity-90;
+  }
+
+  /* Background Styles */
+  .background-wrapper {
+    @apply fixed inset-0 -z-10 pointer-events-none overflow-hidden;
+  }
+
+  .background-wrapper-before {
+    @apply absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1920px] h-full -z-10;
+    content: "";
+    background: #f1f1f3 url("/assets/images/bg/sm_bg.png") no-repeat center top;
+    background-size: contain;
+  }
+
+  @media (min-width: 1024px) {
+    .background-wrapper-before {
+      background-image: url("/assets/images/bg/md_bg.png");
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .background-wrapper-before {
+      background-image: url("/assets/images/bg/2xl_bg.png");
+    }
+  }
+
+  /* Main Content */
+  .main-content {
+    @apply relative z-10 flex-1 w-full pt-[42px] 2xl:pt-[48px];
+  }
+
+  /* Button Styles */
+  .main-button-design {
+    @apply w-4/5 h-[50px] rounded-[24.7px] text-[15px] text-white font-bold text-center uppercase relative z-10 whitespace-nowrap;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  @media (min-width: 640px) {
+    .main-button-design {
+      font-size: 32.5px;
+      border-radius: 53.5px;
+      height: 107px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .main-button-design {
+      font-size: 29.5px;
+      border-radius: 39px;
+      height: 81px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .main-button-design {
+      width: 312px;
+      max-width: none;
+      height: 55px;
+      border-radius: 27px;
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .main-button-design {
+      width: 389px;
+      height: 75px;
+      font-size: 20px;
+      border-radius: 37.5px;
+    }
+  }
+
+  .gradient-purple-button {
+    background: var(--primary-gradient);
+  }
+
+  .gradient-purple-button:hover {
+    box-shadow: 0 4px 15px rgba(138, 68, 200, 0.4),
+      0 4px 15px rgba(223, 12, 57, 0.4);
+  }
+
+  .black-button {
+    @apply bg-[#252931] hover:bg-opacity-90;
+  }
+
+  .main-button-design:hover {
+    @apply -translate-y-[3px];
+  }
+
+  @media (max-width: 1023px) {
+    .main-button-design:hover {
+      @apply shadow-none;
+    }
+  }
+}
+
+@tailwind utilities;

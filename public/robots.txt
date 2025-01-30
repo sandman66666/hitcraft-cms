@@ -1,0 +1,33 @@
+# HitCraft Website Robots Configuration
+User-agent: *
+
+# Allow crawling of main pages
+Allow: /
+Allow: /about
+Allow: /why-hitcraft
+Allow: /pricing
+Allow: /contact
+Allow: /articles/terms-of-use
+
+# Prevent crawling of auth-related pages
+Disallow: /login
+Disallow: /oauth/
+Disallow: /oauth/callback
+Disallow: /api/
+
+# Prevent crawling of development assets
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /assets/js/
+Disallow: /assets/css/
+
+# Allow crawling of important assets
+Allow: /assets/images/
+Allow: /sitemap.xml
+Allow: /favicon.ico
+
+# Sitemap location
+Sitemap: https://hitcraft.ai/sitemap.xml
+
+# Crawl-delay for rate limiting
+Crawl-delay: 1

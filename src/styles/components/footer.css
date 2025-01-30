@@ -1,0 +1,25 @@
+footer {
+  @apply w-full bg-[#252931];
+  position: relative;
+  z-index: 50;
+}
+
+.footer-container {
+  @apply max-w-[1920px] mx-auto px-4 py-8;
+  @apply flex items-center justify-center;
+}
+
+.footer-social {
+  @apply flex items-center gap-12;
+}
+
+.footer-social-link {
+  @apply w-12 h-12 flex items-center justify-center hover:opacity-80 transition-opacity;
+  display: block;
+}
+
+.footer-social-link img {
+  @apply w-full h-full object-contain;
+  min-width: 48px;
+  min-height: 48px;
+}

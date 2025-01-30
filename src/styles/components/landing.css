@@ -1,0 +1,68 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-fade-in-delay {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+.animate-fade-in-delay-2 {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+/* Smooth scroll behavior for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhance section transitions */
+section {
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Add subtle parallax effect to background images */
+section > div[class*="bg-[url"] {
+  transition: transform 0.3s ease-out;
+}
+
+section:hover > div[class*="bg-[url"] {
+  transform: scale(1.05);
+}
+
+/* Enhance hover effects for interactive elements */
+.hover\:transform {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+/* Add subtle gradient animation to CTA buttons */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-gradient-to-r {
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+}

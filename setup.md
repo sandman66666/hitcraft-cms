@@ -1,0 +1,30 @@
+// Project structure and key files:
+
+src/
+  components/
+    auth/
+      Login.js
+      Register.js
+    landing/
+      Landing.js
+    layout/
+      Navbar.js
+      Footer.js
+    shared/
+      Button.js
+      Input.js
+      Modal.js
+  contexts/
+    AuthContext.js
+    UserContext.js
+  services/
+    auth.service.js
+    user.service.js
+  utils/
+    validation.js
+    constants.js
+  styles/
+    tailwind.config.js
+    globals.css
+  App.js
+  index.js

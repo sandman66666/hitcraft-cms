@@ -1,0 +1,65 @@
+.pricing-page {
+  @apply min-h-screen w-full;
+}
+
+.pricing-content {
+  @apply container mx-auto px-4 py-16;
+}
+
+.pricing-content h1 {
+  @apply text-4xl md:text-5xl font-bold text-center mb-4;
+}
+
+.pricing-content p {
+  @apply text-lg md:text-xl text-center mb-16;
+}
+
+.pricing-plans {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto;
+}
+
+.pricing-card {
+  @apply bg-[#252931] rounded-2xl p-8 relative flex flex-col items-center justify-between;
+  min-height: 320px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.pricing-card.popular {
+  @apply border-2 border-[#B026FF];
+}
+
+.most-popular-badge {
+  @apply absolute -top-4 left-1/2 transform -translate-x-1/2 px-6 py-1.5 rounded-full text-sm font-bold text-white;
+  background: linear-gradient(90deg, #B026FF 0%, #FF6B6B 100%);
+}
+
+.pricing-card h2 {
+  @apply text-2xl font-bold text-white mb-6;
+}
+
+.price {
+  @apply text-4xl font-bold text-white mb-8;
+}
+
+.pricing-card button {
+  @apply w-full mt-auto;
+}
+
+.gradient-purple-button {
+  background: linear-gradient(90deg, #B026FF 0%, #FF6B6B 100%);
+  @apply text-white font-bold py-3 px-6 rounded-full transition-all duration-300;
+}
+
+.black-button {
+  @apply bg-[#252931] text-white font-bold py-3 px-6 rounded-full transition-all duration-300;
+}
+
+.black-button:hover {
+  @apply bg-opacity-80;
+}

@@ -1,0 +1,137 @@
+/* Base Navbar */
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-content {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+/* Logo */
+.nav-logo {
+  height: 1.5rem;
+  width: auto;
+  transition: opacity 0.2s;
+}
+
+.nav-logo:hover {
+  opacity: 0.8;
+}
+
+/* Navigation Links */
+.nav-links {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-left: 1rem;
+  }
+}
+
+.nav-link {
+  color: #374151;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #111827;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: linear-gradient(to right, #8a44c8, #df0c39);
+  transform: scaleX(0);
+  transition: transform 0.2s;
+  transform-origin: left;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Login Button */
+.nav-button {
+  background: linear-gradient(to right, #8a44c8, #df0c39);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.nav-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* User Avatar */
+.nav-user-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: linear-gradient(to right, #8a44c8, #df0c39);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Mobile Menu */
+.nav-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .nav-mobile {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+  }
+}
+
+.nav-mobile-button {
+  width: 100%;
+  background: linear-gradient(to right, #8a44c8, #df0c39);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.nav-mobile-button:hover {
+  opacity: 0.9;
+}
