@@ -14,8 +14,8 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-      isScrolled ? 'bg-black/80 backdrop-blur-md' : ''
+    <nav className={`fixed top-0 left-0 right-0 z-[9999] transition-colors duration-300 ${
+      isScrolled ? 'bg-white/80 backdrop-blur-md' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
@@ -32,19 +32,19 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             <Link 
               to="/why-hitcraft"
-              className="text-gray-200 hover:text-white px-3 py-2 text-sm font-medium transition-colors"
+              className="text-black hover:text-black/70 px-3 py-2 text-sm font-medium transition-colors"
             >
               Why HitCraft
             </Link>
             <Link 
               to="/about"
-              className="text-gray-200 hover:text-white px-3 py-2 text-sm font-medium transition-colors"
+              className="text-black hover:text-black/70 px-3 py-2 text-sm font-medium transition-colors"
             >
               About
             </Link>
             <Link 
               to="/contact"
-              className="text-gray-200 hover:text-white px-3 py-2 text-sm font-medium transition-colors"
+              className="text-black hover:text-black/70 px-3 py-2 text-sm font-medium transition-colors"
             >
               Contact
             </Link>
@@ -64,7 +64,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#8a44c8]"
+              className="inline-flex items-center justify-center p-2 rounded-md text-black hover:text-black/70 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#8a44c8]"
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>
