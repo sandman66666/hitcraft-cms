@@ -73,26 +73,26 @@
     }
   },
   "uniqueApproach": {
-    "title": "A Complete Music Creation Experience",
+    "title": "A New Way to Create Music",
     "features": [
       {
-        "title": "Chat Like You'd Talk to a Pro",
-        "description": "Just describe what you want in plain language. From songwriting to production, get expert guidance backed by real musical examples that show you exactly what works.",
+        "title": "Chat Naturally",
+        "description": "Just describe what you want in plain language - no need to learn complex tools or technical jargon.",
         "icon": "chat"
       },
       {
-        "title": "Get Expert Guidance and Execute",
-        "description": "Not just advice - take action instantly through professional tools. Mix, master, or produce without ever leaving your conversation. Every suggestion comes with real song references to learn from.",
+        "title": "Get Expert Guidance",
+        "description": "Receive professional advice on any music-related topic, from creative direction to industry insights.",
         "icon": "lightbulb"
       },
       {
-        "title": "See and Hear the Results",
-        "description": "Turn ideas into professional tracks through natural conversation. Get instant results through industry-standard tools, learn from real musical examples, and keep your creative flow going.",
+        "title": "See Instant Results",
+        "description": "Don't just get suggestions - hear your ideas come to life professionally in seconds.",
         "icon": "play"
       },
       {
-        "title": "Learn While You Create",
-        "description": "Build your skills naturally with an AI mentor that shows you proven techniques through real songs. Every interaction teaches you something new about making better music.",
+        "title": "Grow Your Skills",
+        "description": "Learn as you create with explanations and tips from your AI mentor that help you improve.",
         "icon": "chart"
       }
     ]

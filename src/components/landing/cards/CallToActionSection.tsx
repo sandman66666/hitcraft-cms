@@ -31,7 +31,7 @@ export default function CallToActionSection({ content: initialContent }: CallToA
         <div className="text-center">
           <EditableText
             as="h2"
-            content="CALL TO ACTION:"
+            content="  "
             onChange={(value) => updateContent('callToAction.preTitle', value)}
             className="text-[24px] font-extralight mb-4 text-gray-800 font-poppins"
           />

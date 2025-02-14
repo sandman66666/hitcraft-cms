@@ -12,7 +12,7 @@ export default function SongwritersSection({ content = ContentLoader.getInstance
   return (
     <section className="w-full min-h-[100vh] min-h-[100svh] py-16 sm:py-24 relative bg-gradient-to-br from-blue-900 to-purple-900 overflow-hidden scroll-snap-align-start">
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-5" />
-      <div className="absolute right-0 bottom-0 w-3/4 h-3/4 bg-[url('/assets/images/landing/layer-1@3x.webp')] bg-no-repeat bg-right-bottom bg-contain opacity-10" />
+      <div className="absolute right-0 bottom-0 w-3/4 h-3/4 bg-[url('/assets/images/landing/songwriterimage.png')] bg-no-repeat bg-right-bottom bg-contain opacity-10" />
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           <div className="lg:col-span-2 mb-[-5]">
