@@ -94,7 +94,8 @@ export default function UniqueApproachSection({ content }: UniqueApproachSection
           ))}
         </div>
 
-        <div className="text-center">
+        {/* Added mt-[50px] to push the button down by 50px */}
+        <div className="text-center mt-[50px]">
           <button className="bg-white text-purple-700 px-8 py-4 rounded-full text-lg font-[700] transition-all duration-300 hover:scale-105 shadow-[0px_4px_12px_rgba(0,0,0,0.2)] hover:shadow-[0px_6px_16px_rgba(0,0,0,0.3)] transform hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px] mx-auto">
             LET'S GO!
           </button>

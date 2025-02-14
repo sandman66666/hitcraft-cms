@@ -6,6 +6,17 @@ interface SocialProofSectionProps {
 }
 
 export default function SocialProofSection({ content }: SocialProofSectionProps) {
+  // Update the image of the third testimonial
+  const updatedTestimonials = content.testimonials.map((testimonial, index) => {
+    if (index === 2) {
+      return {
+        ...testimonial,
+        image: "/assets/images/about-us/members/01_oudi.webp"
+      };
+    }
+    return testimonial;
+  });
+
   return (
     <section className="w-full min-h-[100vh] min-h-[100svh] bg-gradient-to-br from-[#1e2128] to-[#252931] py-16 sm:py-24 relative overflow-hidden scroll-snap-align-start">
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-5" />
@@ -20,7 +31,7 @@ export default function SocialProofSection({ content }: SocialProofSectionProps)
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-16">
-          {content.testimonials.map((testimonial, index) => (
+          {updatedTestimonials.map((testimonial, index) => (
             <div 
               key={index} 
               className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl relative min-h-[400px]"
