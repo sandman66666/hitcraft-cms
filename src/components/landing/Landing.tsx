@@ -4,6 +4,7 @@ import { LandingPageContent } from '../../types/content';
 import HeroSection from './cards/HeroSection';
 import MainValueSection from './cards/MainValueSection';
 import CoreBenefitsSection from './cards/CoreBenefitsSection';
+import ProducersSection from './cards/ProducersSection';
 import SongwritersSection from './cards/SongwritersSection';
 import UniqueApproachSection from './cards/UniqueApproachSection';
 import SocialProofSection from './cards/SocialProofSection';
@@ -99,7 +100,8 @@ function LandingContent() {
       <HeroSection content={content.hero} />
       <MainValueSection content={content.mainValue} />
       <CoreBenefitsSection content={content.coreBenefits} />
-      <SongwritersSection content={content.demo} />
+      <ProducersSection content={content.produceSong} />
+      <SongwritersSection content={content.writingPartner} />
       <UniqueApproachSection content={content.uniqueApproach} />
       <SocialProofSection content={content.socialProof} />
       <CallToActionSection content={content.callToAction} />

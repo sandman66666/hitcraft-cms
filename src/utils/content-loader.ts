@@ -1,10 +1,21 @@
 import { LandingPageContent } from '../types/content';
+import defaultContent from '../data/landing-page.json';
 
 export class ContentLoader {
   private static instance: ContentLoader;
-  private content: LandingPageContent | null = null;
+  private content: LandingPageContent = defaultContent as LandingPageContent;
 
-  private constructor() {}
+  private constructor() {
+    // Load from localStorage if available
+    const savedContent = localStorage.getItem('landing-page-content');
+    if (savedContent) {
+      try {
+        this.content = JSON.parse(savedContent);
+      } catch (error) {
+        console.error('Error parsing saved content:', error);
+      }
+    }
+  }
 
   public static getInstance(): ContentLoader {
     if (!ContentLoader.instance) {
@@ -13,9 +24,14 @@ export class ContentLoader {
     return ContentLoader.instance;
   }
 
-  public async getContent(): Promise<LandingPageContent> {
+  // Synchronous content access - always returns content immediately
+  public getContent(): LandingPageContent {
+    return this.content;
+  }
+
+  // Asynchronous content refresh - fetches latest from server
+  public async refreshContent(): Promise<LandingPageContent> {
     try {
-      // Always load from JSON file first
       const response = await fetch('/src/data/landing-page.json');
       if (!response.ok) {
         throw new Error(`Failed to fetch content: ${response.statusText}`);
@@ -23,6 +39,8 @@ export class ContentLoader {
       this.content = await response.json();
       // Save to localStorage for future use
       localStorage.setItem('landing-page-content', JSON.stringify(this.content));
+      // Notify components that content has changed
+      window.dispatchEvent(new CustomEvent('contentUpdated'));
     } catch (error) {
       console.error('Error loading content:', error);
       throw error;
@@ -46,6 +64,7 @@ export class ContentLoader {
 
   public clearCache(): void {
     localStorage.removeItem('landing-page-content');
-    this.content = null;
+    this.content = defaultContent as LandingPageContent;
+    window.dispatchEvent(new CustomEvent('contentUpdated'));
   }
 }

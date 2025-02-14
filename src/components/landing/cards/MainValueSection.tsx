@@ -36,13 +36,13 @@ const MainValueSection: React.FC = () => {
             </ul>
           </div>
 
-          <div className="flex items-center justify-center gap-6 flex-wrap">
-            <button className="bg-white text-purple-700 px-8 py-4 rounded-full text-lg font-[700] transition-all duration-300 hover:scale-105 shadow-[0px_4px_12px_rgba(0,0,0,0.2)] hover:shadow-[0px_6px_16px_rgba(0,0,0,0.3)] transform hover:-translate-y-0.5">
-              LET'S GO!
-            </button>
-            <button className="bg-white/[0.15] text-white border-2 border-white/40 px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:bg-white/25 hover:border-white/60 hover:scale-105 hover:shadow-[0px_4px_12px_rgba(0,0,0,0.2)] hover:-translate-y-0.5">
-              See Real Examples
-            </button>
+          {/* Moved "Let's Go" button to the bottom and added 50px padding to the top */}
+          <div className="mt-12 pt-[62px] border-t border-white/20"> {/* Changed pt-12 to pt-[62px] to add 50px */}
+            <div className="flex items-center justify-center">
+              <button className="bg-white text-purple-700 px-8 py-4 rounded-full text-lg font-[700] transition-all duration-300 hover:scale-105 shadow-[0px_4px_12px_rgba(0,0,0,0.2)] hover:shadow-[0px_6px_16px_rgba(0,0,0,0.3)] transform hover:-translate-y-0.5">
+                LET'S GO!
+              </button>
+            </div>
           </div>
         </div>
       </div>

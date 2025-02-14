@@ -24,26 +24,13 @@ const iconMap: { [key: string]: JSX.Element } = {
 };
 
 export default function CoreBenefitsSection({ content }: CoreBenefitsSectionProps) {
-  const title = content.title;
-  const subtitleParts = content.subtitle.split(' ').map(word => word + ' ');
-
   return (
     <section className="w-full min-h-[100vh] min-h-[100svh] py-16 sm:py-24 relative bg-gradient-to-br from-purple-50 to-white overflow-hidden scroll-snap-align-start">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16 sm:mb-20">
-          <h2 className="text-[30px] font-extralight mb-6 text-gray-900 font-poppins [text-shadow:1px_1px_4px_rgba(0,0,0,0.1)]">
-            {title}
+          <h2 className="text-4xl sm:text-5xl lg:text-[72px] font-extralight mb-12 text-gray-900 font-poppins [text-shadow:1px_1px_4px_rgba(0,0,0,0.1)]">
+            {content.title}
           </h2>
-          <h3 className="text-4xl sm:text-5xl lg:text-[72px] font-extralight mb-12 text-gray-900 font-poppins [text-shadow:1px_1px_4px_rgba(0,0,0,0.1)]">
-            {subtitleParts.map((part, index) => (
-              <span key={index} className={index === 1 ? 'font-[800]' : ''}>
-                {part}
-              </span>
-            ))}
-          </h3>
-          <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            {content.description}
-          </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-16">
@@ -66,12 +53,6 @@ export default function CoreBenefitsSection({ content }: CoreBenefitsSectionProp
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed">{benefit.description}</p>
             </div>
           ))}
-        </div>
-
-        <div className="text-center">
-          <button className="bg-white text-purple-700 px-8 py-4 rounded-full text-lg font-[700] transition-all duration-300 hover:scale-105 shadow-[0px_4px_12px_rgba(0,0,0,0.2)] hover:shadow-[0px_6px_16px_rgba(0,0,0,0.3)] transform hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px] mx-auto">
-            LET'S GO!
-          </button>
         </div>
       </div>
     </section>
