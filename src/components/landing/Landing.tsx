@@ -8,9 +8,44 @@ import SongwritersSection from './cards/SongwritersSection';
 import UniqueApproachSection from './cards/UniqueApproachSection';
 import SocialProofSection from './cards/SocialProofSection';
 import CallToActionSection from './cards/CallToActionSection';
+import { EditProvider, useEdit } from '../../contexts/EditContext';
 
-const Landing: React.FC = () => {
-  const [content, setContent] = useState<LandingPageContent | null>(null);
+function EditModeToggle() {
+  const { isEditMode, toggleEditMode, saveContent } = useEdit();
+
+  return (
+    <div className="fixed bottom-4 right-4 flex gap-2">
+      <button
+        onClick={toggleEditMode}
+        className={`px-4 py-2 rounded-md shadow-sm ${
+          isEditMode 
+            ? 'bg-blue-600 text-white hover:bg-blue-700' 
+            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+        }`}
+      >
+        {isEditMode ? 'Exit Edit Mode' : 'Edit Content'}
+      </button>
+      {isEditMode && (
+        <button
+          onClick={async () => {
+            try {
+              await saveContent();
+              alert('Changes saved successfully!');
+            } catch (error) {
+              alert('Failed to save changes');
+            }
+          }}
+          className="px-4 py-2 bg-green-600 text-white rounded-md shadow-sm hover:bg-green-700"
+        >
+          Save Changes
+        </button>
+      )}
+    </div>
+  );
+}
+
+function LandingContent() {
+  const { content, setContent } = useEdit();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -60,7 +95,7 @@ const Landing: React.FC = () => {
   }
 
   return (
-    <div className="landing flex flex-col">
+    <main className="w-full">
       <HeroSection content={content.hero} />
       <MainValueSection content={content.mainValue} />
       <CoreBenefitsSection content={content.coreBenefits} />
@@ -68,8 +103,15 @@ const Landing: React.FC = () => {
       <UniqueApproachSection content={content.uniqueApproach} />
       <SocialProofSection content={content.socialProof} />
       <CallToActionSection content={content.callToAction} />
-    </div>
+      <EditModeToggle />
+    </main>
   );
-};
+}
 
-export default Landing;
+export default function Landing() {
+  return (
+    <EditProvider>
+      <LandingContent />
+    </EditProvider>
+  );
+}
