@@ -1,0 +1,165 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.admin-container {
+  font-family: 'Poppins', sans-serif;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.admin-header {
+  margin-bottom: 2rem;
+}
+
+.admin-header h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 1rem;
+}
+
+.admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.save-button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.save-button:hover {
+  background-color: #3367d6;
+}
+
+.save-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.success-message {
+  color: #34a853;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.error-message {
+  color: #ea4335;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.admin-sections {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 2rem;
+}
+
+.section-selector {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.section-selector h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 1rem;
+}
+
+.section-selector select {
+  width: 100%;
+  padding: 0.75rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  color: #333333;
+}
+
+.section-editor {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.editor-group {
+  margin-bottom: 2rem;
+}
+
+.editor-group h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 1.5rem;
+}
+
+.field-group {
+  margin-bottom: 1.5rem;
+}
+
+.field-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666666;
+  margin-bottom: 0.5rem;
+}
+
+.field-group input {
+  width: 100%;
+  padding: 0.75rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  color: #333333;
+}
+
+.heading-input {
+  font-size: 24px !important;
+  font-weight: 600;
+}
+
+.subheading-input {
+  font-size: 18px !important;
+  font-weight: 400;
+}
+
+/* Field-specific styles */
+.title-field input {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.subtitle-field input {
+  font-size: 20px;
+  font-weight: 400;
+  color: #666666;
+}
+
+.description-field textarea {
+  font-size: 16px;
+  font-weight: 400;
+  color: #4a4a4a;
+  line-height: 1.6;
+}
+
+.button-text-field input {
+  font-size: 16px;
+  font-weight: 500;
+  color: #4285f4;
+}

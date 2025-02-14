@@ -6,7 +6,7 @@ export default function LandingDemo() {
   const { descope: user } = useAuth();
 
   return (
-    <div className="demo bg-gradient-to-r from-black to-gray-800 py-24">
+    <div className="demo bg-gradient-to-r from-black to-gray-800 py-12">
       <div className="produce-song">
         <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="aspect-video">
@@ -21,7 +21,7 @@ export default function LandingDemo() {
               className="rounded-2xl shadow-2xl"
             ></iframe>
           </div>
-          <div className="text-center pt-12">
+          <div className="text-center pt-6">
             <button
               onClick={() => navigate(user ? "/chat" : "/login")}
               className="bg-gradient-to-br from-purple-500/20 to-red-500/20 hover:from-purple-500/30 hover:to-red-500/30 backdrop-blur-sm text-white px-16 py-5 rounded-xl text-xl font-medium transition-all duration-300 min-w-[280px]"

@@ -18,6 +18,7 @@ import ContactUs from "./components/contact-us/ContactUs";
 import WhyHitCraft from "./components/why-hitcraft/WhyHitCraft";
 import ScrollToTop from "./components/shared/ScrollToTop";
 import TermsOfUse from "./components/terms-of-use";
+import ContentManager from './pages/admin/ContentManager';
 
 const { VITE_DESCOPE_PROJECT_ID } = import.meta.env;
 const { VITE_DESCOPE_AUTH_URL } = import.meta.env;
@@ -48,6 +49,7 @@ export default function App() {
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/why-hitcraft" element={<WhyHitCraft />} />
                 <Route path="/pricing" element={<Pricing />} />
+                <Route path="/admin" element={<ContentManager />} />
                 </Routes>
               </main>
               <Footer />

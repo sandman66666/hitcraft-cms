@@ -1,0 +1,190 @@
+{
+  "hero": {
+    "title": "If ChatGPT were designed for musicians, it would be called HitCraft",
+    "subtitle": "Your AI-Powered Music Mentor",
+    "description": "Ask anything about music creation, get expert guidance and instant execution at every stage of your journey",
+    "button": {
+      "text": "Try HitCraft Free"
+    }
+  },
+  "mainValue": {
+    "title": "More Than Just Another AI Music Tool",
+    "subtitle": "Your Creative Companion",
+    "description": "HitCraft is your always-available creative companion - combining conversational AI guidance with professional execution.",
+    "features": [
+      "How can I make this chorus hit harder?",
+      "What chord progression would work here?",
+      "Help me write lyrics about...",
+      "Can you produce this in a pop style?"
+    ]
+  },
+  "coreBenefits": {
+    "title": "Why Choose HitCraft",
+    "subtitle": "Your Complete Music Creation Solution",
+    "benefits": [
+      {
+        "title": "Guidance & Execution Combined",
+        "description": "Get expert advice AND the tools to implement it instantly. No more jumping between different apps and services.",
+        "icon": "chat"
+      },
+      {
+        "title": "Overcome Any Creative Block",
+        "description": "Stuck on lyrics? Need a melody? Want to try a new style? Just ask and get unlimited inspiration tailored to you.",
+        "icon": "lightbulb"
+      },
+      {
+        "title": "Professional Results\nFast",
+        "description": "Turn rough ideas into polished tracks through natural conversation. No complex technical knowledge required.",
+        "icon": "star"
+      }
+    ]
+  },
+  "writingPartner": {
+    "title": "Your Personal Writing Partner & Producer",
+    "subtitle": "24/7 Creative Companion",
+    "description": "Just like chatting with an experienced co-writer and producer who's available 24/7. HitCraft helps you express your ideas and get them produced just the way you imagine.",
+    "image": "/assets/images/landing/writing-partner.jpg",
+    "button": {
+      "text": "Start Creating Now"
+    }
+  },
+  "produceSong": {
+    "title": "From Demo to Professional Track",
+    "subtitle": "Production Made Simple",
+    "description": "HitCraft turns demos into polished songs on the spot.",
+    "image": "/assets/images/landing/produce-song.jpg",
+    "button": {
+      "text": "Try It Now"
+    }
+  },
+  "writersBlock": {
+    "title": "Overcome Your Writer's Block",
+    "subtitle": "Never Get Stuck Again",
+    "description": "HitCraft is your personal music mentor, ready to elevate your creative process whenever you're stuck—from lyrics and composition to distribution.",
+    "image": "/assets/images/landing/writers-block.jpg",
+    "button": {
+      "text": "Start Writing"
+    }
+  },
+  "musicMentor": {
+    "title": "Collaborate With Your Music Mentor",
+    "subtitle": "Expert Guidance at Every Step",
+    "description": "HitCraft is your professional AI co-creator, always ready to offer guidance, fresh ideas, and support for every step of your musical journey.",
+    "image": "/assets/images/landing/music-mentor.jpg",
+    "button": {
+      "text": "Meet Your Mentor"
+    }
+  },
+  "perfectProcess": {
+    "title": "Perfect Your Process, Whatever Your Path",
+    "carouselItems": [
+      {
+        "category": "Music Producers",
+        "title": "Your Virtual Production Mentor",
+        "description": "Transform your workflow from tedious to brilliant. Get instant DAW guidance, mixing tips, and genre-specific production techniques."
+      },
+      {
+        "category": "Songwriters",
+        "title": "Your Creative Writing Partner",
+        "description": "Never face writer's block again. Get instant inspiration, lyric suggestions, and melody ideas that match your style."
+      },
+      {
+        "category": "Composers",
+        "title": "Your Arranging Assistant",
+        "description": "Bring your compositions to life. Get orchestration suggestions, harmonic ideas, and instant playback of your arrangements."
+      }
+    ],
+    "button": {
+      "text": "Start Your Journey"
+    }
+  },
+  "testimonials": {
+    "title": "What Our Users Say",
+    "testimonials": [
+      {
+        "name": "Samuel Pesci",
+        "role": "Music Producer",
+        "text": "This tool is a game-changer! As a producer, the efficiency and precision it offers in transforming basic sketches into polished tracks is unparalleled.",
+        "rating": 5
+      },
+      {
+        "name": "Jess Penny",
+        "role": "Singer-songwriter",
+        "text": "As a musician who's trying to build her way up in the business I can testify that this AI tool has been a real lifesaver for me.",
+        "rating": 5
+      },
+      {
+        "name": "Christopher Peter",
+        "role": "Musician and Sound Engineer",
+        "text": "I've seen a few things in the music industry, but this thing still managed to impress me. It's intuitive, smart and makes the production process so smooth.",
+        "rating": 5
+      }
+    ]
+  },
+  "demo": {
+    "title": "See HitCraft in Action",
+    "subtitle": "Watch how HitCraft transforms your musical ideas into professional tracks",
+    "demoUrl": "https://example.com/demo"
+  },
+  "uniqueApproach": {
+    "title": "A New Way to Create Music",
+    "features": [
+      {
+        "title": "Chat Naturally",
+        "description": "Just describe what you want in plain language - no need to learn complex tools or technical jargon.",
+        "icon": "chat"
+      },
+      {
+        "title": "Get Expert Guidance",
+        "description": "Receive professional advice on any music-related topic, from creative direction to industry insights.",
+        "icon": "lightbulb"
+      },
+      {
+        "title": "See Instant Results",
+        "description": "Don't just get suggestions - hear your ideas come to life professionally in seconds.",
+        "icon": "play"
+      },
+      {
+        "title": "Grow Your Skills",
+        "description": "Learn as you create with explanations and tips from your AI mentor that help you improve.",
+        "icon": "chart"
+      }
+    ]
+  },
+  "socialProof": {
+    "title": "SOCIAL PROOF",
+    "subtitle": "Join 100,000+ Music Creators Already Using HitCraft",
+    "testimonials": [
+      {
+        "quote": "It's like having a professional producer, co-writer, and industry mentor available 24/7. Game-changing for my creative process.",
+        "author": "Sarah K.",
+        "role": "Songwriter",
+        "image": "/assets/images/about-us/members/Rachel.jpg"
+      },
+      {
+        "quote": "Finally, an AI tool that actually helps you grow as an artist instead of just pushing buttons.",
+        "author": "Mike R.",
+        "role": "Producer",
+        "image": "/assets/images/about-us/members/Tamir.jpg"
+      },
+      {
+        "quote": "The ability to get both guidance and instant execution is incredible. Saves me so much time and helps me deliver better results to clients.",
+        "author": "David M.",
+        "role": "Composer",
+        "image": "/assets/images/about-us/members/Yan.jpg"
+      }
+    ]
+  },
+  "callToAction": {
+    "title": "Start Creating With Your New Music Mentor",
+    "subtitle": "Get unlimited creative guidance and professional production support - all through simple conversation.",
+    "button": {
+      "text": "Try Free Now"
+    },
+    "features": [
+      "No credit card required",
+      "Real-time creative partner",
+      "Professional results"
+    ]
+  }
+}

@@ -5,10 +5,13 @@
 /* Import component styles */
 @import './components/landing.css';
 
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 /* Base styles */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -79,6 +82,16 @@ html {
 
   .body-regular {
     @apply text-lg;
+  }
+
+  .big-header {
+    @apply text-5xl font-extralight mb-8 text-gray-900;
+  }
+}
+
+@layer base {
+  html {
+    @apply font-light;
   }
 }
 
