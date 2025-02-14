@@ -66,14 +66,8 @@ const Landing: React.FC = () => {
       <CoreBenefitsSection content={content.coreBenefits} />
       <SongwritersSection content={content.demo} />
       <UniqueApproachSection content={content.uniqueApproach} />
-      <SocialProofSection content={content.testimonials} />
-      <CallToActionSection content={{
-        title: "Start Creating With Your New Music Mentor",
-        subtitle: "Get unlimited creative guidance and professional production support - all through simple conversation.",
-        button: {
-          text: "Try Free Now"
-        }
-      }} />
+      <SocialProofSection content={content.socialProof} />
+      <CallToActionSection content={content.callToAction} />
     </div>
   );
 };
