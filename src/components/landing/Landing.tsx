@@ -12,7 +12,9 @@ import CallToActionSection from './cards/CallToActionSection';
 import { EditProvider, useEdit } from '../../contexts/EditContext';
 
 function EditModeToggle() {
-  const { isEditMode, toggleEditMode, saveContent } = useEdit();
+  const { isEditMode, toggleEditMode, saveContent, showEditButton } = useEdit();
+
+  if (!showEditButton) return null;
 
   return (
     <div className="fixed bottom-4 right-4 flex gap-2">

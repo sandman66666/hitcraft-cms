@@ -9,6 +9,7 @@ interface EditContextType {
   content: any;
   setContent: React.Dispatch<React.SetStateAction<any>>;
   saveContent: () => Promise<void>;
+  showEditButton: boolean;
 }
 
 const EditContext = createContext<EditContextType | undefined>(undefined);
@@ -17,6 +18,8 @@ export const EditProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isEditMode, setIsEditMode] = useState(false);
   const [content, setContent] = useState<any>(null);
   const [latestBackup, setLatestBackup] = useState<string | null>(null);
+  const [showEditButton, setShowEditButton] = useState(false);
+  const [keySequence, setKeySequence] = useState('');
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -30,15 +33,38 @@ export const EditProvider: React.FC<{ children: React.ReactNode }> = ({ children
     fetchContent();
   }, []);
 
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      setKeySequence(prev => {
+        const newSequence = (prev + event.key).slice(-3);
+        if (newSequence === 'sss' && !showEditButton) {
+          setShowEditButton(true);
+        }
+        return newSequence;
+      });
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [showEditButton]);
+
   const toggleEditMode = async () => {
-    if (!isEditMode && content) {
-      try {
-        // Create a backup when entering edit mode
-        const backupResult = await createBackup(content);
-        setLatestBackup(backupResult.backupFile);
-      } catch (error) {
-        console.error('Error creating backup:', error);
-        // You might want to show an error message to the user here
+    if (!isEditMode) {
+      const username = prompt('Username:');
+      const password = prompt('Password:');
+      
+      if (username !== 'Admin' || password !== 'S42=HitCraft') {
+        alert('Invalid credentials');
+        return;
+      }
+
+      if (content) {
+        try {
+          const backupResult = await createBackup(content);
+          setLatestBackup(backupResult.backupFile);
+        } catch (error) {
+          console.error('Error creating backup:', error);
+        }
       }
     }
     setIsEditMode(!isEditMode);
@@ -55,21 +81,20 @@ export const EditProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.log('Content saved successfully');
     } catch (error) {
       console.error('Error saving content:', error);
-      // You might want to show an error message to the user here
     }
   };
 
   return (
-    <EditContext.Provider value={{ isEditMode, toggleEditMode, content, setContent, saveContent }}>
+    <EditContext.Provider value={{ isEditMode, toggleEditMode, content, setContent, saveContent, showEditButton }}>
       {children}
     </EditContext.Provider>
   );
 };
 
-export function useEdit() {
+export const useEdit = () => {
   const context = useContext(EditContext);
   if (context === undefined) {
     throw new Error('useEdit must be used within an EditProvider');
   }
   return context;
-}
+};

@@ -78,8 +78,15 @@ export default function CoreBenefitsSection({ content: initialContent }: CoreBen
           ))}
         </div>
 
-        <div className="text-center mt-12 -mb-[50px] core-benefits-cta">
-          <CTAButton text="Let's Go" variant="light" />
+        <div className="mt-8 sm:mt-12">
+          <EditableText
+            content={initialContent.subtitle}
+            onChange={(value) => updateContent('coreBenefits.subtitle', value)}
+            className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-10"
+          />
+          <div className="flex justify-center">
+            <CTAButton text="Let's Go" variant="dark" />
+          </div>
         </div>
       </div>
     </section>
