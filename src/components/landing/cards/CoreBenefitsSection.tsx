@@ -8,6 +8,12 @@ interface CoreBenefitsSectionProps {
   content: CoreBenefitsContent;
 }
 
+interface Benefit {
+  icon: string;
+  title: string;
+  description: string;
+}
+
 const iconMap: { [key: string]: JSX.Element } = {
   chat: (
     <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -29,7 +35,7 @@ const iconMap: { [key: string]: JSX.Element } = {
 export default function CoreBenefitsSection({ content: initialContent }: CoreBenefitsSectionProps) {
   const { isEditMode, content, setContent } = useEdit();
 
-  const updateContent = (path: string, value: string) => {
+  const updateContent = (path: string, value: string | string[]) => {
     if (!content) return;
     const newContent = { ...content };
     const pathArray = path.split('.');
@@ -55,7 +61,7 @@ export default function CoreBenefitsSection({ content: initialContent }: CoreBen
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-16">
-          {initialContent.benefits.map((benefit, index) => (
+          {initialContent.benefits.map((benefit: Benefit, index: number) => (
             <div 
               key={index} 
               className="text-center p-6 sm:p-8 rounded-2xl bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
