@@ -59,8 +59,7 @@ export default defineConfig(({ mode }) => {
             vendor: ['react', 'react-dom', 'react-router-dom'],
             utils: ['@/contexts/AuthContext'],
             ui: ['lucide-react', 'react-hot-toast'],
-            routing: ['react-router-dom'],
-            styles: ['./src/styles/**/*.css']
+            routing: ['react-router-dom']
           },
           chunkFileNames(chunkInfo) {
             const name = chunkInfo.name;
