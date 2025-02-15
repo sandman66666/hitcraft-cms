@@ -1,47 +1,27 @@
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+import React from 'react';
 
 interface CTAButtonProps {
-  className?: string;
+  text: string;
   onClick?: () => void;
-  text?: string;
+  variant?: 'light' | 'dark';
 }
 
-export const CTAButton = ({
-  className = "",
-  onClick,
-  // @ts-ignore
-  text,
-}: CTAButtonProps) => {
-  const navigate = useNavigate();
-  const {
-    descope: { isAuthenticated },
-  } = useAuth();
-
-  const handleClick = () => {
-    if (onClick) {
-      onClick();
-      return;
-    }
-
-    if (isAuthenticated) {
-      window.location.href = import.meta.env.VITE_APP_URL;
-    } else {
-      navigate("/login");
-    }
+export const CTAButton: React.FC<CTAButtonProps> = ({ text, onClick, variant = 'light' }) => {
+  const baseClasses = "px-8 py-4 rounded-full text-lg font-[700] transition-all duration-300 hover:scale-105 shadow-[0px_4px_12px_rgba(0,0,0,0.2)] hover:shadow-[0px_6px_16px_rgba(0,0,0,0.3)] transform hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px]";
+  
+  const variantClasses = {
+    light: "bg-white text-purple-700",
+    dark: "bg-purple-700 text-white",
   };
 
   return (
     <button
-      onClick={handleClick}
-      className={`main-button-design gradient-purple-button 2xl:w-[290px] 
-        hover:translate-y-[-3px] 
-        shadow-md 
-        hover:shadow-lg 
-        transition-all duration-300 ease-in-out
-        ${className}`}
+      className={`${baseClasses} ${variantClasses[variant]}`}
+      onClick={onClick}
     >
-      LET'S GO!
+      {text}
     </button>
   );
 };
+
+export default CTAButton;

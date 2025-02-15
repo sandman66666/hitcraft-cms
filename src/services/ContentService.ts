@@ -5,8 +5,8 @@ export class ContentService {
   private baseUrl: string;
 
   private constructor() {
-    // In production, this would be your AWS API Gateway endpoint
-    this.baseUrl = process.env.VITE_API_URL || 'http://localhost:3000/api';
+    // Use a direct URL for now
+    this.baseUrl = 'http://localhost:5174/api';
   }
 
   public static getInstance(): ContentService {
@@ -25,6 +25,29 @@ export class ContentService {
       return await response.json();
     } catch (error) {
       console.error('Error fetching content:', error);
+      throw error;
+    }
+  }
+
+  async createBackup(content: LandingPageContent): Promise<void> {
+    try {
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const response = await fetch(`${this.baseUrl}/content/backup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          content,
+          filename: `landing-page-backup-${timestamp}.json`
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create backup');
+      }
+    } catch (error) {
+      console.error('Error creating backup:', error);
       throw error;
     }
   }

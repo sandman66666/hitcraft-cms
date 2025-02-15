@@ -22,13 +22,7 @@
     ],
     "button": {
       "text": "Watch How It Works"
-    },
-    "questions": [
-      "Please help me create a new instrument track for my project",
-      "What chord progression would work here?",
-      "Help me write lyrics about...",
-      "Can you produce this in a pop style?"
-    ]
+    }
   },
   "coreBenefits": {
     "title": "The Complete Music Creation Assistant",

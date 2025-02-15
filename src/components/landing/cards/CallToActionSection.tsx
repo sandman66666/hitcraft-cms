@@ -1,5 +1,5 @@
 import React from 'react';
-import { CTAButton } from '@/components/shared/CTAButton';
+import CTAButton from '../../shared/CTAButton';
 import { CallToActionContent } from '../../../types/content';
 import EditableText from '../../shared/EditableText';
 import { useEdit } from '../../../contexts/EditContext';
@@ -11,7 +11,7 @@ interface CallToActionSectionProps {
 export default function CallToActionSection({ content: initialContent }: CallToActionSectionProps) {
   const { isEditMode, content, setContent } = useEdit();
 
-  const updateContent = (path: string, value: any) => {
+  const updateContent = (path: string, value: string | string[]) => {
     if (!content) return;
     const newContent = { ...content };
     const pathArray = path.split('.');
@@ -29,12 +29,14 @@ export default function CallToActionSection({ content: initialContent }: CallToA
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-5" />
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center">
-          <EditableText
-            as="h2"
-            content="  "
-            onChange={(value) => updateContent('callToAction.preTitle', value)}
-            className="text-[24px] font-extralight mb-4 text-gray-800 font-poppins"
-          />
+          {initialContent.preTitle && (
+            <EditableText
+              as="h2"
+              content={initialContent.preTitle}
+              onChange={(value) => updateContent('callToAction.preTitle', value)}
+              className="text-[24px] font-extralight mb-4 text-gray-800 font-poppins"
+            />
+          )}
           <EditableText
             as="h3"
             content={initialContent.title}
@@ -46,16 +48,7 @@ export default function CallToActionSection({ content: initialContent }: CallToA
             onChange={(value) => updateContent('callToAction.subtitle', value)}
             className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-10"
           />
-          {isEditMode ? (
-            <input
-              type="text"
-              value={initialContent.button.text}
-              onChange={(e) => updateContent('callToAction.button.text', e.target.value)}
-              className="px-4 py-2 border border-blue-300 rounded-md"
-            />
-          ) : (
-            <CTAButton text={initialContent.button.text} />
-          )}
+          <CTAButton text={initialContent.button.text} variant="dark" />
           <div className="mt-6 text-gray-600 text-sm sm:text-base">
             {initialContent.features.map((feature, index) => (
               <EditableText

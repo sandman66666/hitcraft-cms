@@ -25,6 +25,7 @@ export interface MainValueContent {
   subtitle: string;
   description: string;
   features: string[];
+  button: Button;
 }
 
 export interface CoreBenefit {
@@ -35,11 +36,7 @@ export interface CoreBenefit {
 
 export interface CoreBenefitsContent {
   title: string;
-  benefits: {
-    title: string;
-    description: string;
-    icon: string;
-  }[];
+  benefits: CoreBenefit[];
 }
 
 export interface WritingPartnerContent {
@@ -47,7 +44,6 @@ export interface WritingPartnerContent {
   subtitle: string;
   description: string;
   features?: string[];
-  additionalDescription?: string;
   button: Button;
 }
 
@@ -56,54 +52,7 @@ export interface ProduceSongContent {
   subtitle: string;
   description: string;
   features?: string[];
-  additionalDescription?: string;
   button: Button;
-}
-
-export interface WritersBlockContent {
-  title: string;
-  subtitle: string;
-  description: string;
-  image: string;
-  button: Button;
-}
-
-export interface MusicMentorContent {
-  title: string;
-  subtitle: string;
-  description: string;
-  image: string;
-  button: Button;
-}
-
-export interface CarouselItem {
-  category: string;
-  title: string;
-  description: string;
-}
-
-export interface PerfectProcessContent {
-  title: string;
-  carouselItems: CarouselItem[];
-  button: Button;
-}
-
-export interface Testimonial {
-  name: string;
-  role: string;
-  text: string;
-  rating: number;
-}
-
-export interface TestimonialsContent {
-  title: string;
-  testimonials: Testimonial[];
-}
-
-export interface DemoContent {
-  title: string;
-  subtitle: string;
-  demoUrl: string;
 }
 
 export interface Feature {
@@ -137,23 +86,13 @@ export interface CallToActionContent {
   features: string[];
 }
 
-export interface Section {
-  title: string;
-  features: string[];
-}
-
 export interface LandingPageContent {
   hero: HeroContent;
   mainValue: MainValueContent;
   coreBenefits: CoreBenefitsContent;
   writingPartner: WritingPartnerContent;
   produceSong: ProduceSongContent;
-  writersBlock: WritersBlockContent;
-  musicMentor: MusicMentorContent;
-  perfectProcess: PerfectProcessContent;
-  testimonials: TestimonialsContent;
   uniqueApproach: UniqueApproachContent;
   socialProof: SocialProofContent;
   callToAction: CallToActionContent;
-  demo: DemoContent;
 }

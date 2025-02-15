@@ -1,47 +1,61 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { LandingPageContent } from '../types/content';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import { getContent } from '../api/get-content';
+import { saveContent as apiSaveContent } from '../api/save-content';
+import { createBackup } from '../api/createBackup';
 
 interface EditContextType {
   isEditMode: boolean;
-  toggleEditMode: () => void;
-  content: LandingPageContent | null;
-  setContent: (content: LandingPageContent) => void;
+  toggleEditMode: () => Promise<void>;
+  content: any;
+  setContent: React.Dispatch<React.SetStateAction<any>>;
   saveContent: () => Promise<void>;
 }
 
 const EditContext = createContext<EditContextType | undefined>(undefined);
 
-export function EditProvider({ children }: { children: ReactNode }) {
+export const EditProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const [content, setContent] = useState<LandingPageContent | null>(null);
+  const [content, setContent] = useState<any>(null);
+  const [latestBackup, setLatestBackup] = useState<string | null>(null);
 
-  const toggleEditMode = () => {
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const initialContent = await getContent();
+        setContent(initialContent);
+      } catch (error) {
+        console.error('Error fetching initial content:', error);
+      }
+    };
+    fetchContent();
+  }, []);
+
+  const toggleEditMode = async () => {
+    if (!isEditMode && content) {
+      try {
+        // Create a backup when entering edit mode
+        const backupResult = await createBackup(content);
+        setLatestBackup(backupResult.backupFile);
+      } catch (error) {
+        console.error('Error creating backup:', error);
+        // You might want to show an error message to the user here
+      }
+    }
     setIsEditMode(!isEditMode);
   };
 
   const saveContent = async () => {
-    if (!content) return;
+    if (!content) {
+      console.error('No content to save');
+      return;
+    }
 
     try {
-      // Create backup with timestamp
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const backupPath = `/src/data/backups/landing-page-${timestamp}.json`;
-      
-      await fetch('/api/save-content', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content, path: backupPath })
-      });
-
-      // Save new content
-      await fetch('/api/save-content', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content, path: '/src/data/landing-page.json' })
-      });
+      await apiSaveContent('landing-page.json', content);
+      console.log('Content saved successfully');
     } catch (error) {
-      console.error('Failed to save content:', error);
-      throw error;
+      console.error('Error saving content:', error);
+      // You might want to show an error message to the user here
     }
   };
 
@@ -50,7 +64,7 @@ export function EditProvider({ children }: { children: ReactNode }) {
       {children}
     </EditContext.Provider>
   );
-}
+};
 
 export function useEdit() {
   const context = useContext(EditContext);

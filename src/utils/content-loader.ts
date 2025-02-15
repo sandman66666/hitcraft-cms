@@ -10,7 +10,7 @@ export class ContentLoader {
     const savedContent = localStorage.getItem('landing-page-content');
     if (savedContent) {
       try {
-        this.content = JSON.parse(savedContent);
+        this.content = JSON.parse(savedContent) as LandingPageContent;
       } catch (error) {
         console.error('Error parsing saved content:', error);
       }
@@ -32,11 +32,11 @@ export class ContentLoader {
   // Asynchronous content refresh - fetches latest from server
   public async refreshContent(): Promise<LandingPageContent> {
     try {
-      const response = await fetch('/src/data/landing-page.json');
+      const response = await fetch('/api/get-content');
       if (!response.ok) {
         throw new Error(`Failed to fetch content: ${response.statusText}`);
       }
-      this.content = await response.json();
+      this.content = await response.json() as LandingPageContent;
       // Save to localStorage for future use
       localStorage.setItem('landing-page-content', JSON.stringify(this.content));
       // Notify components that content has changed
@@ -50,12 +50,30 @@ export class ContentLoader {
 
   public async updateContent(newContent: LandingPageContent): Promise<void> {
     try {
-      // Save to localStorage
+      // Send the new content to the server
+      const response = await fetch('/api/save-content', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newContent),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to save content: ${response.statusText}`);
+      }
+
+      // Update local content
       this.content = newContent;
+
+      // Save to localStorage
       localStorage.setItem('landing-page-content', JSON.stringify(newContent));
       
       // Notify components that content has changed
       window.dispatchEvent(new CustomEvent('contentUpdated'));
+
+      // Refresh content from server to ensure consistency
+      await this.refreshContent();
     } catch (error) {
       console.error('Error saving content:', error);
       throw error;
@@ -66,5 +84,18 @@ export class ContentLoader {
     localStorage.removeItem('landing-page-content');
     this.content = defaultContent as LandingPageContent;
     window.dispatchEvent(new CustomEvent('contentUpdated'));
+  }
+
+  // New method to update and save content immediately
+  public async updateAndSaveContent(sectionKey: keyof LandingPageContent, newSectionContent: Partial<LandingPageContent[keyof LandingPageContent]>): Promise<void> {
+    const updatedContent = {
+      ...this.content,
+      [sectionKey]: {
+        ...this.content[sectionKey],
+        ...newSectionContent
+      }
+    };
+
+    await this.updateContent(updatedContent);
   }
 }

@@ -5,7 +5,12 @@
   "type": "module",
   "dependencies": {
     "@descope/react-sdk": "^2.3.9",
+    "@types/dompurify": "^3.0.5",
+    "@types/express": "^5.0.0",
     "axios": "^1.7.9",
+    "dompurify": "^3.2.4",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "lucide-react": "^0.473.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

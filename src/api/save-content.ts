@@ -1,15 +1,14 @@
-import { writeFile, mkdir } from 'fs/promises';
-import { dirname } from 'path';
+import axios from 'axios';
 
-export async function saveContent(path: string, content: any) {
+export async function saveContent(filePath: string, content: any) {
   try {
-    // Create directories if they don't exist
-    await mkdir(dirname(path), { recursive: true });
+    const response = await axios.post('/api/save-content', { filePath, content });
     
-    // Write the content to file
-    await writeFile(path, JSON.stringify(content, null, 2), 'utf8');
-    
-    return { success: true };
+    if (response.status === 200) {
+      return { success: true };
+    } else {
+      throw new Error(response.data.message || 'Failed to save content');
+    }
   } catch (error) {
     console.error('Error saving content:', error);
     return { success: false, error: 'Failed to save content' };
