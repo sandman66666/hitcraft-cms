@@ -13,7 +13,7 @@ export default defineConfig({
     })
   ],
   build: {
-    outDir: 'dist',
+    outDir: 'dist/client',
     sourcemap: false,
     minify: 'terser',
     chunkSizeWarningLimit: 1000,

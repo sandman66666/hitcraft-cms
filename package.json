@@ -48,7 +48,10 @@
   },
   "scripts": {
     "start": "node dist/server.js",
-    "build": "tsc -p tsconfig.server.json && vite build",
+    "clean": "rm -rf dist/*",
+    "build:server": "tsc -p tsconfig.server.json",
+    "build:client": "vite build",
+    "build": "npm run clean && npm run build:server && npm run build:client",
     "postinstall": "npm run build",
     "heroku-postbuild": "npm run prepare-data",
     "dev": "vite",

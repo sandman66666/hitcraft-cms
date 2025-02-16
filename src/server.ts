@@ -76,8 +76,8 @@ app.get('/api/get-backups', async (_req: Request, res: Response) => {
   }
 });
 
-// Serve static files from the client build directory
-const clientPath = path.join(__dirname, '../dist');
+// Serve static files from the vite build output
+const clientPath = path.join(process.cwd(), 'dist/client');
 app.use(express.static(clientPath));
 
 // Serve index.html for client-side routing
