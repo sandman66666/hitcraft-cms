@@ -2,8 +2,12 @@ import express, { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
-import { Content } from './models/Content';
-import { Backup } from './models/Backup';
+import { fileURLToPath } from 'url';
+import { Content } from './models/Content.js';
+import { Backup } from './models/Backup.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -74,13 +78,13 @@ app.get('/api/get-backups', async (_req: Request, res: Response) => {
   }
 });
 
-// Serve static files from the dist directory
-const distPath = path.join(__dirname, '../dist');
-app.use(express.static(distPath));
+// Serve static files from the client build directory
+const clientPath = path.join(__dirname, '../../dist');
+app.use(express.static(clientPath));
 
 // Serve index.html for client-side routing
 app.get('*', (_req: Request, res: Response) => {
-  res.sendFile(path.join(distPath, 'index.html'));
+  res.sendFile(path.join(clientPath, 'index.html'));
 });
 
 // Error handling middleware
