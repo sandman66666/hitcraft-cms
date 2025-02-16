@@ -1,10 +1,11 @@
 import express, { Request, Response, NextFunction, Application } from 'express';
 import mongoose, { ConnectOptions } from 'mongoose';
-import { config } from 'dotenv';
-import Content from './models/Content';
-import Backup from './models/Backup';
+import dotenv from 'dotenv';
+import path from 'path';
+import { Content } from './models/Content';
+import { Backup } from './models/Backup';
 
-config();
+dotenv.config();
 
 const app: Application = express();
 app.use(express.json());
@@ -19,20 +20,6 @@ mongoose.connect(MONGODB_URI)
 app.use((req: Request, res: Response, next: NextFunction): void => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   next();
-});
-
-// Get content endpoint
-app.get('/api/get-content', async (req: Request, res: Response): Promise<void> => {
-  try {
-    const content = await Content.findOne().sort({ createdAt: -1 });
-    if (!content) {
-      return res.status(404).json({ error: 'No content found' });
-    }
-    res.json(content.content);
-  } catch (error: unknown) {
-    console.error('Error reading content:', error);
-    res.status(500).json({ error: 'Error reading content' });
-  }
 });
 
 // Save content endpoint
@@ -50,12 +37,27 @@ app.post('/api/save-content', async (req: Request, res: Response): Promise<void>
     }
 
     // Save new content
-    await Content.create({ content });
+    const newContent = new Content({ content });
+    await newContent.save();
 
     res.json({ success: true });
   } catch (error: unknown) {
     console.error('Error saving content:', error);
     res.status(500).json({ error: 'Error saving content' });
+  }
+});
+
+// Get content endpoint
+app.get('/api/get-content', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const content = await Content.findOne().sort({ createdAt: -1 });
+    if (!content) {
+      return res.status(404).json({ error: 'No content found' });
+    }
+    res.json(content.content);
+  } catch (error: unknown) {
+    console.error('Error reading content:', error);
+    res.status(500).json({ error: 'Error reading content' });
   }
 });
 
@@ -97,29 +99,23 @@ app.post('/api/restore-backup/:id', async (req: Request, res: Response): Promise
   }
 });
 
+// Serve static files from the dist directory
+app.use(express.static(path.join(process.cwd(), 'dist')));
+
+// Fallback route: serve index.html for all non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+});
+
 // Error handling middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
   console.error(err.stack);
   res.status(500).json({ message: 'Internal server error' });
 });
 
-// Export the configured app
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
 export { app };
-
-// For standalone usage (e.g., testing)
-if (process.env.NODE_ENV === 'test') {
-  const PORT = process.env.PORT || 3000;
-
-  // Serve static files from the dist directory
-  import path from 'path';
-  app.use(express.static(path.join(process.cwd(), 'dist')));
-
-  // Fallback route: serve index.html for all non-API routes
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
-  });
-
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-}

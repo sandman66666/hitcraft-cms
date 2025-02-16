@@ -48,10 +48,10 @@
   "scripts": {
     "dev": "vite",
     "build": "cross-env ROLLUP_NATIVE=false vite build",
-    "heroku-postbuild": "npm prune --production",
+    "heroku-postbuild": "npm run build",
+    "start": "node server.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "start": "node server.js"
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": [
