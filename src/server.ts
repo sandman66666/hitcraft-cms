@@ -62,27 +62,30 @@ const loadInitialContent = async () => {
 // Database Connection
 const initializeDatabase = async () => {
   try {
-    // Connect to PostgreSQL
+    // Connect to PostgreSQL first
     await sequelize.authenticate();
     console.log('PostgreSQL connection established successfully.');
     
-    // Connect to MongoDB
-    try {
-      await connectMongo();
-      console.log('MongoDB connection established successfully.');
-      
-      // Sync PostgreSQL models
-      await sequelize.sync({ force: true });
-      console.log('PostgreSQL models synchronized successfully (with force)');
-      
-      // Migrate data from MongoDB if needed
-      await migrateMongoToPostgres(Content, MongoContent);
-    } catch (mongoError) {
-      console.warn('MongoDB connection failed, continuing with PostgreSQL only:', mongoError);
-    }
+    // Sync PostgreSQL models
+    await sequelize.sync({ force: true });
+    console.log('Database models synchronized successfully (with force)');
     
     // Load initial content if needed
     await loadInitialContent();
+
+    // Try to connect to MongoDB in the background
+    connectMongo().then(async () => {
+      console.log('MongoDB connection established successfully.');
+      // Attempt migration in the background
+      try {
+        await migrateMongoToPostgres(Content, MongoContent);
+        console.log('MongoDB data migration completed successfully');
+      } catch (migrationError: unknown) {
+        console.warn('MongoDB migration failed:', migrationError instanceof Error ? migrationError.message : migrationError);
+      }
+    }).catch((mongoError: unknown) => {
+      console.warn('MongoDB connection failed, continuing with PostgreSQL only:', mongoError instanceof Error ? mongoError.message : mongoError);
+    });
     
     // Log database configuration
     console.log('Database configuration:', {
