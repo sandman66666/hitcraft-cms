@@ -100,11 +100,22 @@ app.post('/api/restore-backup/:id', async (req: Request, res: Response): Promise
 });
 
 // Serve static files from the dist directory
-app.use(express.static(path.join(process.cwd(), 'dist')));
+const distPath = path.join(process.cwd(), 'dist');
+console.log('Dist directory path:', distPath);
+console.log('Directory exists:', require('fs').existsSync(distPath));
+console.log('Directory contents:', require('fs').readdirSync(process.cwd()));
+
+app.use(express.static(distPath));
 
 // Fallback route: serve index.html for all non-API routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+  const indexPath = path.join(distPath, 'index.html');
+  console.log('Index path:', indexPath);
+  console.log('Index exists:', require('fs').existsSync(indexPath));
+  if (!require('fs').existsSync(indexPath)) {
+    return res.status(404).send('index.html not found');
+  }
+  res.sendFile(indexPath);
 });
 
 // Error handling middleware

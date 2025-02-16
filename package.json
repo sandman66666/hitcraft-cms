@@ -48,8 +48,8 @@
   "scripts": {
     "dev": "vite",
     "build": "cross-env ROLLUP_NATIVE=false vite build",
-    "heroku-postbuild": "npm run build",
-    "start": "node server.js",
+    "heroku-postbuild": "npm run build && cp -r dist .",
+    "start": "npm run build && node server.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
