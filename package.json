@@ -2,10 +2,10 @@
   "name": "hitcraft2",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "dependencies": {
     "@descope/react-sdk": "^2.6.0",
     "@types/express": "^5.0.0",
+    "@types/express-serve-static-core": "^5.0.6",
     "@types/mongoose": "^5.11.96",
     "@types/node": "^20.17.19",
     "@vitejs/plugin-react-swc": "^3.5.0",

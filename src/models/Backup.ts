@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+import type { Schema, Model } from 'mongoose';
+const mongoose = require('mongoose') as typeof import('mongoose');
 
 const backupSchema = new mongoose.Schema({
   content: {
@@ -11,4 +12,5 @@ const backupSchema = new mongoose.Schema({
   }
 });
 
-export const Backup = mongoose.model('Backup', backupSchema);
+const Backup = mongoose.model('Backup', backupSchema);
+module.exports = { Backup };

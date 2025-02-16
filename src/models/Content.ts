@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+import type { Schema, Model } from 'mongoose';
+const mongoose = require('mongoose') as typeof import('mongoose');
 
 const contentSchema = new mongoose.Schema({
   content: {
@@ -17,4 +18,5 @@ const contentSchema = new mongoose.Schema({
   timestamps: true
 });
 
-export const Content = mongoose.model('Content', contentSchema);
+const Content = mongoose.model('Content', contentSchema);
+module.exports = { Content };

@@ -1,13 +1,11 @@
-import express, { Request, Response, NextFunction } from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { Content } from './models/Content.js';
-import { Backup } from './models/Backup.js';
+import type { Request, Response, NextFunction } from 'express-serve-static-core';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const path = require('path');
+const { Content } = require('./models/Content');
+const { Backup } = require('./models/Backup');
 
 dotenv.config();
 
@@ -105,4 +103,4 @@ connectDB().then(() => {
   process.exit(1);
 });
 
-export { app };
+module.exports = { app };
