@@ -23,18 +23,9 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     minify: 'esbuild',
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          utils: ['@/contexts/AuthContext'],
-          ui: ['lucide-react', 'react-hot-toast']
-        },
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
-        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
-      }
-    }
+    chunkSizeWarningLimit: 1000,
+    assetsInlineLimit: 4096,
+    emptyOutDir: true
   },
   resolve: {
     alias: {
