@@ -26,15 +26,31 @@ const loadInitialContent = async () => {
 
     const initialContent = JSON.parse(fs.readFileSync(initialContentPath, 'utf8'));
     
-    // Check if content exists
-    const existingContent = await Content.findOne({
-      where: { isActive: true }
-    });
+    // Check if any content exists
+    const contentCount = await Content.count();
 
-    if (!existingContent) {
-      console.log('No active content found, loading initial content...');
+    if (contentCount === 0) {
+      console.log('No content found in database, loading initial content...');
       await Content.create({ content: initialContent, isActive: true });
       console.log('Initial content loaded successfully');
+    } else {
+      // Ensure there is an active content
+      const activeContent = await Content.findOne({ where: { isActive: true } });
+      if (!activeContent) {
+        console.log('No active content found, activating most recent content...');
+        const latestContent = await Content.findOne({
+          order: [['createdAt', 'DESC']]
+        });
+        if (latestContent) {
+          latestContent.isActive = true;
+          await latestContent.save();
+          console.log('Most recent content activated');
+        } else {
+          console.log('Loading initial content as fallback...');
+          await Content.create({ content: initialContent, isActive: true });
+          console.log('Initial content loaded successfully');
+        }
+      }
     }
   } catch (error) {
     console.error('Error loading initial content:', error);
@@ -48,10 +64,9 @@ const initializeDatabase = async () => {
     await sequelize.authenticate();
     console.log('Database connection established successfully.');
     
-    // Sync all models with database
-    const force = process.env.NODE_ENV === 'development';
-    await sequelize.sync({ force });
-    console.log(`Database models synchronized successfully${force ? ' (with force)' : ''}`);
+    // Force sync all models with database for initial setup
+    await sequelize.sync({ force: true });
+    console.log('Database models synchronized successfully (with force)');
     
     // Load initial content
     await loadInitialContent();
