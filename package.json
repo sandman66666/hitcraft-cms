@@ -23,7 +23,6 @@
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
     "cssnano": "^7.0.6",
-    "cross-env": "^7.0.3",
     "dompurify": "^3.2.4",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
@@ -43,9 +42,13 @@
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-compression2": "^0.10.5"
   },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  },
   "scripts": {
     "dev": "vite",
     "build": "cross-env ROLLUP_NATIVE=false vite build",
+    "heroku-postbuild": "npm prune --production",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "node server.js"
