@@ -66,18 +66,26 @@ app.get('/api/get-backups', async (_req: Request, res: Response) => {
   }
 });
 
-// Serve static files from the dist directory
-const distPath = path.join(process.cwd(), 'dist');
+// Serve static files from the dist/client directory
+const clientPath = path.resolve(__dirname, '..', 'client');
+console.log('Current directory:', __dirname);
+console.log('Client path:', clientPath);
+console.log('Directory exists:', fs.existsSync(clientPath));
+if (fs.existsSync(clientPath)) {
+  console.log('Directory contents:', fs.readdirSync(clientPath));
+}
 
 // Only serve static files if we're not building
 if (process.env.NODE_ENV !== 'build') {
-  if (fs.existsSync(distPath)) {
-    console.log('Serving static files from:', distPath);
-    app.use(express.static(distPath));
+  if (fs.existsSync(clientPath)) {
+    console.log('Serving static files from:', clientPath);
+    app.use(express.static(clientPath));
     
     // Fallback route: serve index.html for all non-API routes
     app.get('*', (_req: Request, res: Response) => {
-      const indexPath = path.join(distPath, 'index.html');
+      const indexPath = path.join(clientPath, 'index.html');
+      console.log('Index path:', indexPath);
+      console.log('Index exists:', fs.existsSync(indexPath));
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
@@ -85,7 +93,7 @@ if (process.env.NODE_ENV !== 'build') {
       }
     });
   } else {
-    console.error('Dist directory does not exist');
+    console.error('Client directory does not exist');
   }
 }
 
