@@ -15,8 +15,6 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "lucide-react": "^0.475.0",
-    "mongodb": "^6.3.0",
-    "mongoose": "^8.10.1",
     "pg": "^8.13.3",
     "pg-hstore": "^2.3.4",
     "postcss": "^8.5.2",

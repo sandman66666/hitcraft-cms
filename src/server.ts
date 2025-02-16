@@ -6,11 +6,9 @@ const path = require('path');
 const fs = require('fs');
 const { Content } = require('./models/Content');
 const { Backup } = require('./models/Backup');
-const { MongoContent } = require('./models/MongoContent');
-const { sequelize, connectMongo, migrateMongoToPostgres } = require('./config/database');
+const { sequelize, connectDB } = require('./config/database');
 
 // Load environment variables
-
 dotenv.config();
 
 const app = express();
@@ -59,42 +57,11 @@ const loadInitialContent = async () => {
   }
 };
 
-// Database Connection
+// Initialize database and load content
 const initializeDatabase = async () => {
   try {
-    // Connect to PostgreSQL first
-    await sequelize.authenticate();
-    console.log('PostgreSQL connection established successfully.');
-    
-    // Sync PostgreSQL models
-    await sequelize.sync({ force: true });
-    console.log('Database models synchronized successfully (with force)');
-    
-    // Load initial content if needed
+    await connectDB();
     await loadInitialContent();
-
-    // Try to connect to MongoDB in the background
-    connectMongo().then(async () => {
-      console.log('MongoDB connection established successfully.');
-      // Attempt migration in the background
-      try {
-        await migrateMongoToPostgres(Content, MongoContent);
-        console.log('MongoDB data migration completed successfully');
-      } catch (migrationError: unknown) {
-        console.warn('MongoDB migration failed:', migrationError instanceof Error ? migrationError.message : migrationError);
-      }
-    }).catch((mongoError: unknown) => {
-      console.warn('MongoDB connection failed, continuing with PostgreSQL only:', mongoError instanceof Error ? mongoError.message : mongoError);
-    });
-    
-    // Log database configuration
-    console.log('Database configuration:', {
-      environment: process.env.NODE_ENV,
-      dialect: sequelize.getDialect(),
-      host: sequelize.config.host,
-      database: sequelize.config.database,
-      ssl: !!sequelize.config.dialectOptions?.ssl
-    });
   } catch (error) {
     console.error('Unable to connect to the database:', error);
     throw error;
