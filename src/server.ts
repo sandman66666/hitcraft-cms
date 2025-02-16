@@ -109,6 +109,16 @@ export { app };
 // For standalone usage (e.g., testing)
 if (process.env.NODE_ENV === 'test') {
   const PORT = process.env.PORT || 3000;
+
+  // Serve static files from the dist directory
+  import path from 'path';
+  app.use(express.static(path.join(process.cwd(), 'dist')));
+
+  // Fallback route: serve index.html for all non-API routes
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+  });
+
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
