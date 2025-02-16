@@ -19,7 +19,7 @@ app.use(express.json());
 // Load initial content from JSON file
 const loadInitialContent = async () => {
   try {
-    const initialContentPath = path.join(process.cwd(), 'dist/data/initial-landing-page.json');
+    const initialContentPath = path.join(process.cwd(), 'dist/data/landing-page.json');
     if (!fs.existsSync(initialContentPath)) {
       console.warn('Initial content file not found:', initialContentPath);
       return;

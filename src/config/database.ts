@@ -26,7 +26,9 @@ const connectMongo = async (retries = 5) => {
   for (let i = 0; i < retries; i++) {
     try {
       await mongoose.connect(mongoUri, {
-        ssl: process.env.NODE_ENV === 'production'
+        connectTimeoutMS: 10000,
+        socketTimeoutMS: 45000,
+        serverSelectionTimeoutMS: 10000
       });
       console.log('MongoDB Connected');
       return mongoose.connection;

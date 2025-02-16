@@ -60,7 +60,7 @@
     "postinstall": "npm run build",
     "heroku-postbuild": "npm run build && npm run prepare-data",
     "dev": "vite",
-    "prepare-data": "mkdir -p dist/data && cp src/data/initial-landing-page.json dist/data/initial-landing-page.json"
+    "prepare-data": "mkdir -p dist/data && cp -f src/data/initial-landing-page.json dist/data/landing-page.json"
   },
   "engines": {
     "node": "18.x"
