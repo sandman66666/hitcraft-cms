@@ -1,0 +1,45 @@
+{
+  "hero": {
+    "title": "Welcome to HitCraft",
+    "subtitle": "AI-Powered Music Creation Partner",
+    "description": "Your creative companion for music production.",
+    "button": {
+      "text": "Try HitCraft"
+    },
+    "secondaryButton": {
+      "text": "Learn More"
+    }
+  },
+  "mainValue": {
+    "title": "Music Creation Made Simple",
+    "subtitle": "Your Complete Music Creation Partner",
+    "description": "Get started with HitCraft today.",
+    "features": [
+      "Feature 1",
+      "Feature 2",
+      "Feature 3"
+    ]
+  },
+  "socialProof": {
+    "title": "What People Say",
+    "subtitle": "Join the Community",
+    "testimonials": [
+      {
+        "text": "Sample testimonial",
+        "author": "John Doe",
+        "role": "Musician"
+      }
+    ]
+  },
+  "features": {
+    "preTitle": "Features",
+    "title": "What We Offer",
+    "description": "Discover our features",
+    "items": [
+      {
+        "title": "Feature 1",
+        "description": "Description 1"
+      }
+    ]
+  }
+}

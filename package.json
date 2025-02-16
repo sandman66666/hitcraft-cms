@@ -50,7 +50,7 @@
     "build": "vite build",
     "heroku-postbuild": "npm run build",
     "start": "node server.js",
-    "prepare-data": "mkdir -p src/data && echo '{}' > src/data/landing-page.json"
+    "prepare-data": "mkdir -p src/data && cp -n src/data/initial-landing-page.json src/data/landing-page.json 2>/dev/null || true"
   },
   "engines": {
     "node": "18.x"
