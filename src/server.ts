@@ -14,11 +14,27 @@ app.use(express.json());
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/hitcraft';
 
+// Connect to MongoDB with retries
+const connectToMongoDB = async (retries = 5) => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      await mongoose.connect(MONGODB_URI);
+      console.log('Connected to MongoDB');
+      return;
+    } catch (err) {
+      console.error(`MongoDB connection attempt ${i + 1} failed:`, err);
+      if (i === retries - 1) throw err;
+      await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds before retrying
+    }
+  }
+};
+
 // Only connect to MongoDB if we're not building
 if (process.env.NODE_ENV !== 'build') {
-  mongoose.connect(MONGODB_URI)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('MongoDB connection error:', err));
+  connectToMongoDB().catch(err => {
+    console.error('Failed to connect to MongoDB after all retries:', err);
+    process.exit(1);
+  });
 }
 
 // API Routes

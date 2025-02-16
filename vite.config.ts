@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 import viteCompress from 'vite-plugin-compression2';
-import { app as expressApp } from './src/server';
 
 export default defineConfig({
   plugins: [
@@ -11,21 +10,22 @@ export default defineConfig({
       algorithm: 'gzip',
       exclude: [/\.(br)$/, /\.(gz)$/, /index\.html$/],
       deleteOriginalAssets: false
-    }),
-    {
-      name: 'integrate-express',
-      configureServer(server) {
-        server.middlewares.use(expressApp);
-      }
-    }
+    })
   ],
   build: {
-    outDir: 'dist/client',
-    sourcemap: true,
-    minify: 'esbuild',
+    outDir: 'dist',
+    sourcemap: false,
+    minify: 'terser',
     chunkSizeWarningLimit: 1000,
     assetsInlineLimit: 4096,
-    emptyOutDir: true
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+        }
+      }
+    }
   },
   resolve: {
     alias: {
