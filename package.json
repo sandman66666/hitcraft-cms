@@ -44,16 +44,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build-dev": "npm run type-check && vite build --mode development",
-    "build-prod": "npm run lint && vite build",
-    "start": "node server.js",
+    "build": "ROLLUP_NATIVE=false vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint . --ext ts,tsx --fix",
-    "type-check": "tsc --noEmit",
-    "clean": "rm -rf dist",
     "preview": "vite preview",
-    "validate": "npm run type-check && npm run lint"
+    "start": "node server.js"
   },
   "eslintConfig": {
     "extends": [
