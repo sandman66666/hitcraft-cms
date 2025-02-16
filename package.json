@@ -58,9 +58,9 @@
     "build:client": "vite build",
     "build": "npm run clean && npm run build:server && npm run build:client",
     "postinstall": "npm run build",
-    "heroku-postbuild": "npm run prepare-data",
+    "heroku-postbuild": "npm run build && npm run prepare-data",
     "dev": "vite",
-    "prepare-data": "mkdir -p dist/data && cp src/data/initial-landing-page.json dist/data/landing-page.json"
+    "prepare-data": "mkdir -p dist/data && cp src/data/initial-landing-page.json dist/data/initial-landing-page.json"
   },
   "engines": {
     "node": "18.x"

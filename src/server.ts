@@ -18,7 +18,7 @@ app.use(express.json());
 // Load initial content from JSON file
 const loadInitialContent = async () => {
   try {
-    const initialContentPath = path.join(process.cwd(), 'dist/data/landing-page.json');
+    const initialContentPath = path.join(process.cwd(), 'dist/data/initial-landing-page.json');
     if (!fs.existsSync(initialContentPath)) {
       console.warn('Initial content file not found:', initialContentPath);
       return;
@@ -105,7 +105,7 @@ app.get('/api/get-content', async (_req: Request, res: Response) => {
       where: { isActive: true },
       order: [['createdAt', 'DESC']]
     });
-    res.json(content);
+    res.json({ content: content?.content || null });
   } catch (error) {
     console.error('Error getting content:', error);
     res.status(500).json({ error: 'Failed to get content' });
