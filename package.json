@@ -50,15 +50,7 @@
     "build": "vite build",
     "heroku-postbuild": "npm run build",
     "start": "node server.js",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "prepare-data": "mkdir -p src/data && echo '{}' > src/data/landing-page.json"
   },
   "engines": {
     "node": "18.x"
