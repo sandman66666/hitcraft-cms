@@ -10,7 +10,7 @@ export default defineConfig({
     viteCompress({
       algorithm: 'gzip',
       exclude: [/\.(br)$/, /\.(gz)$/],
-      deleteOriginalAssets: true
+      deleteOriginalAssets: false
     }),
     {
       name: 'integrate-express',
