@@ -47,9 +47,9 @@
     "cssnano": "^7.0.6"
   },
   "scripts": {
-    "start": "node dist/server/server.js",
+    "start": "node dist/server.js",
     "build": "tsc -p tsconfig.server.json && vite build",
-    "heroku-postbuild": "npm run build",
+    "heroku-postbuild": "npm run build && npm run prepare-data",
     "dev": "vite",
     "prepare-data": "mkdir -p src/data && cp -n src/data/initial-landing-page.json src/data/landing-page.json 2>/dev/null || true"
   },

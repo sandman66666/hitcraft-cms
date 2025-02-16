@@ -1,1 +1,1 @@
-web: npm run prepare-data && npm start
+web: npm start
