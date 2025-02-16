@@ -11,5 +11,12 @@ docs/
 *.test.*
 .vscode/
 coverage/
-public/assets/unused/
+public/assets/images/*
+!public/assets/images/favicon.ico
+!public/assets/images/logo.png
+!public/assets/images/logo-small.png
+public/audio/*
+!public/audio/.gitkeep
 *.map
+.github/
+.husky/
