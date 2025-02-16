@@ -1,7 +1,7 @@
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from "path";
-import compression from 'vite-plugin-compression';
+import compression from 'vite-plugin-compression2';
 import { app as expressApp } from './src/server';
 
 export default defineConfig(({ mode }) => {
@@ -13,15 +13,8 @@ export default defineConfig(({ mode }) => {
       react(),
       compression({
         algorithm: 'gzip',
-        ext: '.gz',
-        threshold: 1024,
-        deleteOriginFile: false
-      }),
-      compression({
-        algorithm: 'brotliCompress',
-        ext: '.br',
-        threshold: 1024,
-        deleteOriginFile: false
+        exclude: [/\.(br)$/, /\.(gz)$/],
+        deleteOriginalAssets: true
       }),
       {
         name: 'integrate-express',
@@ -46,6 +39,7 @@ export default defineConfig(({ mode }) => {
       }
     },
     build: {
+      outDir: 'dist',
       minify: 'terser',
       terserOptions: {
         compress: {
@@ -60,23 +54,9 @@ export default defineConfig(({ mode }) => {
             utils: ['@/contexts/AuthContext'],
             ui: ['lucide-react', 'react-hot-toast']
           },
-          chunkFileNames(chunkInfo) {
-            const name = chunkInfo.name;
-            if (name.includes('style')) {
-              return 'assets/css/[name]-[hash].css';
-            }
-            return 'assets/js/[name]-[hash].js';
-          },
+          chunkFileNames: 'assets/js/[name]-[hash].js',
           entryFileNames: 'assets/js/[name]-[hash].js',
-          assetFileNames({ name }) {
-            if (/\.(gif|jpe?g|png|svg|webp)$/.test(name ?? '')) {
-              return 'assets/images/[name]-[hash][extname]';
-            }
-            if (/\.css$/.test(name ?? '')) {
-              return 'assets/css/[name]-[hash][extname]';
-            }
-            return 'assets/[ext]/[name]-[hash][extname]';
-          }
+          assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
         }
       },
       assetsInlineLimit: 4096,
