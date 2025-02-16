@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
-import { viteCompress } from 'vite-plugin-compression2';
+import viteCompress from 'vite-plugin-compression2';
 import { app as expressApp } from './src/server';
 
 export default defineConfig({
