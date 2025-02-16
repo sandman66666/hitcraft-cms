@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     viteCompress({
       algorithm: 'gzip',
-      exclude: [/\.(br)$/, /\.(gz)$/],
+      exclude: [/\.(br)$/, /\.(gz)$/, /index\.html$/],
       deleteOriginalAssets: false
     }),
     {
