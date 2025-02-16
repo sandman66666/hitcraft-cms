@@ -3,6 +3,7 @@ import type { Request, Response, NextFunction } from 'express-serve-static-core'
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
+const fs = require('fs');
 const { Content } = require('./models/Content');
 const { Backup } = require('./models/Backup');
 const sequelize = require('./config/database').default;
@@ -13,6 +14,33 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+// Load initial content from JSON file
+const loadInitialContent = async () => {
+  try {
+    const initialContentPath = path.join(process.cwd(), 'dist/data/landing-page.json');
+    if (!fs.existsSync(initialContentPath)) {
+      console.warn('Initial content file not found:', initialContentPath);
+      return;
+    }
+
+    const initialContent = JSON.parse(fs.readFileSync(initialContentPath, 'utf8'));
+    
+    // Check if content exists
+    const existingContent = await Content.findOne({
+      where: { isActive: true }
+    });
+
+    if (!existingContent) {
+      console.log('No active content found, loading initial content...');
+      await Content.create({ content: initialContent, isActive: true });
+      console.log('Initial content loaded successfully');
+    }
+  } catch (error) {
+    console.error('Error loading initial content:', error);
+    throw error;
+  }
+};
 
 // Database Connection
 const initializeDatabase = async () => {
@@ -25,6 +53,9 @@ const initializeDatabase = async () => {
     await sequelize.sync({ force });
     console.log(`Database models synchronized successfully${force ? ' (with force)' : ''}`);
     
+    // Load initial content
+    await loadInitialContent();
+    
     // Log database configuration
     console.log('Database configuration:', {
       environment: process.env.NODE_ENV,
@@ -33,7 +64,6 @@ const initializeDatabase = async () => {
       database: sequelize.config.database,
       ssl: !!sequelize.config.dialectOptions?.ssl
     });
-    console.log('Database models synchronized successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
     throw error;
