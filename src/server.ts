@@ -6,7 +6,8 @@ const path = require('path');
 const fs = require('fs');
 const { Content } = require('./models/Content');
 const { Backup } = require('./models/Backup');
-const sequelize = require('./config/database').default;
+const { MongoContent } = require('./models/MongoContent');
+const { sequelize, connectMongo, migrateMongoToPostgres } = require('./config/database');
 
 // Load environment variables
 
@@ -61,14 +62,26 @@ const loadInitialContent = async () => {
 // Database Connection
 const initializeDatabase = async () => {
   try {
+    // Connect to PostgreSQL
     await sequelize.authenticate();
-    console.log('Database connection established successfully.');
+    console.log('PostgreSQL connection established successfully.');
     
-    // Force sync all models with database for initial setup
-    await sequelize.sync({ force: true });
-    console.log('Database models synchronized successfully (with force)');
+    // Connect to MongoDB
+    try {
+      await connectMongo();
+      console.log('MongoDB connection established successfully.');
+      
+      // Sync PostgreSQL models
+      await sequelize.sync({ force: true });
+      console.log('PostgreSQL models synchronized successfully (with force)');
+      
+      // Migrate data from MongoDB if needed
+      await migrateMongoToPostgres(Content, MongoContent);
+    } catch (mongoError) {
+      console.warn('MongoDB connection failed, continuing with PostgreSQL only:', mongoError);
+    }
     
-    // Load initial content
+    // Load initial content if needed
     await loadInitialContent();
     
     // Log database configuration
