@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction, Application } from 'express';
 import mongoose, { ConnectOptions } from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
+import { promises as fs } from 'fs';
 import { Content } from './models/Content';
 import { Backup } from './models/Backup';
 
@@ -102,21 +103,31 @@ app.post('/api/restore-backup/:id', async (req: Request, res: Response): Promise
 // Serve static files from the dist directory
 const distPath = path.join(process.cwd(), 'dist');
 console.log('Dist directory path:', distPath);
-console.log('Directory exists:', require('fs').existsSync(distPath));
-console.log('Directory contents:', require('fs').readdirSync(process.cwd()));
 
-app.use(express.static(distPath));
+fs.access(distPath)
+  .then(() => {
+    console.log('Directory exists');
+    return fs.readdir(distPath);
+  })
+  .then((files) => {
+    console.log('Directory contents:', files);
+    app.use(express.static(distPath));
 
-// Fallback route: serve index.html for all non-API routes
-app.get('*', (req, res) => {
-  const indexPath = path.join(distPath, 'index.html');
-  console.log('Index path:', indexPath);
-  console.log('Index exists:', require('fs').existsSync(indexPath));
-  if (!require('fs').existsSync(indexPath)) {
-    return res.status(404).send('index.html not found');
-  }
-  res.sendFile(indexPath);
-});
+    // Fallback route: serve index.html for all non-API routes
+    app.get('*', (req, res) => {
+      const indexPath = path.join(distPath, 'index.html');
+      fs.access(indexPath)
+        .then(() => {
+          res.sendFile(indexPath);
+        })
+        .catch(() => {
+          res.status(404).send('index.html not found');
+        });
+    });
+  })
+  .catch((err) => {
+    console.error('Dist directory does not exist:', err);
+  });
 
 // Error handling middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
