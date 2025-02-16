@@ -7,6 +7,8 @@ const { Content } = require('./models/Content');
 const { Backup } = require('./models/Backup');
 const sequelize = require('./config/database').default;
 
+// Load environment variables
+
 dotenv.config();
 
 const app = express();
@@ -19,7 +21,18 @@ const initializeDatabase = async () => {
     console.log('Database connection established successfully.');
     
     // Sync all models with database
-    await sequelize.sync();
+    const force = process.env.NODE_ENV === 'development';
+    await sequelize.sync({ force });
+    console.log(`Database models synchronized successfully${force ? ' (with force)' : ''}`);
+    
+    // Log database configuration
+    console.log('Database configuration:', {
+      environment: process.env.NODE_ENV,
+      dialect: sequelize.getDialect(),
+      host: sequelize.config.host,
+      database: sequelize.config.database,
+      ssl: !!sequelize.config.dialectOptions?.ssl
+    });
     console.log('Database models synchronized successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
