@@ -1,16 +1,38 @@
-import type { Schema, Model } from 'mongoose';
-const mongoose = require('mongoose') as typeof import('mongoose');
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../config/database';
 
-const backupSchema = new mongoose.Schema({
-  content: {
-    type: mongoose.Schema.Types.Mixed,
-    required: true
+interface BackupAttributes {
+  id: number;
+  content: any;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+class Backup extends Model<BackupAttributes> implements BackupAttributes {
+  public id!: number;
+  public content!: any;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+}
+
+Backup.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    content: {
+      type: DataTypes.JSONB,
+      allowNull: false,
+    }
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  {
+    sequelize,
+    modelName: 'Backup',
+    timestamps: true,
   }
-});
+);
 
-const Backup = mongoose.model('Backup', backupSchema);
-module.exports = { Backup };
+export { Backup };
+export type { BackupAttributes };

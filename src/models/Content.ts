@@ -1,22 +1,44 @@
-import type { Schema, Model } from 'mongoose';
-const mongoose = require('mongoose') as typeof import('mongoose');
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../config/database';
 
-const contentSchema = new mongoose.Schema({
-  content: {
-    type: mongoose.Schema.Types.Mixed,
-    required: true
+interface ContentAttributes {
+  id: number;
+  content: any;
+  isActive: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+class Content extends Model<ContentAttributes> implements ContentAttributes {
+  public id!: number;
+  public content!: any;
+  public isActive!: boolean;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+}
+
+Content.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    content: {
+      type: DataTypes.JSONB,
+      allowNull: false,
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
   },
-  isActive: {
-    type: Boolean,
-    default: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  {
+    sequelize,
+    modelName: 'Content',
+    timestamps: true,
   }
-}, {
-  timestamps: true
-});
+);
 
-const Content = mongoose.model('Content', contentSchema);
-module.exports = { Content };
+export { Content };
+export type { ContentAttributes };
