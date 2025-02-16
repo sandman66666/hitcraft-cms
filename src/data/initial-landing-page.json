@@ -1,44 +1,69 @@
 {
   "hero": {
     "title": "Welcome to HitCraft",
-    "subtitle": "AI-Powered Music Creation Partner",
-    "description": "Your creative companion for music production.",
-    "button": {
-      "text": "Try HitCraft"
-    },
-    "secondaryButton": {
-      "text": "Learn More"
-    }
+    "subtitle": "Your AI-Powered Music Creation Partner",
+    "description": "Your creative companion for music production."
   },
   "mainValue": {
-    "title": "Music Creation Made Simple",
-    "subtitle": "Your Complete Music Creation Partner",
-    "description": "Get started with HitCraft today.",
-    "features": [
-      "Feature 1",
-      "Feature 2",
-      "Feature 3"
+    "title": "More Than <span class='font-[800]'>Just Another</span><br /><span class='text-[#111111] [text-shadow:1px_1px_4px_rgba(0,0,0,0.2)]'>AI Music Tool</span>",
+    "description": "HitCraft is your always-available creative companion - combining conversational AI guidance with professional execution. Whether you need creative direction, technical help, or full production support, just ask and get instant results.",
+    "questionsTitle": "Ask Questions Like:",
+    "questions": [
+      "How can I make this chorus hit harder?",
+      "What chord progression would work here?",
+      "Help me write lyrics about...",
+      "Can you produce this in a pop style?"
     ]
   },
-  "socialProof": {
-    "title": "What People Say",
-    "subtitle": "Join the Community",
-    "testimonials": [
+  "coreBenefits": {
+    "title": "Unlock Your Creative Potential",
+    "subtitle": "Experience the power of AI-assisted music creation",
+    "benefits": [
       {
-        "text": "Sample testimonial",
-        "author": "John Doe",
-        "role": "Musician"
+        "title": "Instant Creative Guidance",
+        "description": "Get immediate feedback and suggestions for your music"
+      },
+      {
+        "title": "Professional Production",
+        "description": "Access high-quality production tools and techniques"
+      },
+      {
+        "title": "Collaborative Workflow",
+        "description": "Work seamlessly with AI to enhance your creative process"
       }
     ]
   },
-  "features": {
-    "preTitle": "Features",
-    "title": "What We Offer",
-    "description": "Discover our features",
-    "items": [
+  "uniqueApproach": {
+    "title": "A New Way to Create",
+    "subtitle": "Innovative Music Production",
+    "features": [
       {
-        "title": "Feature 1",
-        "description": "Description 1"
+        "title": "AI-Powered Assistance",
+        "description": "Get instant creative guidance"
+      }
+    ]
+  },
+  "callToAction": {
+    "preTitle": "Ready to Create?",
+    "title": "Start Making Music Today",
+    "subtitle": "Join HitCraft and transform your music production workflow"
+  },
+  "writingPartner": {
+    "title": "Your Songwriting Partner",
+    "subtitle": "Creative Inspiration On Demand"
+  },
+  "produceSong": {
+    "title": "Professional Production",
+    "subtitle": "Studio-Quality Results"
+  },
+  "socialProof": {
+    "title": "Join the Community",
+    "subtitle": "What Musicians Are Saying",
+    "testimonials": [
+      {
+        "text": "HitCraft has revolutionized my workflow",
+        "author": "John Doe",
+        "role": "Producer"
       }
     ]
   }
