@@ -1,7 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { getContent } from '../api/get-content';
-import { saveContent as apiSaveContent } from '../api/save-content';
-import { createBackup } from '../api/createBackup';
+import { ContentLoader } from '../utils/content-loader';
 
 interface EditContextType {
   isEditMode: boolean;
@@ -17,14 +15,14 @@ const EditContext = createContext<EditContextType | undefined>(undefined);
 export const EditProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [content, setContent] = useState<any>(null);
-  const [latestBackup, setLatestBackup] = useState<string | null>(null);
   const [showEditButton, setShowEditButton] = useState(false);
   const [keySequence, setKeySequence] = useState('');
 
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const initialContent = await getContent();
+        const contentLoader = ContentLoader.getInstance();
+        const initialContent = await contentLoader.getContent();
         setContent(initialContent);
       } catch (error) {
         console.error('Error fetching initial content:', error);
@@ -57,15 +55,6 @@ export const EditProvider: React.FC<{ children: React.ReactNode }> = ({ children
         alert('Invalid credentials');
         return;
       }
-
-      if (content) {
-        try {
-          const backupResult = await createBackup(content);
-          setLatestBackup(backupResult.backupFile);
-        } catch (error) {
-          console.error('Error creating backup:', error);
-        }
-      }
     }
     setIsEditMode(!isEditMode);
   };
@@ -77,15 +66,37 @@ export const EditProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     try {
-      await apiSaveContent('landing-page.json', content);
-      console.log('Content saved successfully');
+      const response = await fetch('/api/save-content', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save content');
+      }
+
+      // Clear the content loader cache to ensure fresh content on next load
+      ContentLoader.getInstance().clearCache();
+      
+      alert('Content saved successfully');
     } catch (error) {
       console.error('Error saving content:', error);
+      alert('Failed to save content');
     }
   };
 
   return (
-    <EditContext.Provider value={{ isEditMode, toggleEditMode, content, setContent, saveContent, showEditButton }}>
+    <EditContext.Provider value={{ 
+      isEditMode, 
+      toggleEditMode, 
+      content, 
+      setContent, 
+      saveContent, 
+      showEditButton 
+    }}>
       {children}
     </EditContext.Provider>
   );

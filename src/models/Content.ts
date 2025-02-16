@@ -2,8 +2,12 @@ import mongoose from 'mongoose';
 
 const contentSchema = new mongoose.Schema({
   content: {
-    type: String,
+    type: mongoose.Schema.Types.Mixed,
     required: true
+  },
+  isActive: {
+    type: Boolean,
+    default: true
   },
   createdAt: {
     type: Date,
