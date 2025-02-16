@@ -2,3 +2,14 @@ src/data/backups
 node_modules
 *.log
 .DS_Store
+.git
+.gitignore
+.env
+README.md
+tests/
+docs/
+*.test.*
+.vscode/
+coverage/
+public/assets/unused/
+*.map
