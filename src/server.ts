@@ -14,9 +14,12 @@ app.use(express.json());
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/hitcraft';
 
-mongoose.connect(MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// Only connect to MongoDB if we're not building
+if (process.env.NODE_ENV !== 'build') {
+  mongoose.connect(MONGODB_URI)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.error('MongoDB connection error:', err));
+}
 
 // API Routes
 app.post('/api/save-content', async (req: Request, res: Response) => {
@@ -65,23 +68,25 @@ app.get('/api/get-backups', async (_req: Request, res: Response) => {
 
 // Serve static files from the dist directory
 const distPath = path.join(process.cwd(), 'dist');
-console.log('Dist directory path:', distPath);
 
-if (fs.existsSync(distPath)) {
-  console.log('Directory contents:', fs.readdirSync(distPath));
-  app.use(express.static(distPath));
-  
-  // Fallback route: serve index.html for all non-API routes
-  app.get('*', (_req: Request, res: Response) => {
-    const indexPath = path.join(distPath, 'index.html');
-    if (fs.existsSync(indexPath)) {
-      res.sendFile(indexPath);
-    } else {
-      res.status(404).send('index.html not found');
-    }
-  });
-} else {
-  console.error('Dist directory does not exist');
+// Only serve static files if we're not building
+if (process.env.NODE_ENV !== 'build') {
+  if (fs.existsSync(distPath)) {
+    console.log('Serving static files from:', distPath);
+    app.use(express.static(distPath));
+    
+    // Fallback route: serve index.html for all non-API routes
+    app.get('*', (_req: Request, res: Response) => {
+      const indexPath = path.join(distPath, 'index.html');
+      if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+      } else {
+        res.status(404).send('index.html not found');
+      }
+    });
+  } else {
+    console.error('Dist directory does not exist');
+  }
 }
 
 // Error handling middleware
@@ -90,9 +95,12 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).send('Something broke!');
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Only start the server if we're not building
+if (process.env.NODE_ENV !== 'build') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
 export { app };
