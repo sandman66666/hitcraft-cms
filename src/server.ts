@@ -19,11 +19,24 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/hitcra
 const connectDB = async (retries = 5) => {
   for (let i = 0; i < retries; i++) {
     try {
-      const conn = await mongoose.connect(MONGODB_URI);
+      // Parse MongoDB URI to handle different formats
+      const uri = MONGODB_URI.startsWith('mongodb+srv://') 
+        ? MONGODB_URI 
+        : MONGODB_URI.replace('mongodb://', 'mongodb+srv://');
+
+      const options = {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 45000,
+      };
+
+      const conn = await mongoose.connect(uri, options);
       console.log(`MongoDB Connected: ${conn.connection.host}`);
       return;
     } catch (err) {
       console.error(`MongoDB connection attempt ${i + 1} failed:`, err);
+      console.error('Connection URI:', MONGODB_URI.replace(/\/\/[^@]+@/, '//***:***@'));
       if (i === retries - 1) throw err;
       await new Promise(resolve => setTimeout(resolve, 5000));
     }
