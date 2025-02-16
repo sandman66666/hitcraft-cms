@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const contentSchema = new mongoose.Schema({
   content: {
-    type: mongoose.Schema.Types.Mixed,
+    type: String,
     required: true
   },
   createdAt: {
@@ -13,6 +13,4 @@ const contentSchema = new mongoose.Schema({
   timestamps: true
 });
 
-const Content = mongoose.model('Content', contentSchema);
-
-export default Content;
+export const Content = mongoose.model('Content', contentSchema);

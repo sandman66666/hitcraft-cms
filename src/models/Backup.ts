@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const backupSchema = new mongoose.Schema({
   content: {
-    type: mongoose.Schema.Types.Mixed,
+    type: String,
     required: true
   },
   createdAt: {
@@ -13,6 +13,4 @@ const backupSchema = new mongoose.Schema({
   timestamps: true
 });
 
-const Backup = mongoose.model('Backup', backupSchema);
-
-export default Backup;
+export const Backup = mongoose.model('Backup', backupSchema);
