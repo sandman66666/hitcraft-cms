@@ -1,8 +1,8 @@
 {
   "hero": {
     "title": "If ChatGPT were designed for musicians, it would be called HitCraft",
-    "subtitle": "Yadin's AI-Powered Music Creation Partner",
-    "description": "Aviv your demo, ask anything about music creation, get guidance enriched with real musical examples, and execute through professional tools - all in one conversation.",
+    "subtitle": "Your AI-Powered Music Creation Partner",
+    "description": "produce your demo, ask anything about music creation, get guidance enriched with real musical examples, and execute through professional tools - all in one conversation.",
     "button": {
       "text": "Try HitCraft Free"
     },
@@ -24,7 +24,7 @@
       "text": "Watch How It Works"
     },
     "questions": [
-      "sdadsadsfsadfHow can I make this chorus hit harder?",
+      "Please help me create a new instrument track for my project",
       "What chord progression would work here?",
       "Help me write lyrics about...",
       "Can you produce this in a pop style?"

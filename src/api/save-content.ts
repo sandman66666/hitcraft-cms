@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-export async function saveContent(filePath: string, content: any) {
+export async function saveContent(content: any) {
   try {
-    const response = await axios.post('/api/save-content', { filePath, content });
-    
-    if (response.status === 200) {
+    const response = await axios.post('/api/save-content', { content });
+    if (response.data.success) {
       return { success: true };
     } else {
-      throw new Error(response.data.message || 'Failed to save content');
+      throw new Error(response.data.error || 'Failed to save content');
     }
   } catch (error) {
     console.error('Error saving content:', error);

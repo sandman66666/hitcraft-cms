@@ -1,11 +1,19 @@
 import express, { Request, Response, NextFunction, Application } from 'express';
-import fs from 'fs/promises';
-import path from 'path';
+import mongoose, { ConnectOptions } from 'mongoose';
+import { config } from 'dotenv';
+import Content from './models/Content';
+import Backup from './models/Backup';
+
+config();
 
 const app: Application = express();
-
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/hitcraft';
+
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err: Error) => console.error('MongoDB connection error:', err));
 
 // Add logging middleware
 app.use((req: Request, res: Response, next: NextFunction): void => {
@@ -14,82 +22,78 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
 });
 
 // Get content endpoint
-app.get('/api/get-content', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  console.log('Received request to get-content endpoint');
-
+app.get('/api/get-content', async (req: Request, res: Response): Promise<void> => {
   try {
-    const landingPagePath = path.join(process.cwd(), 'src', 'data', 'landing-page.json');
-    const content = await fs.readFile(landingPagePath, 'utf8');
-    
-    res.status(200).json(JSON.parse(content));
+    const content = await Content.findOne().sort({ createdAt: -1 });
+    if (!content) {
+      return res.status(404).json({ error: 'No content found' });
+    }
+    res.json(content.content);
   } catch (error: unknown) {
-    console.error('Error in get-content API:', error);
-    next(error);
+    console.error('Error reading content:', error);
+    res.status(500).json({ error: 'Error reading content' });
   }
 });
 
 // Save content endpoint
-app.post('/api/save-content', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  console.log('Received request to save-content endpoint');
-
+app.post('/api/save-content', async (req: Request, res: Response): Promise<void> => {
   try {
     const { content } = req.body;
-    if (!content) {
-      res.status(400).json({ message: 'Content is required' });
-      return;
+    
+    // Create backup of current content
+    const currentContent = await Content.findOne().sort({ createdAt: -1 });
+    if (currentContent) {
+      await Backup.create({
+        content: currentContent.content,
+        createdAt: new Date()
+      });
     }
 
-    const landingPagePath = path.join(process.cwd(), 'src', 'data', 'landing-page.json');
-    
-    // Create a backup before saving
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const backupDir = path.join(process.cwd(), 'src', 'data', 'backups');
-    const backupFile = path.join(backupDir, `landing-page-${timestamp}.json`);
-    
-    // Ensure backup directory exists
-    await fs.mkdir(backupDir, { recursive: true });
-    
-    // Create backup
-    if (await fs.access(landingPagePath).then(() => true).catch(() => false)) {
-      await fs.copyFile(landingPagePath, backupFile);
-    }
+    // Save new content
+    await Content.create({ content });
 
-    // Save the new content
-    await fs.writeFile(landingPagePath, JSON.stringify(content, null, 2), 'utf8');
-    
-    console.log('Content saved successfully');
-    res.status(200).json({ message: 'Content saved successfully' });
+    res.json({ success: true });
   } catch (error: unknown) {
-    console.error('Error in save-content API:', error);
-    next(error);
+    console.error('Error saving content:', error);
+    res.status(500).json({ error: 'Error saving content' });
   }
 });
 
-// Create backup endpoint
-app.post('/api/create-backup', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  console.log('Received request to create-backup endpoint');
-
+// Get backups endpoint
+app.get('/api/get-backups', async (req: Request, res: Response): Promise<void> => {
   try {
-    const { content } = req.body;
-    if (!content) {
-      res.status(400).json({ message: 'Content is required' });
-      return;
+    const backups = await Backup.find().sort({ createdAt: -1 }).limit(10);
+    res.json(backups);
+  } catch (error: unknown) {
+    console.error('Error getting backups:', error);
+    res.status(500).json({ error: 'Error getting backups' });
+  }
+});
+
+// Restore backup endpoint
+app.post('/api/restore-backup/:id', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const backup = await Backup.findById(req.params.id);
+    if (!backup) {
+      return res.status(404).json({ error: 'Backup not found' });
     }
 
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const backupDir = path.join(process.cwd(), 'src', 'data', 'backups');
-    const backupFile = path.join(backupDir, `landing-page-${timestamp}.json`);
-    
-    // Ensure backup directory exists
-    await fs.mkdir(backupDir, { recursive: true });
-    
-    // Create backup
-    await fs.writeFile(backupFile, JSON.stringify(content, null, 2), 'utf8');
-    
-    res.status(200).json({ message: 'Backup created successfully', backupFile });
+    // Save current content as backup
+    const currentContent = await Content.findOne().sort({ createdAt: -1 });
+    if (currentContent) {
+      await Backup.create({
+        content: currentContent.content,
+        createdAt: new Date()
+      });
+    }
+
+    // Restore backup as current content
+    await Content.create({ content: backup.content });
+
+    res.json({ success: true });
   } catch (error: unknown) {
-    console.error('Error in create-backup API:', error);
-    next(error);
+    console.error('Error restoring backup:', error);
+    res.status(500).json({ error: 'Error restoring backup' });
   }
 });
 
