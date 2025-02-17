@@ -19,10 +19,10 @@
       "Access expert music knowledge"
     ],
     "questions": [
-      "Please help me create a new instrument track for my project",
-      "What chord progression would work here?",
-      "Help me write lyrics about...",
-      "Can you produce this in a pop style?"
+      "\"Help me find the right words for this feeling...\"",
+      "\"Show me songs with similar chord progressions\"",
+      "\"Can you suggest a better chorus structure?\"",
+      "\"Turn this demo into a professional track\""
     ],
     "button": {
       "text": "START CREATING NOW"
