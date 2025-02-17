@@ -83,8 +83,9 @@ const MainValueSection: React.FC = () => {
           <div className="mt-12 pt-[62px] border-t border-white/20">
             <div className="flex items-center justify-center">
               <CTAButton 
-                text={localContent.button?.text || ''}
-                variant="light" 
+                className="bg-white text-black border-2 border-white px-8 py-4 rounded-full text-xl sm:text-2xl font-black transition-all duration-300 hover:bg-white/90 hover:scale-105 hover:shadow-[0px_4px_12px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px]"
+                text="LET'S GO!"
+                variant="dark"
               />
             </div>
           </div>

@@ -17,7 +17,7 @@ interface PixieDustProps {
 
 const PixieDust: React.FC<PixieDustProps> = ({ 
   enabled = true,
-  particleCount = 15
+  particleCount = 35
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -54,12 +54,12 @@ const PixieDust: React.FC<PixieDustProps> = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const colors = ['#FFD700', '#FFF', '#FF69B4', '#00FFFF', '#FFA500', '#FF1493'];
+    const colors = ['#FFD700', '#FFFFFF', '#FF69B4', '#00FFFF', '#FFA500', '#FF1493', '#7B68EE', '#00FF00'];
 
     const createParticle = (): Particle => ({
       x: mousePosition.x,
       y: mousePosition.y,
-      size: Math.random() * 5 + 3,
+      size: Math.random() * 10 + 6,
       speedX: (Math.random() - 0.5) * 8,
       speedY: (Math.random() - 0.5) * 8 - 4,
       opacity: 1,
@@ -89,8 +89,9 @@ const PixieDust: React.FC<PixieDustProps> = ({
             particle.x, particle.y, 0,
             particle.x, particle.y, particle.size
           );
-          gradient.addColorStop(0, `${particle.color}FF`);
-          gradient.addColorStop(0.6, `${particle.color}${Math.floor(particle.opacity * 255).toString(16).padStart(2, '0')}`);
+          const alpha = Math.floor(particle.opacity * 255).toString(16).padStart(2, '0');
+          gradient.addColorStop(0, `${particle.color}`);
+          gradient.addColorStop(0.4, `${particle.color}${alpha}`);
           gradient.addColorStop(1, `${particle.color}00`);
           ctx.fillStyle = gradient;
           ctx.fill();
@@ -99,7 +100,7 @@ const PixieDust: React.FC<PixieDustProps> = ({
             ...particle,
             x: particle.x + particle.speedX,
             y: particle.y + particle.speedY,
-            opacity: particle.opacity - 0.01,
+      opacity: particle.opacity - 0.008,
             size: particle.size * 0.99
           };
         }).filter(particle => particle.opacity > 0 && particle.size > 0.1);
