@@ -31,11 +31,9 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
     <section 
       className="w-full h-[100vh] h-[100svh] min-h-[600px] flex items-center justify-center relative bg-gradient-to-br from-gray-900 to-black overflow-hidden" 
       aria-label="Hero"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-10" />
-      <PixieDust enabled={!isEditMode && isHovered} particleCount={35} />
+      <PixieDust enabled={!isEditMode} particleCount={50} />
       <div className="text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <EditableText
           content={initialContent?.title || ''}
@@ -56,7 +54,7 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
         />
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
           <CTAButton 
-            className="bg-white text-black border-2 border-white px-8 py-4 rounded-full text-xl sm:text-2xl font-medium transition-all duration-300 hover:bg-white/90 hover:scale-105 hover:shadow-[0px_4px_12px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px]"
+            className="bg-white text-black border-2 border-white px-8 py-4 rounded-full text-xl sm:text-2xl font-black transition-all duration-300 hover:bg-white/90 hover:scale-105 hover:shadow-[0px_4px_12px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px]"
             text="LET'S GO!"
             variant="dark"
           />
