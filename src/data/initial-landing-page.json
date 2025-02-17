@@ -1,8 +1,8 @@
 {
   "hero": {
-    "title": "Welcome to HitCraft",
+    "title": "If ChatGPT were designed for musicians, it would be called HitCraft",
     "subtitle": "Your AI-Powered Music Creation Partner",
-    "description": "Your creative companion for music production.",
+    "description": "Produce your demo, ask anything about music creation, get guidance enriched with real musical examples, and execute through professional tools - all in one conversation.",
     "button": {
       "text": "Try HitCraft Free"
     },
@@ -11,73 +11,78 @@
     }
   },
   "mainValue": {
-    "title": "More Than <span class='font-[800]'>Just Another</span><br /><span class='text-[#111111] [text-shadow:1px_1px_4px_rgba(0,0,0,0.2)]'>AI Music Tool</span>",
-    "description": "HitCraft is your always-available creative companion - combining conversational AI guidance with professional execution. Whether you need creative direction, technical help, or full production support, just ask and get instant results.",
-    "questionsTitle": "Ask Questions Like:",
-    "questions": [
-      "How can I make this chorus hit harder?",
-      "What chord progression would work here?",
-      "Help me write lyrics about...",
-      "Can you produce this in a pop style?"
+    "title": "More Than Just Another AI Music Tool",
+    "subtitle": "Your Complete Music Creation Partner",
+    "description": "HitCraft is your always-available creative companion - combining conversational AI guidance with real musical examples and professional tools. Whether you need creative direction, technical help, or full production support, just ask and get instant results.",
+    "features": [
+      "\"How can I make this chorus hit harder?\"",
+      "\"What chord progression would work here?\"",
+      "\"Help me write lyrics about...\"",
+      "\"Mix this track professionally\""
     ],
     "button": {
       "text": "Watch How It Works"
-    }
+    },
+    "questions": [
+      "Please help me create a new instrument track for my project",
+      "What chord progression would work here?",
+      "Help me write lyrics about...",
+      "Can you produce this in a pop style?"
+    ]
   },
   "coreBenefits": {
-    "title": "Unlock Your Creative Potential",
+    "title": "The Complete Music Creation Assistant",
     "subtitle": "Experience the power of AI-assisted music creation",
     "benefits": [
       {
-        "title": "Instant Creative Guidance",
-        "description": "Get immediate feedback and suggestions for your music",
+        "title": "Ask Anything, Get Complete Answers",
+        "description": "Every response enriched with real musical examples and references that show you exactly what works.",
         "icon": "chat"
       },
       {
-        "title": "Professional Production",
-        "description": "Access high-quality production tools and techniques",
+        "title": "Take Action Instantly",
+        "description": "From mixing and mastering, to quantizing and even producing your demo, do it all from one chat in a single flow, with a single product.",
         "icon": "lightbulb"
       },
       {
-        "title": "Collaborative Workflow",
-        "description": "Work seamlessly with AI to enhance your creative process",
+        "title": "All Your Music Tools in One Chat",
+        "description": "Stop jumping between apps. Access professional tools and musical knowledge through simple conversation.",
         "icon": "star"
       }
     ]
   },
   "uniqueApproach": {
-    "title": "A New Way to Create",
+    "title": "A New Way to Create Music",
     "subtitle": "Innovative Music Production",
     "button": {
       "text": "Start Creating"
     },
     "features": [
       {
-        "title": "AI-Powered Assistance",
-        "description": "Get instant creative guidance",
+        "title": "Chat Naturally",
+        "description": "Just describe what you want in plain language - no need to learn complex tools or technical jargon.",
         "icon": "chat"
       },
       {
-        "title": "Professional Tools",
-        "description": "Access industry-standard production tools",
+        "title": "Get Expert Guidance",
+        "description": "Receive professional advice on any music-related topic, from creative direction to industry insights.",
         "icon": "lightbulb"
       },
       {
-        "title": "Real-Time Feedback",
-        "description": "Get immediate feedback on your work",
+        "title": "See Instant Results",
+        "description": "Don't just get suggestions - hear your ideas come to life professionally in seconds.",
         "icon": "play"
       },
       {
-        "title": "Continuous Learning",
-        "description": "Improve your skills with every session",
+        "title": "Grow Your Skills",
+        "description": "Learn as you create with explanations and tips from your AI mentor that help you improve.",
         "icon": "chart"
       }
     ]
   },
   "callToAction": {
-    "preTitle": "Ready to Create?",
-    "title": "Start Making Music Today",
-    "subtitle": "Join HitCraft and transform your music production workflow",
+    "title": "Start Creating With Your Complete Music Partner",
+    "subtitle": "Get unlimited creative guidance enriched with real examples, plus professional tools - all through simple conversation.",
     "button": {
       "text": "Try Free Now"
     },
@@ -88,28 +93,28 @@
     ]
   },
   "writingPartner": {
-    "title": "Your Songwriting Partner",
-    "subtitle": "Creative Inspiration On Demand",
-    "description": "Get instant creative guidance and professional feedback on your songwriting",
+    "title": "FOR SONGWRITERS:",
+    "subtitle": "Your Personal Writing Partner & Producer",
+    "description": "Just like chatting with an experienced co-writer who can show you what works and create professional tracks in one seamless flow:",
     "features": [
-      "Help me find the right words for this feeling...",
-      "Show me songs with similar chord progressions",
-      "Can you suggest a better chorus structure?",
-      "Turn this demo into a professional track"
+      "\"Help me find the right words for this feeling...\"",
+      "\"Show me songs with similar chord progressions\"",
+      "\"Can you suggest a better chorus structure?\"",
+      "\"Turn this demo into a professional track\""
     ],
     "button": {
       "text": "Start Creating"
     }
   },
   "produceSong": {
-    "title": "Professional Production",
-    "subtitle": "Studio-Quality Results",
-    "description": "Access professional-grade production tools and techniques",
+    "title": "FOR PRODUCERS:",
+    "subtitle": "Your Own Production Assistant",
+    "description": "Like having a veteran producer who can show you exactly what works and point at musical examples and even take action instantly on your behalf:",
     "features": [
-      "Mix this track professionally",
-      "Show me reference tracks with similar sound",
-      "Help me add an instrument track to my project",
-      "What modern pop songs use this type of processing?"
+      "\"Mix this track professionally\"",
+      "\"Show me reference tracks with similar sound\"",
+      "\"Help me add an instrument track to my project\"",
+      "\"What modern pop songs use this type of processing?\""
     ],
     "button": {
       "text": "Start Producing"
@@ -117,23 +122,23 @@
   },
   "socialProof": {
     "title": "Join the Community",
-    "subtitle": "What Musicians Are Saying",
+    "subtitle": "Join 100,000+ Music Creators Already Using HitCraft",
     "testimonials": [
       {
-        "quote": "HitCraft has revolutionized my workflow",
-        "author": "John Doe",
-        "role": "Producer",
+        "quote": "It's like having a professional producer and mentor who can show you exactly how hit songs achieve their sound. Game-changing for my creative process.",
+        "author": "Sarah K.",
+        "role": "Songwriter",
         "image": "/assets/images/about-us/members/Rachel.jpg"
       },
       {
-        "quote": "Finally, an AI tool that understands music production",
-        "author": "Jane Smith",
-        "role": "Songwriter",
+        "quote": "Finally, an AI tool that shows you real examples and lets you execute through professional tools. No more jumping between apps.",
+        "author": "Mike R.",
+        "role": "Producer",
         "image": "/assets/images/about-us/members/Tamir.jpg"
       },
       {
-        "quote": "The best tool for modern music creation",
-        "author": "Mike Johnson",
+        "quote": "The way it explains concepts through real songs is brilliant. I've learned more in a month than I did in a year of tutorials.",
+        "author": "David L.",
         "role": "Music Producer",
         "image": "/assets/images/about-us/members/David.jpg"
       }

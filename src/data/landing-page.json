@@ -1,8 +1,8 @@
 {
   "hero": {
     "title": "If ChatGPT were designed for musicians, it would be called HitCraft",
-    "subtitle": "Yadin's AI-Powered Music Creation Partner",
-    "description": "Aviv your demo, ask anything about music creation, get guidance enriched with real musical examples, and execute through professional tools - all in one conversation.",
+    "subtitle": "Your AI-Powered Music Creation Partner",
+    "description": "Produce your demo, ask anything about music creation, get guidance enriched with real musical examples, and execute through professional tools - all in one conversation.",
     "button": {
       "text": "Try HitCraft Free"
     },
@@ -24,7 +24,7 @@
       "text": "Watch How It Works"
     },
     "questions": [
-      "sdadsadsfsadfHow can I make this chorus hit harder?",
+      "Please help me create a new instrument track for my project",
       "What chord progression would work here?",
       "Help me write lyrics about...",
       "Can you produce this in a pop style?"
@@ -32,6 +32,7 @@
   },
   "coreBenefits": {
     "title": "The Complete Music Creation Assistant",
+    "subtitle": "Experience the power of AI-assisted music creation",
     "benefits": [
       {
         "title": "Ask Anything, Get Complete Answers",
@@ -49,34 +50,6 @@
         "icon": "star"
       }
     ]
-  },
-  "produceSong": {
-    "title": "FOR PRODUCERS:",
-    "subtitle": "Your Own Production Assistant",
-    "description": "Like having a veteran producer who can show you exactly what works and point at musical examples and even take action instantly on your behalf:",
-    "features": [
-      "\"Mix this track professionally\"",
-      "\"Show me reference tracks with similar sound\"",
-      "\"Help me add an instrument track to my project\"",
-      "\"What modern pop songs use this type of processing?\""
-    ],
-    "button": {
-      "text": "Start Producing"
-    }
-  },
-  "writingPartner": {
-    "title": "FOR SONGWRITERS:",
-    "subtitle": "Your Personal Writing Partner & Producer",
-    "description": "Just like chatting with an experienced co-writer who can show you what works and create professional tracks in one seamless flow:",
-    "features": [
-      "\"Help me find the right words for this feeling...\"",
-      "\"Show me songs with similar chord progressions\"",
-      "\"Can you suggest a better chorus structure?\"",
-      "\"Turn this demo into a professional track\""
-    ],
-    "button": {
-      "text": "Start Creating"
-    }
   },
   "uniqueApproach": {
     "title": "A New Way to Create Music",
@@ -107,8 +80,48 @@
       }
     ]
   },
+  "callToAction": {
+    "title": "Start Creating With Your Complete Music Partner",
+    "subtitle": "Get unlimited creative guidance enriched with real examples, plus professional tools - all through simple conversation.",
+    "button": {
+      "text": "Try Free Now"
+    },
+    "features": [
+      "No credit card required",
+      "Real musical examples",
+      "Professional tools included"
+    ]
+  },
+  "writingPartner": {
+    "title": "FOR SONGWRITERS:",
+    "subtitle": "Your Personal Writing Partner & Producer",
+    "description": "Just like chatting with an experienced co-writer who can show you what works and create professional tracks in one seamless flow:",
+    "features": [
+      "\"Help me find the right words for this feeling...\"",
+      "\"Show me songs with similar chord progressions\"",
+      "\"Can you suggest a better chorus structure?\"",
+      "\"Turn this demo into a professional track\""
+    ],
+    "button": {
+      "text": "Start Creating"
+    }
+  },
+  "produceSong": {
+    "title": "FOR PRODUCERS:",
+    "subtitle": "Your Own Production Assistant",
+    "description": "Like having a veteran producer who can show you exactly what works and point at musical examples and even take action instantly on your behalf:",
+    "features": [
+      "\"Mix this track professionally\"",
+      "\"Show me reference tracks with similar sound\"",
+      "\"Help me add an instrument track to my project\"",
+      "\"What modern pop songs use this type of processing?\""
+    ],
+    "button": {
+      "text": "Start Producing"
+    }
+  },
   "socialProof": {
-    "title": " ",
+    "title": "Join the Community",
     "subtitle": "Join 100,000+ Music Creators Already Using HitCraft",
     "testimonials": [
       {
@@ -129,18 +142,6 @@
         "role": "Music Producer",
         "image": "/assets/images/about-us/members/David.jpg"
       }
-    ]
-  },
-  "callToAction": {
-    "title": "Start Creating With Your Complete Music Partner",
-    "subtitle": "Get unlimited creative guidance enriched with real examples, plus professional tools - all through simple conversation.",
-    "button": {
-      "text": "Try Free Now"
-    },
-    "features": [
-      "No credit card required",
-      "Real musical examples",
-      "Professional tools included"
     ]
   }
 }
