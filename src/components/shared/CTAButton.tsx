@@ -17,7 +17,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({ text, variant = 'light', c
 
   return (
     <button
-      className={`${baseClasses} ${variantClasses[variant]} ${className}`}
+      className={`${baseClasses} ${variantClasses[variant]} !text-black ${className}`}
       onClick={onClick}
     >
       {text}

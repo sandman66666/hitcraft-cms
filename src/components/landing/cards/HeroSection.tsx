@@ -54,9 +54,9 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
         />
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
           <CTAButton 
-            className="bg-white text-black border-2 border-white px-8 py-4 rounded-full text-xl sm:text-2xl font-black transition-all duration-300 hover:bg-white/90 hover:scale-105 hover:shadow-[0px_4px_12px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px]"
+            className="bg-white !text-black border-2 border-white px-8 py-4 rounded-full text-xl sm:text-2xl font-black transition-all duration-300 hover:bg-white/90 hover:scale-105 hover:shadow-[0px_4px_12px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px]"
             text="LET'S GO!"
-            variant="dark"
+            variant="light"
           />
         </div>
       </div>

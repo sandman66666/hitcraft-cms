@@ -17,7 +17,7 @@ interface PixieDustProps {
 
 const PixieDust: React.FC<PixieDustProps> = ({ 
   enabled = true,
-  particleCount = 35
+  particleCount = 75
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -59,7 +59,7 @@ const PixieDust: React.FC<PixieDustProps> = ({
     const createParticle = (): Particle => ({
       x: mousePosition.x,
       y: mousePosition.y,
-      size: Math.random() * 10 + 6,
+      size: Math.random() * 12 + 8,
       speedX: (Math.random() - 0.5) * 8,
       speedY: (Math.random() - 0.5) * 8 - 4,
       opacity: 1,
@@ -100,7 +100,7 @@ const PixieDust: React.FC<PixieDustProps> = ({
             ...particle,
             x: particle.x + particle.speedX,
             y: particle.y + particle.speedY,
-      opacity: particle.opacity - 0.008,
+      opacity: particle.opacity - 0.005,
             size: particle.size * 0.99
           };
         }).filter(particle => particle.opacity > 0 && particle.size > 0.1);
