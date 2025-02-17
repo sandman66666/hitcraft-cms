@@ -48,11 +48,11 @@ const MainValueSection: React.FC = () => {
       </div>
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
         <div className="text-white text-center lg:text-left">
-          <h2 className="text-3xl sm:text-4xl lg:text-6xl font-light mb-8">
+          <h2 className="text-4xl sm:text-5xl lg:text-7xl font-extralight mb-8">
             <EditableText
               content={localContent.title || 'Start Songs'}
               onChange={(value: string) => updateContent('mainValue.title', value)}
-              className="bg-clip-text text-transparent bg-gradient-to-r from-[#8a44c8] to-[#df0c39]"
+              className="bg-clip-text text-transparent bg-gradient-to-r from-[#8a44c8] to-[#df0c39] block"
             />
             <EditableText
               content={localContent.subtitle || 'With Confidence'}
@@ -63,17 +63,17 @@ const MainValueSection: React.FC = () => {
           <EditableText
             content={localContent.description || "Eliminate uncertainty at the beginning of the songwriting process. Get inspired by AI-generated themes, chord progressions, and melody ideas to kickstart your creation."}
             onChange={(value: string) => updateContent('mainValue.description', value)}
-            className="text-xl lg:text-2xl mb-12 text-white/80 max-w-xl"
+            className="text-xl lg:text-2xl mb-12 text-white/80 max-w-xl leading-relaxed"
           />
 
-          <div className="bg-white/[0.12] backdrop-blur-sm rounded-2xl p-8 mb-12 max-w-2xl mx-auto shadow-[0_4px_12px_rgba(0,0,0,0.1),inset_0px_2px_10px_rgba(0,0,0,0.1)] border border-white/10">
+          <div className="bg-white/[0.12] backdrop-blur-sm rounded-2xl p-10 sm:p-12 mb-12 max-w-2xl mx-auto shadow-[0_4px_12px_rgba(0,0,0,0.1),inset_0px_2px_10px_rgba(0,0,0,0.1)] border border-white/10">
             <EditableText
               content={localContent.subtitle || 'Your Complete Music Creation Partner'}
               onChange={(value) => updateContent('mainValue.subtitle', value)}
-              className="text-2xl sm:text-3xl font-medium mb-8 text-white [text-shadow:0px_2px_4px_rgba(0,0,0,0.1)]"
+              className="text-2xl sm:text-3xl lg:text-4xl font-medium mb-10 text-white [text-shadow:0px_2px_4px_rgba(0,0,0,0.1)]"
               as="h3"
             />
-            <ul className="text-left text-lg sm:text-xl text-gray-100 space-y-6 leading-[1.4]">
+            <ul className="text-left text-lg sm:text-xl lg:text-2xl text-gray-100 space-y-8 leading-[1.4]">
               {(localContent.questions || [
                 "Please help me create a new instrument track for my project",
                 "What chord progression would work here?",
@@ -81,7 +81,7 @@ const MainValueSection: React.FC = () => {
                 "Can you produce this in a pop style?"
               ]).map((question, index) => (
                 <li key={index} className="flex items-center">
-                  <span className="text-white mr-3">•</span>
+                  <span className="text-white mr-4 text-2xl">•</span>
                   <EditableText
                     content={`"${question}"`}
                     onChange={(value) => {
