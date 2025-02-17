@@ -13,24 +13,33 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+import { LandingPageContent } from './types/landing';
+
 // Validate content structure
-const validateContentStructure = (content: any) => {
+const validateContentStructure = (content: any): content is LandingPageContent => {
+  if (!content) return false;
+
+  // Check required sections
   const requiredSections = ['hero', 'mainValue', 'coreBenefits', 'writingPartner', 'produceSong', 'uniqueApproach', 'socialProof', 'callToAction'];
   const missingKeys = requiredSections.filter(key => !content[key]);
   if (missingKeys.length > 0) {
-    throw new Error(`Missing required sections: ${missingKeys.join(', ')}`);
+    console.error(`Missing required sections: ${missingKeys.join(', ')}`);
+    return false;
   }
 
   // Validate button text in each section
-  const sectionsWithButtons = ['hero', 'mainValue', 'writingPartner', 'produceSong', 'callToAction'];
+  const sectionsWithButtons = ['hero', 'mainValue', 'writingPartner', 'produceSong', 'uniqueApproach', 'callToAction'];
   const missingButtonText = sectionsWithButtons.filter(section => {
     const button = content[section]?.button;
-    return !button || typeof button.text !== 'string';
+    return !button || typeof button.text !== 'string' || !button.text.trim();
   });
 
   if (missingButtonText.length > 0) {
-    throw new Error(`Missing button text in sections: ${missingButtonText.join(', ')}`);
+    console.error(`Missing or invalid button text in sections: ${missingButtonText.join(', ')}`);
+    return false;
   }
+
+  return true;
 };
 
 // Load initial content from JSON file
@@ -45,10 +54,8 @@ const loadInitialContent = async () => {
     const initialContent = JSON.parse(fs.readFileSync(initialContentPath, 'utf8'));
     
     // Validate initial content structure
-    try {
-      validateContentStructure(initialContent);
-    } catch (error: any) {
-      console.error('Invalid initial content structure:', error.message);
+    if (!validateContentStructure(initialContent)) {
+      console.error('Invalid initial content structure');
       return;
     }
     
@@ -101,12 +108,10 @@ app.post('/api/save-content', async (req: Request, res: Response) => {
     const { content } = req.body;
 
     // Validate content structure before saving
-    try {
-      validateContentStructure(content);
-    } catch (error: any) {
+    if (!validateContentStructure(content)) {
       return res.status(400).json({ 
         success: false, 
-        error: `Invalid content structure: ${error.message}` 
+        error: 'Invalid content structure. Check server logs for details.' 
       });
     }
 
@@ -140,7 +145,25 @@ app.get('/api/get-content', async (_req: Request, res: Response) => {
       where: { isActive: true },
       order: [['createdAt', 'DESC']]
     });
-    res.json({ content: content?.content || null });
+
+    let contentToSend = content?.content;
+
+    // Validate content structure
+    if (contentToSend && !validateContentStructure(contentToSend)) {
+      console.error('Invalid content structure in database, loading initial content');
+      const initialContentPath = path.join(process.cwd(), 'dist/data/landing-page.json');
+      if (fs.existsSync(initialContentPath)) {
+        contentToSend = JSON.parse(fs.readFileSync(initialContentPath, 'utf8'));
+        if (!validateContentStructure(contentToSend)) {
+          console.error('Invalid initial content structure');
+          contentToSend = null;
+        }
+      } else {
+        contentToSend = null;
+      }
+    }
+
+    res.json({ content: contentToSend });
   } catch (error) {
     console.error('Error getting content:', error);
     res.status(500).json({ error: 'Failed to get content' });
