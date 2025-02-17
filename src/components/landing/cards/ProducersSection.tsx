@@ -9,9 +9,29 @@ interface ProducersSectionProps {
   content?: ProduceSongContent;
 }
 
-export default function ProducersSection({ content: initialContent = ContentLoader.getInstance().getContent().produceSong }: ProducersSectionProps) {
+export default function ProducersSection({ content: propContent }: ProducersSectionProps) {
   const { isEditMode, content, setContent } = useEdit();
-  const subtitleParts = initialContent.subtitle.split(' ');
+  const [localContent, setLocalContent] = React.useState<ProduceSongContent | null>(null);
+
+  React.useEffect(() => {
+    if (propContent) {
+      setLocalContent(propContent);
+    } else {
+      ContentLoader.getInstance().getContent()
+        .then(content => {
+          if (content?.produceSong) {
+            setLocalContent(content.produceSong);
+          }
+        })
+        .catch(error => console.error('Error loading producer content:', error));
+    }
+  }, [propContent]);
+
+  if (!localContent) {
+    return null; // or loading state
+  }
+
+  const subtitleParts = localContent.subtitle.split(' ');
 
   const updateContent = (path: string, value: string | string[]) => {
     if (!content) return;
@@ -34,14 +54,14 @@ export default function ProducersSection({ content: initialContent = ContentLoad
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           <div className="lg:col-span-2 mb-[-5]">
             <EditableText
-              content={initialContent.title}
+              content={localContent.title}
               onChange={(value) => updateContent('produceSong.title', value)}
               className="text-2xl sm:text-3xl lg:text-[30px] font-extralight mb-6 font-poppins text-white [text-shadow:1px_1px_4px_rgba(0,0,0,0.2)]"
               as="h2"
             />
             <h3 className="text-4xl sm:text-5xl lg:text-[72px] font-extralight leading-tight font-poppins text-white [text-shadow:1px_1px_4px_rgba(0,0,0,0.2)]">
               <EditableText
-                content={initialContent.subtitle}
+                content={localContent.subtitle}
                 onChange={(value) => updateContent('produceSong.subtitle', value)}
                 className="inline"
               />
@@ -49,19 +69,19 @@ export default function ProducersSection({ content: initialContent = ContentLoad
           </div>
           <div className="text-white lg:col-span-2 xl:col-span-1">
             <EditableText
-              content={initialContent.description}
+              content={localContent.description}
               onChange={(value) => updateContent('produceSong.description', value)}
               className="text-lg sm:text-xl lg:text-2xl mb-12 text-gray-200 max-w-5xl leading-relaxed"
             />
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 sm:p-10 mb-12 max-w-2xl shadow-[0px_4px_24px_rgba(0,0,0,0.1)]">
               <ul className="text-left text-base sm:text-lg lg:text-xl text-gray-200 space-y-6 sm:space-y-8">
-                {initialContent.features?.map((feature, index) => (
+                {localContent.features?.map((feature: string, index: number) => (
                   <li key={index} className="flex items-center">
                     <span className="text-white mr-4 text-2xl">•</span>
                     <EditableText
                       content={feature}
                       onChange={(value) => {
-                        const newFeatures = [...(initialContent.features || [])];
+                        const newFeatures = [...(localContent.features || [])];
                         newFeatures[index] = value;
                         updateContent('produceSong.features', newFeatures);
                       }}
@@ -71,15 +91,8 @@ export default function ProducersSection({ content: initialContent = ContentLoad
                 ))}
               </ul>
             </div>
-            {initialContent.additionalDescription && (
-              <EditableText
-                content={initialContent.additionalDescription}
-                onChange={(value) => updateContent('produceSong.additionalDescription', value)}
-                className="text-lg sm:text-xl lg:text-2xl mb-12 text-gray-200 max-w-3xl leading-relaxed"
-              />
-            )}
             <CTAButton
-              text={initialContent.button.text}
+              text={content?.produceSong?.button?.text || localContent.button.text}
               variant="light"
             />
           </div>

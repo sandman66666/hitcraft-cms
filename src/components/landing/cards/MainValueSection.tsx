@@ -12,7 +12,7 @@ const MainValueSection: React.FC = () => {
     "Can you produce this in a pop style?"
   ];
 
-  const updateContent = (path: string, value: string) => {
+  const updateContent = (path: string, value: string | string[]) => {
     if (!content) return;
     const newContent = { ...content };
     const pathArray = path.split('.');
@@ -70,7 +70,10 @@ const MainValueSection: React.FC = () => {
 
           <div className="mt-12 pt-[62px] border-t border-white/20">
             <div className="flex items-center justify-center">
-              <CTAButton text="Let's Go" variant="light" />
+              <CTAButton 
+                text={content?.mainValue?.button?.text || "Let's Go"} 
+                variant="light" 
+              />
             </div>
           </div>
         </div>

@@ -3,13 +3,33 @@ import CTAButton from '../../shared/CTAButton';
 import { CallToActionContent } from '../../../types/content';
 import EditableText from '../../shared/EditableText';
 import { useEdit } from '../../../contexts/EditContext';
+import { ContentLoader } from '@/utils/content-loader';
 
 interface CallToActionSectionProps {
-  content: CallToActionContent;
+  content?: CallToActionContent;
 }
 
-export default function CallToActionSection({ content: initialContent }: CallToActionSectionProps) {
+export default function CallToActionSection({ content: propContent }: CallToActionSectionProps) {
   const { isEditMode, content, setContent } = useEdit();
+  const [localContent, setLocalContent] = React.useState<CallToActionContent | null>(null);
+
+  React.useEffect(() => {
+    if (propContent) {
+      setLocalContent(propContent);
+    } else {
+      ContentLoader.getInstance().getContent()
+        .then(content => {
+          if (content?.callToAction) {
+            setLocalContent(content.callToAction);
+          }
+        })
+        .catch(error => console.error('Error loading call to action content:', error));
+    }
+  }, [propContent]);
+
+  if (!localContent) {
+    return null; // or loading state
+  }
 
   const updateContent = (path: string, value: string | string[]) => {
     if (!content) return;
@@ -29,41 +49,36 @@ export default function CallToActionSection({ content: initialContent }: CallToA
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-5" />
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center">
-          {initialContent.preTitle && (
-            <EditableText
-              as="h2"
-              content={initialContent.preTitle}
-              onChange={(value) => updateContent('callToAction.preTitle', value)}
-              className="text-[24px] font-extralight mb-4 text-gray-800 font-poppins"
-            />
-          )}
           <EditableText
             as="h3"
-            content={initialContent.title}
+            content={localContent.title}
             onChange={(value) => updateContent('callToAction.title', value)}
             className="text-4xl sm:text-5xl lg:text-6xl font-extralight mb-8 text-gray-900 font-poppins leading-tight"
           />
           <EditableText
-            content={initialContent.subtitle}
+            content={localContent.subtitle}
             onChange={(value) => updateContent('callToAction.subtitle', value)}
             className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-10"
           />
           <div className="flex justify-center">
-            <CTAButton text={initialContent.button.text} variant="dark" />
+            <CTAButton 
+              text={content?.callToAction?.button?.text || localContent.button.text}
+              variant="dark" 
+            />
           </div>
           <div className="mt-6 text-gray-600 text-sm sm:text-base">
-            {initialContent.features.map((feature, index) => (
+            {localContent.features.map((feature: string, index: number) => (
               <EditableText
                 key={index}
                 content={feature}
                 onChange={(value) => {
-                  const newFeatures = [...initialContent.features];
+                  const newFeatures = [...localContent.features];
                   newFeatures[index] = value;
                   updateContent('callToAction.features', newFeatures);
                 }}
                 className="inline-block"
               />
-            )).reduce((prev, curr) => (
+            )).reduce((prev: React.ReactNode, curr: React.ReactNode) => (
               <>{prev} • {curr}</>
             ))}
           </div>

@@ -4,9 +4,9 @@ const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
 const fs = require('fs');
+const { sequelize, connectDB } = require('./config/database');
 const { Content } = require('./models/Content');
 const { Backup } = require('./models/Backup');
-const { sequelize, connectDB } = require('./config/database');
 
 // Load environment variables
 dotenv.config();
@@ -149,4 +149,4 @@ initializeDatabase().then(() => {
   process.exit(1);
 });
 
-module.exports = { app };
+export { app };

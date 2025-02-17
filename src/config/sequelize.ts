@@ -1,10 +1,10 @@
-const SequelizeORM = require('sequelize');
+import { Sequelize, Model, DataTypes } from 'sequelize';
 
 // PostgreSQL Configuration
 const databaseUrl = process.env.DATABASE_URL || 'postgres://localhost:5432/hitcraft';
 
 const config = {
-  dialect: 'postgres',
+  dialect: 'postgres' as const,
   dialectOptions: {
     ssl: process.env.NODE_ENV === 'production' ? {
       require: true,
@@ -21,19 +21,19 @@ const config = {
 };
 
 // Initialize PostgreSQL with retry logic
-const dbInstance = new SequelizeORM.Sequelize(databaseUrl, config);
+export const sequelize = new Sequelize(databaseUrl, config);
 
-const connectDB = async (retries = 5) => {
+export const connectDB = async (retries = 5) => {
   for (let i = 0; i < retries; i++) {
     try {
-      await dbInstance.authenticate();
+      await sequelize.authenticate();
       console.log('Database connection established successfully.');
       
       // Sync models
-      await dbInstance.sync();
+      await sequelize.sync();
       console.log('Database models synchronized successfully');
       
-      return dbInstance;
+      return sequelize;
     } catch (err) {
       console.error(`Database connection attempt ${i + 1} failed:`, err);
       if (i === retries - 1) throw err;
@@ -42,4 +42,5 @@ const connectDB = async (retries = 5) => {
   }
 };
 
-module.exports = { sequelize: dbInstance, connectDB };
+export { Model, DataTypes };
+export default sequelize;

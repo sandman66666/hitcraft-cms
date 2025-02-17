@@ -1,7 +1,7 @@
-import { Model, DataTypes } from 'sequelize';
-import sequelize from '../config/database';
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('../config/database');
 
-export class Backup extends Model {
+class Backup extends Model {
   public id!: number;
   public content!: any;
   public readonly createdAt!: Date;
@@ -23,3 +23,5 @@ Backup.init({
   timestamps: true,
   updatedAt: false,
 });
+
+module.exports = { Backup };

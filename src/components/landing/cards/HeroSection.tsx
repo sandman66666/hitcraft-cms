@@ -9,9 +9,29 @@ interface HeroSectionProps {
   content?: HeroContent;
 }
 
-export default function HeroSection({ content: initialContent = ContentLoader.getInstance().getContent().hero }: HeroSectionProps) {
+export default function HeroSection({ content: propContent }: HeroSectionProps) {
   const { isEditMode, content, setContent } = useEdit();
-  const titleWords = initialContent.subtitle.split(' ');
+  const [localContent, setLocalContent] = React.useState<HeroContent | null>(null);
+
+  React.useEffect(() => {
+    if (propContent) {
+      setLocalContent(propContent);
+    } else {
+      ContentLoader.getInstance().getContent()
+        .then(content => {
+          if (content?.hero) {
+            setLocalContent(content.hero);
+          }
+        })
+        .catch(error => console.error('Error loading hero content:', error));
+    }
+  }, [propContent]);
+
+  if (!localContent) {
+    return null; // or loading state
+  }
+
+  const titleWords = localContent.subtitle.split(' ');
 
   const updateContent = (path: string, value: string) => {
     if (!content) return;
@@ -31,25 +51,25 @@ export default function HeroSection({ content: initialContent = ContentLoader.ge
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-5" />
       <div className="text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <EditableText
-          content={initialContent.title}
+          content={localContent.title}
           onChange={(value) => updateContent('hero.title', value)}
           className="text-xl sm:text-2xl italic text-gray-900 mb-12 animate-fade-in font-poppins"
         />
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[6rem] font-extralight mb-12 font-poppins bg-gradient-to-r from-[#A533FF] to-[#ff3366] text-transparent bg-clip-text leading-[1.15] max-w-4xl mx-auto">
           <EditableText
-            content={initialContent.subtitle}
+            content={localContent.subtitle}
             onChange={(value) => updateContent('hero.subtitle', value)}
             className="inline"
           />
         </h1>
         <EditableText
-          content={initialContent.description}
+          content={localContent.description}
           onChange={(value) => updateContent('hero.description', value)}
           className="text-[1.35rem] sm:text-[1.45rem] mb-12 text-gray-800 max-w-3xl mx-auto font-light leading-relaxed tracking-[0.02em]"
         />
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
           <CTAButton 
-            text={initialContent.button.text}
+            text={content?.hero?.button?.text || localContent.button.text}
             variant="light"
           />
         </div>

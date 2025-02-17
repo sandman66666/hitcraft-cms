@@ -9,11 +9,31 @@ interface SongwritersSectionProps {
   content?: WritingPartnerContent;
 }
 
-export default function SongwritersSection({ content: initialContent = ContentLoader.getInstance().getContent().writingPartner }: SongwritersSectionProps) {
+export default function SongwritersSection({ content: propContent }: SongwritersSectionProps) {
   const { isEditMode, content, setContent } = useEdit();
-  const subtitleParts = initialContent.subtitle.split(' ');
+  const [localContent, setLocalContent] = React.useState<WritingPartnerContent | null>(null);
 
-  const updateContent = (path: string, value: string) => {
+  React.useEffect(() => {
+    if (propContent) {
+      setLocalContent(propContent);
+    } else {
+      ContentLoader.getInstance().getContent()
+        .then(content => {
+          if (content?.writingPartner) {
+            setLocalContent(content.writingPartner);
+          }
+        })
+        .catch(error => console.error('Error loading songwriter content:', error));
+    }
+  }, [propContent]);
+
+  if (!localContent) {
+    return null; // or loading state
+  }
+
+  const subtitleParts = localContent.subtitle.split(' ');
+
+  const updateContent = (path: string, value: string | string[]) => {
     if (!content) return;
     const newContent = { ...content };
     const pathArray = path.split('.');
@@ -34,7 +54,7 @@ export default function SongwritersSection({ content: initialContent = ContentLo
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           <div className="lg:col-span-2 mb-[-5]">
             <EditableText
-              content={initialContent.title}
+              content={localContent.title}
               onChange={(value) => updateContent('writingPartner.title', value)}
               className="text-2xl sm:text-3xl lg:text-[30px] font-extralight mb-6 font-poppins text-white [text-shadow:1px_1px_4px_rgba(0,0,0,0.2)]"
               as="h2"
@@ -50,21 +70,21 @@ export default function SongwritersSection({ content: initialContent = ContentLo
           </div>
           <div className="text-white lg:col-span-2 xl:col-span-1">
             <EditableText
-              content={initialContent.description}
+              content={localContent.description}
               onChange={(value) => updateContent('writingPartner.description', value)}
               className="text-lg sm:text-xl lg:text-2xl mb-12 text-gray-200 max-w-5xl leading-relaxed"
             />
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 sm:p-10 mb-12 max-w-2xl shadow-[0px_4px_24px_rgba(0,0,0,0.1)]">
               <ul className="text-left text-base sm:text-lg lg:text-xl text-gray-200 space-y-6 sm:space-y-8">
-                {initialContent.features?.map((feature, index) => (
+                {localContent.features?.map((feature: string, index: number) => (
                   <li key={index} className="flex items-center">
                     <span className="text-white mr-4 text-2xl">•</span>
                     <EditableText
                       content={feature}
                       onChange={(value) => {
-                        const newFeatures = [...(initialContent.features || [])];
+                        const newFeatures = [...(localContent.features || [])];
                         newFeatures[index] = value;
-                        updateContent('writingPartner.features', newFeatures.join('|'));
+                        updateContent('writingPartner.features', newFeatures);
                       }}
                       className="inline"
                     />
@@ -72,14 +92,10 @@ export default function SongwritersSection({ content: initialContent = ContentLo
                 ))}
               </ul>
             </div>
-            {initialContent.additionalDescription && (
-              <EditableText
-                content={initialContent.additionalDescription}
-                onChange={(value) => updateContent('writingPartner.additionalDescription', value)}
-                className="text-lg sm:text-xl lg:text-2xl mb-12 text-gray-200 max-w-3xl leading-relaxed"
-              />
-            )}
-            <CTAButton text={initialContent.button.text} variant="light" />
+            <CTAButton 
+              text={content?.writingPartner?.button?.text || localContent.button.text}
+              variant="light" 
+            />
           </div>
         </div>
       </div>
