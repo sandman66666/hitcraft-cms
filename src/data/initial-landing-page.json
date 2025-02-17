@@ -5,7 +5,8 @@
     "description": "Whether you're stuck on lyrics, need help composing melodies, or want to bring your song to life—HitCraft helps you write songs, effortlessly",
     "button": {
       "text": "START CREATING NOW"
-    }
+    },
+    "secondaryText": "No credit card required • Try it free"
   },
   "mainValue": {
     "title": "Start Songs",

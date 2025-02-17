@@ -14,6 +14,7 @@ export interface HeroContent {
   description: string;
   button: Button;
   secondaryButton?: Button;
+  secondaryText?: string;
 }
 
 export interface MainValueContent {

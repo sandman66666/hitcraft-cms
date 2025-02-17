@@ -62,7 +62,7 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
             text={initialContent?.button?.text || 'START CREATING NOW'}
             variant="light"
           />
-          <p className="text-sm text-gray-400 mt-4 font-light">No credit card required • Try it free</p>
+          <p className="text-sm text-gray-400 mt-4 font-light">{initialContent?.secondaryText || 'No credit card required • Try it free'}</p>
         </div>
       </div>
     </section>
