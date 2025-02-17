@@ -43,27 +43,32 @@ const MainValueSection: React.FC = () => {
       <div className="w-full max-w-4xl mx-auto relative z-10">
         <div className="text-center">
           <EditableText
-            content={localContent.title || ''}
+            content={localContent.title || 'More Than Just Another AI Music Tool'}
             onChange={(value) => updateContent('mainValue.title', value)}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-poppins font-extralight mb-8 text-center text-[#1a1a1a] leading-[1.2] [text-shadow:1px_1px_4px_rgba(0,0,0,0.15)]"
             as="h2"
           />
           
           <EditableText
-            content={localContent.description || ''}
+            content={localContent.description || 'HitCraft is your always-available creative companion - combining conversational AI guidance with real musical examples and professional tools. Whether you need creative direction, technical help, or full production support, just ask and get instant results.'}
             onChange={(value) => updateContent('mainValue.description', value)}
             className="text-xl sm:text-2xl mb-12 text-gray-100 mx-auto [text-shadow:0px_2px_4px_rgba(0,0,0,0.1)] leading-[1.5] max-w-[800px]"
           />
 
           <div className="bg-white/[0.12] backdrop-blur-sm rounded-2xl p-8 mb-12 max-w-2xl mx-auto shadow-[0_4px_12px_rgba(0,0,0,0.1),inset_0px_2px_10px_rgba(0,0,0,0.1)] border border-white/10">
             <EditableText
-              content={localContent.subtitle || ''}
+              content={localContent.subtitle || 'Your Complete Music Creation Partner'}
               onChange={(value) => updateContent('mainValue.subtitle', value)}
               className="text-2xl sm:text-3xl font-medium mb-8 text-white [text-shadow:0px_2px_4px_rgba(0,0,0,0.1)]"
               as="h3"
             />
             <ul className="text-left text-lg sm:text-xl text-gray-100 space-y-6 leading-[1.4]">
-              {(localContent.questions || []).map((question, index) => (
+              {(localContent.questions || [
+                "Please help me create a new instrument track for my project",
+                "What chord progression would work here?",
+                "Help me write lyrics about...",
+                "Can you produce this in a pop style?"
+              ]).map((question, index) => (
                 <li key={index} className="flex items-center">
                   <span className="text-white mr-3">•</span>
                   <EditableText
@@ -84,7 +89,7 @@ const MainValueSection: React.FC = () => {
             <div className="flex items-center justify-center">
               <CTAButton 
                 className="bg-white text-black border-2 border-white px-8 py-4 rounded-full text-xl sm:text-2xl font-black transition-all duration-300 hover:bg-white/90 hover:scale-105 hover:shadow-[0px_4px_12px_rgba(255,255,255,0.3)] hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px]"
-                text="LET'S GO!"
+                text={localContent.button?.text || "Watch How It Works"}
                 variant="dark"
               />
             </div>
