@@ -2,7 +2,13 @@
   "hero": {
     "title": "Welcome to HitCraft",
     "subtitle": "Your AI-Powered Music Creation Partner",
-    "description": "Your creative companion for music production."
+    "description": "Your creative companion for music production.",
+    "button": {
+      "text": "Try HitCraft Free"
+    },
+    "secondaryButton": {
+      "text": "See Real Examples"
+    }
   },
   "mainValue": {
     "title": "More Than <span class='font-[800]'>Just Another</span><br /><span class='text-[#111111] [text-shadow:1px_1px_4px_rgba(0,0,0,0.2)]'>AI Music Tool</span>",
@@ -13,7 +19,10 @@
       "What chord progression would work here?",
       "Help me write lyrics about...",
       "Can you produce this in a pop style?"
-    ]
+    ],
+    "button": {
+      "text": "Watch How It Works"
+    }
   },
   "coreBenefits": {
     "title": "Unlock Your Creative Potential",
@@ -21,15 +30,18 @@
     "benefits": [
       {
         "title": "Instant Creative Guidance",
-        "description": "Get immediate feedback and suggestions for your music"
+        "description": "Get immediate feedback and suggestions for your music",
+        "icon": "chat"
       },
       {
         "title": "Professional Production",
-        "description": "Access high-quality production tools and techniques"
+        "description": "Access high-quality production tools and techniques",
+        "icon": "lightbulb"
       },
       {
         "title": "Collaborative Workflow",
-        "description": "Work seamlessly with AI to enhance your creative process"
+        "description": "Work seamlessly with AI to enhance your creative process",
+        "icon": "star"
       }
     ]
   },
@@ -39,31 +51,88 @@
     "features": [
       {
         "title": "AI-Powered Assistance",
-        "description": "Get instant creative guidance"
+        "description": "Get instant creative guidance",
+        "icon": "chat"
+      },
+      {
+        "title": "Professional Tools",
+        "description": "Access industry-standard production tools",
+        "icon": "lightbulb"
+      },
+      {
+        "title": "Real-Time Feedback",
+        "description": "Get immediate feedback on your work",
+        "icon": "play"
+      },
+      {
+        "title": "Continuous Learning",
+        "description": "Improve your skills with every session",
+        "icon": "chart"
       }
     ]
   },
   "callToAction": {
     "preTitle": "Ready to Create?",
     "title": "Start Making Music Today",
-    "subtitle": "Join HitCraft and transform your music production workflow"
+    "subtitle": "Join HitCraft and transform your music production workflow",
+    "button": {
+      "text": "Try Free Now"
+    },
+    "features": [
+      "No credit card required",
+      "Real musical examples",
+      "Professional tools included"
+    ]
   },
   "writingPartner": {
     "title": "Your Songwriting Partner",
-    "subtitle": "Creative Inspiration On Demand"
+    "subtitle": "Creative Inspiration On Demand",
+    "description": "Get instant creative guidance and professional feedback on your songwriting",
+    "features": [
+      "Help me find the right words for this feeling...",
+      "Show me songs with similar chord progressions",
+      "Can you suggest a better chorus structure?",
+      "Turn this demo into a professional track"
+    ],
+    "button": {
+      "text": "Start Creating"
+    }
   },
   "produceSong": {
     "title": "Professional Production",
-    "subtitle": "Studio-Quality Results"
+    "subtitle": "Studio-Quality Results",
+    "description": "Access professional-grade production tools and techniques",
+    "features": [
+      "Mix this track professionally",
+      "Show me reference tracks with similar sound",
+      "Help me add an instrument track to my project",
+      "What modern pop songs use this type of processing?"
+    ],
+    "button": {
+      "text": "Start Producing"
+    }
   },
   "socialProof": {
     "title": "Join the Community",
     "subtitle": "What Musicians Are Saying",
     "testimonials": [
       {
-        "text": "HitCraft has revolutionized my workflow",
+        "quote": "HitCraft has revolutionized my workflow",
         "author": "John Doe",
-        "role": "Producer"
+        "role": "Producer",
+        "image": "/assets/images/about-us/members/Rachel.jpg"
+      },
+      {
+        "quote": "Finally, an AI tool that understands music production",
+        "author": "Jane Smith",
+        "role": "Songwriter",
+        "image": "/assets/images/about-us/members/Tamir.jpg"
+      },
+      {
+        "quote": "The best tool for modern music creation",
+        "author": "Mike Johnson",
+        "role": "Music Producer",
+        "image": "/assets/images/about-us/members/David.jpg"
       }
     ]
   }
