@@ -13,6 +13,26 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+// Validate content structure
+const validateContentStructure = (content: any) => {
+  const requiredSections = ['hero', 'mainValue', 'coreBenefits', 'writingPartner', 'produceSong', 'uniqueApproach', 'socialProof', 'callToAction'];
+  const missingKeys = requiredSections.filter(key => !content[key]);
+  if (missingKeys.length > 0) {
+    throw new Error(`Missing required sections: ${missingKeys.join(', ')}`);
+  }
+
+  // Validate button text in each section
+  const sectionsWithButtons = ['hero', 'mainValue', 'writingPartner', 'produceSong', 'callToAction'];
+  const missingButtonText = sectionsWithButtons.filter(section => {
+    const button = content[section]?.button;
+    return !button || typeof button.text !== 'string';
+  });
+
+  if (missingButtonText.length > 0) {
+    throw new Error(`Missing button text in sections: ${missingButtonText.join(', ')}`);
+  }
+};
+
 // Load initial content from JSON file
 const loadInitialContent = async () => {
   try {
@@ -23,6 +43,14 @@ const loadInitialContent = async () => {
     }
 
     const initialContent = JSON.parse(fs.readFileSync(initialContentPath, 'utf8'));
+    
+    // Validate initial content structure
+    try {
+      validateContentStructure(initialContent);
+    } catch (error: any) {
+      console.error('Invalid initial content structure:', error.message);
+      return;
+    }
     
     // Check if any content exists
     const contentCount = await Content.count();
@@ -71,6 +99,16 @@ const initializeDatabase = async () => {
 app.post('/api/save-content', async (req: Request, res: Response) => {
   try {
     const { content } = req.body;
+
+    // Validate content structure before saving
+    try {
+      validateContentStructure(content);
+    } catch (error: any) {
+      return res.status(400).json({ 
+        success: false, 
+        error: `Invalid content structure: ${error.message}` 
+      });
+    }
 
     // Create backup of current content
     const currentContent = await Content.findOne({
