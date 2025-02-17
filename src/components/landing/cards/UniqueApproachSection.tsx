@@ -1,8 +1,10 @@
 import React from 'react';
 import { UniqueApproachContent } from "../../../types/content";
+import { ContentLoader } from "@/utils/content-loader";
+import CTAButton from '../../shared/CTAButton';
 
 interface UniqueApproachSectionProps {
-  content: UniqueApproachContent;
+  content?: UniqueApproachContent;
 }
 
 const iconMap: { [key: string]: JSX.Element } = {
@@ -29,7 +31,26 @@ const iconMap: { [key: string]: JSX.Element } = {
   )
 };
 
-export default function UniqueApproachSection({ content }: UniqueApproachSectionProps) {
+export default function UniqueApproachSection({ content: propContent }: UniqueApproachSectionProps) {
+  const [localContent, setLocalContent] = React.useState<UniqueApproachContent | null>(null);
+
+  React.useEffect(() => {
+    if (propContent) {
+      setLocalContent(propContent);
+    } else {
+      ContentLoader.getInstance().getContent()
+        .then(content => {
+          if (content?.uniqueApproach) {
+            setLocalContent(content.uniqueApproach);
+          }
+        })
+        .catch(error => console.error('Error loading unique approach content:', error));
+    }
+  }, [propContent]);
+
+  if (!localContent) {
+    return null; // or loading state
+  }
   return (
     <section className="w-full min-h-[100vh] min-h-[100svh] py-16 sm:py-24 relative bg-gradient-to-br from-purple-50 to-white overflow-hidden scroll-snap-align-start">
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-5" />
@@ -39,12 +60,12 @@ export default function UniqueApproachSection({ content }: UniqueApproachSection
             UNIQUE APPROACH:
           </h2>
           <h3 className="text-4xl sm:text-5xl lg:text-[72px] font-extralight mb-8 text-gray-900 font-poppins [text-shadow:1px_1px_4px_rgba(0,0,0,0.1)]">
-            {content.title}
+            {localContent.title}
           </h3>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-16">
-          {content.features.map((feature, index) => (
+          {localContent.features.map((feature, index) => (
             <div 
               key={index} 
               className="p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
@@ -65,9 +86,10 @@ export default function UniqueApproachSection({ content }: UniqueApproachSection
         </div>
 
         <div className="text-center mt-[50px]">
-          <button className="bg-white text-purple-700 px-8 py-4 rounded-full text-lg font-[700] transition-all duration-300 hover:scale-105 shadow-[0px_4px_12px_rgba(0,0,0,0.2)] hover:shadow-[0px_6px_16px_rgba(0,0,0,0.3)] transform hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px] mx-auto">
-            LET'S GO!
-          </button>
+          <CTAButton 
+            text="Let's Go!"
+            variant="light" 
+          />
         </div>
       </div>
     </section>

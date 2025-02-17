@@ -1,6 +1,7 @@
-const { Model, DataTypes, sequelize } = require('../config/sequelize');
+import { Model, DataTypes, Sequelize } from 'sequelize';
+import { sequelize } from '../config/sequelize';
 
-class Content extends Model {
+class Content extends Model<any> {
   public id!: number;
   public content!: any;
   public isActive!: boolean;
@@ -28,4 +29,4 @@ Content.init({
   timestamps: true,
 });
 
-module.exports = { Content };
+export { Content };
