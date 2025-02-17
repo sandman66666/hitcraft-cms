@@ -18,15 +18,15 @@
       "Turn ideas into finished songs",
       "Access expert music knowledge"
     ],
-    "button": {
-      "text": "START CREATING NOW"
-    },
     "questions": [
       "Please help me create a new instrument track for my project",
       "What chord progression would work here?",
       "Help me write lyrics about...",
       "Can you produce this in a pop style?"
-    ]
+    ],
+    "button": {
+      "text": "START CREATING NOW"
+    }
   },
   "coreBenefits": {
     "title": "The Complete Music Creation Assistant",
@@ -47,6 +47,99 @@
         "description": "Stop jumping between apps. Access professional tools and musical knowledge through simple conversation.",
         "icon": "star"
       }
+    ]
+  },
+  "writingPartner": {
+    "title": "FOR SONGWRITERS:",
+    "subtitle": "Your Personal Writing Partner & Producer",
+    "description": "Just like chatting with an experienced co-writer who can show you what works and create professional tracks in one seamless flow:",
+    "features": [
+      "\"Help me find the right words for this feeling...\"",
+      "\"Show me songs with similar chord progressions\"",
+      "\"Can you suggest a better chorus structure?\"",
+      "\"Turn this demo into a professional track\""
+    ],
+    "button": {
+      "text": "Start Creating"
+    }
+  },
+  "produceSong": {
+    "title": "FOR PRODUCERS:",
+    "subtitle": "Your Own Production Assistant",
+    "description": "Like having a veteran producer who can show you exactly what works and point at musical examples and even take action instantly on your behalf:",
+    "features": [
+      "\"Mix this track professionally\"",
+      "\"Show me reference tracks with similar sound\"",
+      "\"Help me add an instrument track to my project\"",
+      "\"What modern pop songs use this type of processing?\""
+    ],
+    "button": {
+      "text": "Start Producing"
+    }
+  },
+  "uniqueApproach": {
+    "title": "A New Way to Create Music",
+    "subtitle": "Innovative Music Production",
+    "features": [
+      {
+        "title": "Chat Naturally",
+        "description": "Just describe what you want in plain language - no need to learn complex tools or technical jargon.",
+        "icon": "chat"
+      },
+      {
+        "title": "Get Expert Guidance",
+        "description": "Receive professional advice on any music-related topic, from creative direction to industry insights.",
+        "icon": "lightbulb"
+      },
+      {
+        "title": "See Instant Results",
+        "description": "Don't just get suggestions - hear your ideas come to life professionally in seconds.",
+        "icon": "play"
+      },
+      {
+        "title": "Grow Your Skills",
+        "description": "Learn as you create with explanations and tips from your AI mentor that help you improve.",
+        "icon": "chart"
+      }
+    ],
+    "button": {
+      "text": "Start Creating"
+    }
+  },
+  "socialProof": {
+    "title": "Join the Community",
+    "subtitle": "Join 100,000+ Music Creators Already Using HitCraft",
+    "testimonials": [
+      {
+        "quote": "It's like having a professional producer and mentor who can show you exactly how hit songs achieve their sound. Game-changing for my creative process.",
+        "author": "Sarah K.",
+        "role": "Songwriter",
+        "image": "/assets/images/about-us/members/Rachel.jpg"
+      },
+      {
+        "quote": "Finally, an AI tool that shows you real examples and lets you execute through professional tools. No more jumping between apps.",
+        "author": "Mike R.",
+        "role": "Producer",
+        "image": "/assets/images/about-us/members/Tamir.jpg"
+      },
+      {
+        "quote": "The way it explains concepts through real songs is brilliant. I've learned more in a month than I did in a year of tutorials.",
+        "author": "David L.",
+        "role": "Music Producer",
+        "image": "/assets/images/about-us/members/David.jpg"
+      }
+    ]
+  },
+  "callToAction": {
+    "title": "Start Creating With Your Complete Music Partner",
+    "subtitle": "Get unlimited creative guidance enriched with real examples, plus professional tools - all through simple conversation.",
+    "button": {
+      "text": "Try Free Now"
+    },
+    "features": [
+      "No credit card required",
+      "Real musical examples",
+      "Professional tools included"
     ]
   }
 }
