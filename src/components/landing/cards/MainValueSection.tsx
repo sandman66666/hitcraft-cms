@@ -66,14 +66,14 @@ const MainValueSection: React.FC = () => {
             className="text-xl lg:text-2xl mb-12 text-white/80 max-w-xl leading-relaxed"
           />
 
-          <div className="bg-white/[0.12] backdrop-blur-sm rounded-2xl p-10 sm:p-12 mb-12 max-w-2xl mx-auto shadow-[0_4px_12px_rgba(0,0,0,0.1),inset_0px_2px_10px_rgba(0,0,0,0.1)] border border-white/10">
+          <div className="bg-white/[0.12] backdrop-blur-sm rounded-2xl p-12 sm:p-14 lg:p-16 mb-12 max-w-2xl mx-auto shadow-[0_4px_12px_rgba(0,0,0,0.1),inset_0px_2px_10px_rgba(0,0,0,0.1)] border border-white/10">
             <EditableText
               content={localContent.subtitle || 'Your Complete Music Creation Partner'}
               onChange={(value) => updateContent('mainValue.subtitle', value)}
-              className="text-2xl sm:text-3xl lg:text-4xl font-medium mb-10 text-white [text-shadow:0px_2px_4px_rgba(0,0,0,0.1)]"
+              className="text-3xl sm:text-4xl lg:text-5xl font-medium mb-12 text-white [text-shadow:0px_2px_4px_rgba(0,0,0,0.1)]"
               as="h3"
             />
-            <ul className="text-left text-lg sm:text-xl lg:text-2xl text-gray-100 space-y-8 leading-[1.4]">
+            <ul className="text-left text-xl sm:text-2xl lg:text-3xl text-gray-100 space-y-10 leading-[1.4]">
               {(localContent.questions || [
                 "Please help me create a new instrument track for my project",
                 "What chord progression would work here?",
@@ -96,22 +96,22 @@ const MainValueSection: React.FC = () => {
             </ul>
           </div>
 
-          <div className="mt-12 pt-[62px] border-t border-white/20">
-            <div className="flex items-center justify-center">
+          <div className="mt-16 pt-[72px] border-t border-white/20">
+            <div className="flex flex-col items-center justify-center">
               <CTAButton 
-                className="bg-gradient-to-r from-[#8a44c8] to-[#df0c39] text-white px-8 py-4 rounded-full text-xl font-black transition-all duration-300 hover:scale-105 hover:shadow-[0px_4px_12px_rgba(138,68,200,0.3)] hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px]"
+                className="text-xl sm:text-2xl bg-gradient-to-r from-[#8a44c8] to-[#df0c39] text-white px-10 py-5 rounded-full font-black transition-all duration-300 hover:scale-105 hover:shadow-[0px_4px_12px_rgba(138,68,200,0.3)] hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[280px]"
                 text={localContent.button?.text || "START CREATING NOW"}
                 variant="dark"
               />
-              <p className="text-sm text-gray-400 mt-4 font-light">No credit card required • Try it free</p>
+              <p className="text-base text-gray-400 mt-6 font-light tracking-wide">No credit card required • Try it free</p>
             </div>
           </div>
         </div>
         <div className="flex justify-start lg:justify-center">
-          <div className="relative w-[65%] max-w-xl">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#8a44c8] to-[#df0c39] rounded-2xl blur-xl opacity-20 transform -rotate-6"></div>
-            <video
-              className="relative w-full rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+            <div className="relative w-[70%] max-w-2xl">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#8a44c8] to-[#df0c39] rounded-2xl blur-2xl opacity-25 transform -rotate-6 scale-110"></div>
+              <video
+                className="relative w-full rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500 border border-white/10"
               autoPlay
               muted
               loop
