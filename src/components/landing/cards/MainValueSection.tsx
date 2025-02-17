@@ -39,19 +39,25 @@ const MainValueSection: React.FC = () => {
 
   return (
     <section className="w-full min-h-screen flex items-center relative bg-gradient-to-br from-gray-900 to-black py-24">
-      <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-5" />
+      <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-10" />
+      <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden select-none">
+        <div className="shooting-star">
+          <div className="star"></div>
+          <div className="star-trail"></div>
+        </div>
+      </div>
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
         <div className="text-center lg:text-left">
           <h2 className="text-3xl sm:text-4xl lg:text-6xl font-light mb-8">
             <EditableText
               content={localContent.title || 'Start Songs'}
               onChange={(value: string) => updateContent('mainValue.title', value)}
-              className="bg-gradient-to-r from-[#8a44c8] to-[#df0c39] text-transparent bg-clip-text"
+              className="bg-clip-text text-transparent bg-gradient-to-r from-[#8a44c8] to-[#df0c39]"
             />
             <EditableText
               content={localContent.subtitle || 'With Confidence'}
               onChange={(value: string) => updateContent('mainValue.subtitle', value)}
-              className="font-bold block mt-4 bg-gradient-to-r from-[#8a44c8] to-[#df0c39] text-transparent bg-clip-text"
+              className="font-bold block mt-4 bg-clip-text text-transparent bg-gradient-to-r from-[#8a44c8] to-[#df0c39]"
             />
           </h2>
           <EditableText
