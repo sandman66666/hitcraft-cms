@@ -1,5 +1,5 @@
 import React from 'react';
-import { UniqueApproachContent } from "../../../types/content";
+import { UniqueApproachContent, Feature } from "../../../types/landing";
 import { ContentLoader } from "@/utils/content-loader";
 import CTAButton from '../../shared/CTAButton';
 import { useEdit } from '../../../contexts/EditContext';
@@ -67,7 +67,7 @@ export default function UniqueApproachSection({ content: propContent }: UniqueAp
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-16">
-          {localContent.features.map((feature, index) => (
+          {localContent.features.map((feature: Feature, index: number) => (
             <div 
               key={index} 
               className="p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
@@ -76,7 +76,7 @@ export default function UniqueApproachSection({ content: propContent }: UniqueAp
                 {iconMap[feature.icon]}
               </div>
               <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gray-900 leading-tight text-center min-h-[4em] flex flex-col items-center justify-center">
-                {feature.title.split('\n').map((line, i) => (
+                {feature.title.split('\n').map((line: string, i: number) => (
                   <span key={i} className="block">{line}</span>
                 ))}
               </h3>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeroContent } from "../../../types/content";
+import { HeroContent } from "../../../types/landing";
 import { CTAButton } from "@/components/shared/CTAButton";
 import { ContentLoader } from "@/utils/content-loader";
 import EditableText from '../../shared/EditableText';

@@ -80,6 +80,10 @@
   },
   "uniqueApproach": {
     "title": "A New Way to Create Music",
+    "subtitle": "Innovative Music Production",
+    "button": {
+      "text": "Start Creating"
+    },
     "features": [
       {
         "title": "Chat Naturally",

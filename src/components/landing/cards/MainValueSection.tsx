@@ -3,7 +3,7 @@ import CTAButton from '../../shared/CTAButton';
 import EditableText from '../../shared/EditableText';
 import { useEdit } from '../../../contexts/EditContext';
 import { ContentLoader } from '@/utils/content-loader';
-import { MainValueContent } from '../../../types/content';
+import { MainValueContent } from '../../../types/landing';
 
 const MainValueSection: React.FC = () => {
   const { isEditMode, content, setContent } = useEdit();
@@ -63,20 +63,19 @@ const MainValueSection: React.FC = () => {
 
           <div className="bg-white/[0.12] backdrop-blur-sm rounded-2xl p-8 mb-12 max-w-2xl mx-auto shadow-[0_4px_12px_rgba(0,0,0,0.1),inset_0px_2px_10px_rgba(0,0,0,0.1)] border border-white/10">
             <EditableText
-              content="Ask Questions Like:"
+              content={localContent.subtitle}
               onChange={(value) => updateContent('mainValue.subtitle', value)}
               className="text-2xl sm:text-3xl font-medium mb-8 text-white [text-shadow:0px_2px_4px_rgba(0,0,0,0.1)]"
               as="h3"
             />
             <ul className="text-left text-lg sm:text-xl text-gray-100 space-y-6 leading-[1.4]">
-              {questions.map((question, index) => (
+              {localContent.questions.map((question, index) => (
                 <li key={index} className="flex items-center">
                   <span className="text-white mr-3">•</span>
                   <EditableText
                     content={`"${question}"`}
                     onChange={(value) => {
-                      const newQuestions = [...questions];
-                      setQuestions(newQuestions);
+                      const newQuestions = [...localContent.questions];
                       newQuestions[index] = value.replace(/^"|"$/g, '');
                       updateContent('mainValue.questions', newQuestions);
                     }}

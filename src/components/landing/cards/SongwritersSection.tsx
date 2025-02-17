@@ -1,5 +1,5 @@
 import React from 'react';
-import { WritingPartnerContent } from "../../../types/content";
+import { WritingPartnerContent } from "../../../types/landing";
 import { ContentLoader } from "@/utils/content-loader";
 import CTAButton from '../../shared/CTAButton';
 import EditableText from '../../shared/EditableText';
@@ -60,7 +60,7 @@ export default function SongwritersSection({ content: propContent }: Songwriters
               as="h2"
             />
             <EditableText
-              content={subtitleParts.map((part, index) => 
+              content={subtitleParts.map((part: string, index: number) =>
                 `<span class="${index === 1 ? 'font-[800]' : ''}">${part} </span>`
               ).join('')}
               onChange={(value) => updateContent('writingPartner.subtitle', value.replace(/<[^>]*>/g, ' ').trim())}

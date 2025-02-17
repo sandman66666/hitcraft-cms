@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProduceSongContent } from "../../../types/content";
+import { ProduceSongContent } from "../../../types/landing";
 import { ContentLoader } from "@/utils/content-loader";
 import EditableText from '../../shared/EditableText';
 import { useEdit } from '../../../contexts/EditContext';

@@ -1,6 +1,6 @@
 import React from 'react';
 import CTAButton from '../../shared/CTAButton';
-import { CallToActionContent } from '../../../types/content';
+import { CallToActionContent } from '../../../types/landing';
 import EditableText from '../../shared/EditableText';
 import { useEdit } from '../../../contexts/EditContext';
 import { ContentLoader } from '@/utils/content-loader';
