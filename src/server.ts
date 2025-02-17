@@ -1,12 +1,11 @@
 import type { Request, Response, NextFunction } from 'express-serve-static-core';
-
 const express = require('express');
-const dotenv = require('dotenv');
-const path = require('path');
-const fs = require('fs');
-const { sequelize, connectDB } = require('./config/database');
-const { Content } = require('./models/Content');
-const { Backup } = require('./models/Backup');
+import dotenv from 'dotenv';
+import path from 'path';
+import fs from 'fs';
+import { sequelize, connectDB } from './config/sequelize';
+import { Content } from './models/Content';
+import { Backup } from './models/Backup';
 
 // Load environment variables
 dotenv.config();
