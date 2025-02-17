@@ -12,23 +12,6 @@ interface HeroSectionProps {
 
 export default function HeroSection({ content: initialContent }: HeroSectionProps) {
   const { isEditMode, content: editContent, setContent } = useEdit();
-  const [isHovered, setIsHovered] = useState(false);
-  const [keyPresses, setKeyPresses] = useState<string[]>([]);
-
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      setKeyPresses(prev => {
-        const newPresses = [...prev, e.key].slice(-3);
-        if (newPresses.join('') === 'sss') {
-          setContent(editContent);
-        }
-        return newPresses;
-      });
-    };
-
-    window.addEventListener('keypress', handleKeyPress);
-    return () => window.removeEventListener('keypress', handleKeyPress);
-  }, [editContent, setContent]);
 
   const updateContent = (path: string, value: string) => {
     if (!editContent) return;
@@ -49,7 +32,7 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
       aria-label="Hero"
     >
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-10" />
-      <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden select-none">
         <div className="shooting-star">
           <div className="star"></div>
           <div className="star-trail"></div>

@@ -25,12 +25,12 @@ export default function Navbar() {
       isScrolled ? 'bg-white/80 backdrop-blur-md' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24">
+        <div className="flex justify-between items-center h-36">
           <Link to="/">
             <img
               src="/assets/images/home-logo.webp"
               alt="HitCraft"
-              className={`h-[100px] w-auto ${isScrolled ? '' : 'filter invert brightness-0 invert'}`}
+              className={`h-[140px] w-auto ${isScrolled ? '' : 'filter invert brightness-0 invert'}`}
             />
           </Link>
 
@@ -73,8 +73,8 @@ export default function Navbar() {
 
           {/* Menu Overlay */}
           {isMenuOpen && (
-            <div className="absolute top-full left-0 right-0 bg-black/90 backdrop-blur-md">
-              <div className="max-w-7xl mx-auto px-4 py-4">
+            <div className="absolute top-full left-0 right-0 bg-black/[0.98] backdrop-blur-lg">
+              <div className="max-w-7xl mx-auto px-4 py-8">
                 {menuItems.map((item) => (
                   <Link
                     key={item.to}
