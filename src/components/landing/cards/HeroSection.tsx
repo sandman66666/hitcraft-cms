@@ -50,20 +50,10 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
     >
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-10" />
       <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
-        {[...Array(3)].map((_, i) => (
-          <div 
-            key={i} 
-            className="shooting-star" 
-            style={{ 
-              animationDelay: `${i * 4 + Math.random() * 2}s`,
-              bottom: `${Math.random() * 20}%`,
-              left: `${Math.random() * 10}%`
-            }}
-          >
-            <div className="star"></div>
-            <div className="star-trail"></div>
-          </div>
-        ))}
+        <div className="shooting-star">
+          <div className="star"></div>
+          <div className="star-trail"></div>
+        </div>
       </div>
       <div className="text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <EditableText

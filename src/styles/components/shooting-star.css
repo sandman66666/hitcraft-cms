@@ -2,9 +2,9 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 3px;
-  height: 3px;
-  animation: shoot 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  width: 4px;
+  height: 4px;
+  animation: shoot 8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   transform-origin: bottom left;
   z-index: 10;
   will-change: transform, opacity;
@@ -15,9 +15,9 @@
   height: 100%;
   background: white;
   border-radius: 50%;
-  box-shadow: 0 0 40px 8px rgba(255, 255, 255, 1),
-              0 0 80px 16px rgba(255, 255, 255, 0.8),
-              0 0 120px 24px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 60px 12px rgba(255, 255, 255, 1),
+              0 0 100px 20px rgba(255, 255, 255, 0.8),
+              0 0 140px 30px rgba(255, 255, 255, 0.6);
   will-change: opacity;
 }
 
@@ -25,36 +25,36 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 120px;
-  height: 2px;
+  width: 200px;
+  height: 3px;
   background: linear-gradient(to left, 
     rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0.4) 10%,
-    rgba(255, 255, 255, 0.8) 30%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(255, 255, 255, 1) 70%
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.4) 40%,
+    rgba(255, 255, 255, 0.8) 60%,
+    rgba(255, 255, 255, 1) 80%
   );
-  transform: translate(-100%, -50%);
+  transform: translate(-100%, -50%) rotate(-15deg);
+  transform-origin: right center;
   will-change: transform, opacity;
+  filter: blur(1px);
 }
 
 @keyframes shoot {
   0% {
-    transform: translate(0, 0) rotate(35deg) scale(0.3);
+    transform: translate(0, 0) rotate(-35deg) scale(0.3);
     opacity: 0;
   }
   2% {
     opacity: 1;
-    transform: translate(10vw, -5vh) rotate(35deg) scale(1);
+    transform: translate(20vw, -30vh) rotate(-35deg) scale(1);
   }
-  40% {
+  70% {
     opacity: 1;
-  }
-  60% {
-    opacity: 0.5;
+    transform: translate(80vw, -80vh) rotate(-35deg) scale(1);
   }
   100% {
-    transform: translate(200vw, -100vh) rotate(35deg) scale(0.3);
+    transform: translate(100vw, -100vh) rotate(-35deg) scale(0.3);
     opacity: 0;
   }
 }

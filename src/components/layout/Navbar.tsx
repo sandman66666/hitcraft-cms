@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,69 +14,47 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const menuItems = [
+    { to: "/why-hitcraft", text: "Why HitCraft" },
+    { to: "/about", text: "About" },
+    { to: "/contact", text: "Contact" }
+  ];
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${
       isScrolled ? 'bg-white/80 backdrop-blur-md' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-24">
-          <img
-            src="/assets/images/home-logo.webp"
-            alt="HitCraft"
-            className={`h-[80px] w-auto ${isScrolled ? '' : 'filter invert brightness-0 invert'}`}
-          />
+          <Link to="/">
+            <img
+              src="/assets/images/home-logo.webp"
+              alt="HitCraft"
+              className={`h-[100px] w-auto ${isScrolled ? '' : 'filter invert brightness-0 invert'}`}
+            />
+          </Link>
 
-          {/* Main Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/why-hitcraft"
-              className={`px-3 py-2 text-sm font-medium transition-colors ${
-                isScrolled ? 'text-black hover:text-black/70' : 'text-white hover:text-white/70'
-              }`}
-            >
-              Why HitCraft
-            </Link>
-            <Link 
-              to="/about"
-              className={`px-3 py-2 text-sm font-medium transition-colors ${
-                isScrolled ? 'text-black hover:text-black/70' : 'text-white hover:text-white/70'
-              }`}
-            >
-              About
-            </Link>
-            <Link 
-              to="/contact"
-              className={`px-3 py-2 text-sm font-medium transition-colors ${
-                isScrolled ? 'text-black hover:text-black/70' : 'text-white hover:text-white/70'
-              }`}
-            >
-              Contact
-            </Link>
-          </div>
-
-          {/* Login Button */}
-          <div className="hidden md:flex items-center">
+          <div className="flex items-center space-x-6">
             <Link
               to="/login"
-              className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-[#8a44c8] to-[#df0c39] hover:opacity-90 transition-opacity"
+              className={`text-lg font-medium transition-colors ${
+                isScrolled ? 'text-black hover:text-black/70' : 'text-white hover:text-white/70'
+              }`}
             >
               Login
             </Link>
-          </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
             <button
               type="button"
-              className={`inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#8a44c8] transition-colors ${
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className={`inline-flex items-center justify-center p-2 rounded-md focus:outline-none transition-colors ${
                 isScrolled ? 'text-black hover:text-black/70' : 'text-white hover:text-white/70'
               }`}
-              aria-expanded="false"
+              aria-expanded={isMenuOpen}
             >
               <span className="sr-only">Open main menu</span>
-              {/* Menu icon */}
               <svg
-                className="block h-6 w-6"
+                className="block h-8 w-8"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -91,6 +70,24 @@ export default function Navbar() {
               </svg>
             </button>
           </div>
+
+          {/* Menu Overlay */}
+          {isMenuOpen && (
+            <div className="absolute top-full left-0 right-0 bg-black/90 backdrop-blur-md">
+              <div className="max-w-7xl mx-auto px-4 py-4">
+                {menuItems.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className="block py-4 text-lg font-medium text-white hover:text-white/70 transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.text}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </nav>
