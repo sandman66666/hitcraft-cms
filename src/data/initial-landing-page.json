@@ -48,6 +48,9 @@
   "uniqueApproach": {
     "title": "A New Way to Create",
     "subtitle": "Innovative Music Production",
+    "button": {
+      "text": "Start Creating"
+    },
     "features": [
       {
         "title": "AI-Powered Assistance",

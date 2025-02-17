@@ -2,14 +2,10 @@ export interface Button {
   text: string;
 }
 
-export interface TitlePart {
-  text: string;
-  style?: 'bold' | 'normal';
-}
-
-export interface SubtitleContent {
-  text: string;
-  style?: string;
+export interface Feature {
+  title: string;
+  description: string;
+  icon: string;
 }
 
 export interface HeroContent {
@@ -24,7 +20,8 @@ export interface MainValueContent {
   title: string;
   subtitle: string;
   description: string;
-  features: string[];
+  questionsTitle: string;
+  questions: string[];
   button: Button;
 }
 
@@ -36,6 +33,7 @@ export interface CoreBenefit {
 
 export interface CoreBenefitsContent {
   title: string;
+  subtitle: string;
   benefits: CoreBenefit[];
 }
 
@@ -43,7 +41,7 @@ export interface WritingPartnerContent {
   title: string;
   subtitle: string;
   description: string;
-  features?: string[];
+  features: string[];
   button: Button;
 }
 
@@ -51,19 +49,15 @@ export interface ProduceSongContent {
   title: string;
   subtitle: string;
   description: string;
-  features?: string[];
+  features: string[];
   button: Button;
-}
-
-export interface Feature {
-  title: string;
-  description: string;
-  icon: string;
 }
 
 export interface UniqueApproachContent {
   title: string;
+  subtitle: string;
   features: Feature[];
+  button: Button;
 }
 
 export interface SocialProofTestimonial {

@@ -2,6 +2,7 @@ import React from 'react';
 import { UniqueApproachContent } from "../../../types/content";
 import { ContentLoader } from "@/utils/content-loader";
 import CTAButton from '../../shared/CTAButton';
+import { useEdit } from '../../../contexts/EditContext';
 
 interface UniqueApproachSectionProps {
   content?: UniqueApproachContent;
@@ -32,6 +33,7 @@ const iconMap: { [key: string]: JSX.Element } = {
 };
 
 export default function UniqueApproachSection({ content: propContent }: UniqueApproachSectionProps) {
+  const { isEditMode, content, setContent } = useEdit();
   const [localContent, setLocalContent] = React.useState<UniqueApproachContent | null>(null);
 
   React.useEffect(() => {
@@ -85,12 +87,12 @@ export default function UniqueApproachSection({ content: propContent }: UniqueAp
           ))}
         </div>
 
-        <div className="text-center mt-[50px]">
-          <CTAButton 
-            text="Let's Go!"
-            variant="light" 
-          />
-        </div>
+          <div className="text-center mt-[50px]">
+            <CTAButton 
+              text={content?.uniqueApproach?.button?.text || localContent.button.text}
+              variant="light" 
+            />
+          </div>
       </div>
     </section>
   );
