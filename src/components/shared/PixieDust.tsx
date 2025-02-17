@@ -60,14 +60,14 @@ const PixieDust: React.FC<PixieDustProps> = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const colors = ['#FFD700', '#FFA500', '#FF69B4', '#FF1493'];
+    const colors = ['#FFD700', '#FFF', '#FF69B4', '#00FFFF'];
 
     const createParticle = (): Particle => ({
       x: mousePosition.x,
       y: mousePosition.y,
-      size: Math.random() * 3 + 1,
-      speedX: (Math.random() - 0.5) * 4,
-      speedY: (Math.random() - 0.5) * 4 - 2,
+      size: Math.random() * 4 + 2,
+      speedX: (Math.random() - 0.5) * 6,
+      speedY: (Math.random() - 0.5) * 6 - 3,
       opacity: 1,
       color: colors[Math.floor(Math.random() * colors.length)]
     });
@@ -90,15 +90,22 @@ const PixieDust: React.FC<PixieDustProps> = ({
         return newParticles.map(particle => {
           ctx.beginPath();
           ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-          ctx.fillStyle = `${particle.color}${Math.floor(particle.opacity * 255).toString(16).padStart(2, '0')}`;
+          // Add glow effect
+          const gradient = ctx.createRadialGradient(
+            particle.x, particle.y, 0,
+            particle.x, particle.y, particle.size
+          );
+          gradient.addColorStop(0, `${particle.color}${Math.floor(particle.opacity * 255).toString(16).padStart(2, '0')}`);
+          gradient.addColorStop(1, `${particle.color}00`);
+          ctx.fillStyle = gradient;
           ctx.fill();
 
           return {
             ...particle,
             x: particle.x + particle.speedX,
             y: particle.y + particle.speedY,
-            opacity: particle.opacity - 0.02,
-            size: particle.size * 0.99
+            opacity: particle.opacity - 0.015,
+            size: particle.size * 0.98
           };
         }).filter(particle => particle.opacity > 0 && particle.size > 0.1);
       });
