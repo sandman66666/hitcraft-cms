@@ -4,7 +4,7 @@ import { ContentLoader } from "@/utils/content-loader";
 import EditableText from '../../shared/EditableText';
 import { useEdit } from '../../../contexts/EditContext';
 import PixieDust from '../../shared/PixieDust';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface HeroSectionProps {
   content?: HeroContent;
@@ -13,6 +13,22 @@ interface HeroSectionProps {
 export default function HeroSection({ content: initialContent }: HeroSectionProps) {
   const { isEditMode, content: editContent, setContent } = useEdit();
   const [isHovered, setIsHovered] = useState(false);
+  const [keyPresses, setKeyPresses] = useState<string[]>([]);
+
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      setKeyPresses(prev => {
+        const newPresses = [...prev, e.key].slice(-3);
+        if (newPresses.join('') === 'sss') {
+          setContent(editContent);
+        }
+        return newPresses;
+      });
+    };
+
+    window.addEventListener('keypress', handleKeyPress);
+    return () => window.removeEventListener('keypress', handleKeyPress);
+  }, [editContent, setContent]);
 
   const updateContent = (path: string, value: string) => {
     if (!editContent) return;
@@ -33,7 +49,7 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
       aria-label="Hero"
     >
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-10" />
-      <PixieDust enabled={!isEditMode} particleCount={50} />
+      <PixieDust enabled={true} particleCount={200} />
       <div className="text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <EditableText
           content={initialContent?.title || ''}
@@ -41,11 +57,11 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
           className="text-xl sm:text-2xl italic text-white mb-12 animate-fade-in font-poppins"
         />
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[6rem] font-extralight mb-12 font-poppins bg-gradient-to-r from-[#A533FF] to-[#ff3366] text-transparent bg-clip-text leading-[1.15] max-w-4xl mx-auto">
-          <EditableText
-            content={initialContent?.subtitle || ''}
-            onChange={(value) => updateContent('hero.subtitle', value)}
-            className="inline"
-          />
+          {initialContent?.subtitle?.split(' ').map((word, index) => (
+            <span key={index} className={word === "AI-POWERED" ? 'font-black' : ''}>
+              {word}{' '}
+            </span>
+          ))}
         </h1>
         <EditableText
           content={initialContent?.description || ''}
