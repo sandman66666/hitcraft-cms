@@ -32,14 +32,14 @@ const PixieDust: React.FC<PixieDustProps> = ({
   const animationFrameRef = useRef<number>();
 
   const createStar = (canvas: HTMLCanvasElement) => {
-    const startX = -100;
-    const startY = -100;
+    const startX = -20;
+    const startY = canvas.height + 100;
     return {
       x: startX,
       y: startY,
-      size: 100,
-      speedX: 150,
-      speedY: 100
+      size: 2,
+      speedX: 20,
+      speedY: -15
     };
   };
 
@@ -53,7 +53,7 @@ const PixieDust: React.FC<PixieDustProps> = ({
     const createParticle = (x: number, y: number): Particle => ({
       x,
       y,
-      size: Math.random() * 20 + 10,
+      size: Math.random() * 1 + 0.3,
       opacity: 1,
       color: '#FFFFFF'
     });
@@ -65,11 +65,11 @@ const PixieDust: React.FC<PixieDustProps> = ({
 
       // Update star position and create particles
       setStar(prevStar => {
-          if (!prevStar && Math.random() < 0.03) {
+          if (!prevStar) {
           return createStar(canvas);
         }
         if (prevStar) {
-          if (prevStar.x > canvas.width) {
+          if (prevStar.y < -50 || prevStar.x > canvas.width + 50) {
             return null;
           }
           // Draw star
@@ -77,7 +77,7 @@ const PixieDust: React.FC<PixieDustProps> = ({
           ctx.arc(prevStar.x, prevStar.y, prevStar.size, 0, Math.PI * 2);
           const gradient = ctx.createRadialGradient(
             prevStar.x, prevStar.y, 0,
-            prevStar.x, prevStar.y, prevStar.size * 20
+            prevStar.x, prevStar.y, prevStar.size * 8
           );
           gradient.addColorStop(0, '#FFFFFF');
           gradient.addColorStop(0.4, '#FFFFFFAA');
@@ -89,7 +89,7 @@ const PixieDust: React.FC<PixieDustProps> = ({
           setParticles(prev => [
             ...prev,
             createParticle(prevStar.x, prevStar.y)
-          ].slice(-2000));
+          ].slice(-30));
 
           return {
             ...prevStar,
@@ -111,7 +111,7 @@ const PixieDust: React.FC<PixieDustProps> = ({
 
           return {
             ...particle,
-            opacity: particle.opacity - 0.0005
+            opacity: particle.opacity - 0.08
           };
         }).filter(particle => particle.opacity > 0)
       );
