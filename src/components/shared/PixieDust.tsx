@@ -32,14 +32,14 @@ const PixieDust: React.FC<PixieDustProps> = ({
   const animationFrameRef = useRef<number>();
 
   const createStar = (canvas: HTMLCanvasElement) => {
-    const startX = Math.random() * canvas.width;
-    const startY = -100;
+    const startX = -100;
+    const startY = -50;
     return {
       x: startX,
       y: startY,
-      size: 35,
-      speedX: Math.random() * 30 - 15,
-      speedY: 25
+      size: 20,
+      speedX: 80,
+      speedY: 30
     };
   };
 
@@ -50,14 +50,12 @@ const PixieDust: React.FC<PixieDustProps> = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const colors = ['#FFD700', '#FFFFFF', '#FF69B4', '#00FFFF', '#FFA500', '#FF1493', '#7B68EE', '#00FF00'];
-
     const createParticle = (x: number, y: number): Particle => ({
       x,
       y,
-      size: Math.random() * 15 + 8,
+      size: Math.random() * 2 + 1,
       opacity: 1,
-      color: colors[Math.floor(Math.random() * colors.length)]
+      color: '#FFFFFF'
     });
 
     const animate = () => {
@@ -67,7 +65,7 @@ const PixieDust: React.FC<PixieDustProps> = ({
 
       // Update star position and create particles
       setStar(prevStar => {
-          if (!prevStar && Math.random() < 0.01) {
+          if (!prevStar && Math.random() < 0.03) {
           return createStar(canvas);
         }
         if (prevStar) {
@@ -79,7 +77,7 @@ const PixieDust: React.FC<PixieDustProps> = ({
           ctx.arc(prevStar.x, prevStar.y, prevStar.size, 0, Math.PI * 2);
           const gradient = ctx.createRadialGradient(
             prevStar.x, prevStar.y, 0,
-            prevStar.x, prevStar.y, prevStar.size * 6
+            prevStar.x, prevStar.y, prevStar.size * 5
           );
           gradient.addColorStop(0, '#FFFFFF');
           gradient.addColorStop(0.4, '#FFFFFFAA');
@@ -91,7 +89,7 @@ const PixieDust: React.FC<PixieDustProps> = ({
           setParticles(prev => [
             ...prev,
             createParticle(prevStar.x, prevStar.y)
-          ].slice(-800));
+          ].slice(-300));
 
           return {
             ...prevStar,
@@ -113,7 +111,7 @@ const PixieDust: React.FC<PixieDustProps> = ({
 
           return {
             ...particle,
-            opacity: particle.opacity - 0.002
+            opacity: particle.opacity - 0.005
           };
         }).filter(particle => particle.opacity > 0)
       );

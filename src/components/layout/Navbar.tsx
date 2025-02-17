@@ -14,7 +14,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-[9999] transition-colors duration-300 ${
+    <nav className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${
       isScrolled ? 'bg-white/80 backdrop-blur-md' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,7 +24,7 @@ export default function Navbar() {
             <img
               src="/assets/images/logo.svg"
               alt="HitCraft"
-              className="h-8 w-auto"
+              className={`h-8 w-auto ${isScrolled ? '' : 'filter invert brightness-0 invert'}`}
             />
           </Link>
 
@@ -32,19 +32,25 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             <Link 
               to="/why-hitcraft"
-              className="text-black hover:text-black/70 px-3 py-2 text-sm font-medium transition-colors"
+              className={`px-3 py-2 text-sm font-medium transition-colors ${
+                isScrolled ? 'text-black hover:text-black/70' : 'text-white hover:text-white/70'
+              }`}
             >
               Why HitCraft
             </Link>
             <Link 
               to="/about"
-              className="text-black hover:text-black/70 px-3 py-2 text-sm font-medium transition-colors"
+              className={`px-3 py-2 text-sm font-medium transition-colors ${
+                isScrolled ? 'text-black hover:text-black/70' : 'text-white hover:text-white/70'
+              }`}
             >
               About
             </Link>
             <Link 
               to="/contact"
-              className="text-black hover:text-black/70 px-3 py-2 text-sm font-medium transition-colors"
+              className={`px-3 py-2 text-sm font-medium transition-colors ${
+                isScrolled ? 'text-black hover:text-black/70' : 'text-white hover:text-white/70'
+              }`}
             >
               Contact
             </Link>
@@ -64,7 +70,9 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-black hover:text-black/70 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#8a44c8]"
+              className={`inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#8a44c8] transition-colors ${
+                isScrolled ? 'text-black hover:text-black/70' : 'text-white hover:text-white/70'
+              }`}
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>
