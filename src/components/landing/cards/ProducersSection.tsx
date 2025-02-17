@@ -31,7 +31,6 @@ export default function ProducersSection({ content: propContent }: ProducersSect
     return null; // or loading state
   }
 
-  const subtitleParts = localContent.subtitle.split(' ');
 
   const updateContent = (path: string, value: string | string[]) => {
     if (!content) return;
@@ -54,14 +53,14 @@ export default function ProducersSection({ content: propContent }: ProducersSect
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           <div className="lg:col-span-2 mb-[-5]">
             <EditableText
-              content={localContent.title}
+              content={localContent.title || ''}
               onChange={(value) => updateContent('produceSong.title', value)}
               className="text-2xl sm:text-3xl lg:text-[30px] font-extralight mb-6 font-poppins text-white [text-shadow:1px_1px_4px_rgba(0,0,0,0.2)]"
               as="h2"
             />
             <h3 className="text-4xl sm:text-5xl lg:text-[72px] font-extralight leading-tight font-poppins text-white [text-shadow:1px_1px_4px_rgba(0,0,0,0.2)]">
               <EditableText
-                content={localContent.subtitle}
+                content={localContent.subtitle || ''}
                 onChange={(value) => updateContent('produceSong.subtitle', value)}
                 className="inline"
               />
@@ -69,7 +68,7 @@ export default function ProducersSection({ content: propContent }: ProducersSect
           </div>
           <div className="text-white lg:col-span-2 xl:col-span-1">
             <EditableText
-              content={localContent.description}
+              content={localContent.description || ''}
               onChange={(value) => updateContent('produceSong.description', value)}
               className="text-lg sm:text-xl lg:text-2xl mb-12 text-gray-200 max-w-5xl leading-relaxed"
             />
@@ -92,7 +91,7 @@ export default function ProducersSection({ content: propContent }: ProducersSect
               </ul>
             </div>
             <CTAButton
-              text={content?.produceSong?.button?.text || localContent.button.text}
+              text={localContent.button?.text || ''}
               variant="light"
             />
           </div>

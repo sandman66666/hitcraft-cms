@@ -51,28 +51,28 @@ export default function CallToActionSection({ content: propContent }: CallToActi
         <div className="text-center">
           <EditableText
             as="h3"
-            content={localContent.title}
+            content={localContent.title || ''}
             onChange={(value) => updateContent('callToAction.title', value)}
             className="text-4xl sm:text-5xl lg:text-6xl font-extralight mb-8 text-gray-900 font-poppins leading-tight"
           />
           <EditableText
-            content={localContent.subtitle}
+            content={localContent.subtitle || ''}
             onChange={(value) => updateContent('callToAction.subtitle', value)}
             className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-10"
           />
           <div className="flex justify-center">
             <CTAButton 
-              text={content?.callToAction?.button?.text || localContent.button.text}
+              text={localContent.button?.text || ''}
               variant="dark" 
             />
           </div>
           <div className="mt-6 text-gray-600 text-sm sm:text-base">
-            {localContent.features.map((feature: string, index: number) => (
+            {(localContent.features || []).map((feature: string, index: number) => (
               <EditableText
                 key={index}
                 content={feature}
                 onChange={(value) => {
-                  const newFeatures = [...localContent.features];
+                  const newFeatures = [...(localContent.features || [])];
                   newFeatures[index] = value;
                   updateContent('callToAction.features', newFeatures);
                 }}

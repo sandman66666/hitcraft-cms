@@ -31,7 +31,6 @@ export default function SongwritersSection({ content: propContent }: Songwriters
     return null; // or loading state
   }
 
-  const subtitleParts = localContent.subtitle.split(' ');
 
   const updateContent = (path: string, value: string | string[]) => {
     if (!content) return;
@@ -54,23 +53,21 @@ export default function SongwritersSection({ content: propContent }: Songwriters
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           <div className="lg:col-span-2 mb-[-5]">
             <EditableText
-              content={localContent.title}
+              content={localContent.title || ''}
               onChange={(value) => updateContent('writingPartner.title', value)}
               className="text-2xl sm:text-3xl lg:text-[30px] font-extralight mb-6 font-poppins text-white [text-shadow:1px_1px_4px_rgba(0,0,0,0.2)]"
               as="h2"
             />
             <EditableText
-              content={subtitleParts.map((part: string, index: number) =>
-                `<span class="${index === 1 ? 'font-[800]' : ''}">${part} </span>`
-              ).join('')}
-              onChange={(value) => updateContent('writingPartner.subtitle', value.replace(/<[^>]*>/g, ' ').trim())}
+              content={localContent.subtitle || ''}
+              onChange={(value) => updateContent('writingPartner.subtitle', value)}
               className="text-4xl sm:text-5xl lg:text-[72px] font-extralight leading-tight font-poppins text-white [text-shadow:1px_1px_4px_rgba(0,0,0,0.2)]"
               as="h3"
             />
           </div>
           <div className="text-white lg:col-span-2 xl:col-span-1">
             <EditableText
-              content={localContent.description}
+              content={localContent.description || ''}
               onChange={(value) => updateContent('writingPartner.description', value)}
               className="text-lg sm:text-xl lg:text-2xl mb-12 text-gray-200 max-w-5xl leading-relaxed"
             />
@@ -93,7 +90,7 @@ export default function SongwritersSection({ content: propContent }: Songwriters
               </ul>
             </div>
             <CTAButton 
-              text={content?.writingPartner?.button?.text || localContent.button.text}
+              text={localContent.button?.text || ''}
               variant="light" 
             />
           </div>

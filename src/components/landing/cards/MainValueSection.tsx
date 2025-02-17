@@ -19,12 +19,6 @@ const MainValueSection: React.FC = () => {
       .catch(error => console.error('Error loading main value content:', error));
   }, []);
 
-  const [questions, setQuestions] = React.useState<string[]>([
-    "How can I make this chorus hit harder?",
-    "What chord progression would work here?",
-    "Help me write lyrics about...",
-    "Can you produce this in a pop style?"
-  ]);
 
   if (!localContent) {
     return null; // or loading state
@@ -49,33 +43,33 @@ const MainValueSection: React.FC = () => {
       <div className="w-full max-w-4xl mx-auto relative z-10">
         <div className="text-center">
           <EditableText
-            content={localContent.title}
+            content={localContent.title || ''}
             onChange={(value) => updateContent('mainValue.title', value)}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-poppins font-extralight mb-8 text-center text-[#1a1a1a] leading-[1.2] [text-shadow:1px_1px_4px_rgba(0,0,0,0.15)]"
             as="h2"
           />
           
           <EditableText
-            content={localContent.description}
+            content={localContent.description || ''}
             onChange={(value) => updateContent('mainValue.description', value)}
             className="text-xl sm:text-2xl mb-12 text-gray-100 mx-auto [text-shadow:0px_2px_4px_rgba(0,0,0,0.1)] leading-[1.5] max-w-[800px]"
           />
 
           <div className="bg-white/[0.12] backdrop-blur-sm rounded-2xl p-8 mb-12 max-w-2xl mx-auto shadow-[0_4px_12px_rgba(0,0,0,0.1),inset_0px_2px_10px_rgba(0,0,0,0.1)] border border-white/10">
             <EditableText
-              content={localContent.subtitle}
+              content={localContent.subtitle || ''}
               onChange={(value) => updateContent('mainValue.subtitle', value)}
               className="text-2xl sm:text-3xl font-medium mb-8 text-white [text-shadow:0px_2px_4px_rgba(0,0,0,0.1)]"
               as="h3"
             />
             <ul className="text-left text-lg sm:text-xl text-gray-100 space-y-6 leading-[1.4]">
-              {localContent.questions.map((question, index) => (
+              {(localContent.questions || []).map((question, index) => (
                 <li key={index} className="flex items-center">
                   <span className="text-white mr-3">•</span>
                   <EditableText
                     content={`"${question}"`}
                     onChange={(value) => {
-                      const newQuestions = [...localContent.questions];
+                      const newQuestions = [...(localContent.questions || [])];
                       newQuestions[index] = value.replace(/^"|"$/g, '');
                       updateContent('mainValue.questions', newQuestions);
                     }}
@@ -89,7 +83,7 @@ const MainValueSection: React.FC = () => {
           <div className="mt-12 pt-[62px] border-t border-white/20">
             <div className="flex items-center justify-center">
               <CTAButton 
-                text={content?.mainValue?.button?.text || localContent.button.text}
+                text={localContent.button?.text || ''}
                 variant="light" 
               />
             </div>
