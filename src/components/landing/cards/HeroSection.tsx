@@ -57,7 +57,7 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
         <EditableText
           content={initialContent?.description || ''}
           onChange={(value) => updateContent('hero.description', value)}
-          className="text-[1.35rem] sm:text-[1.45rem] mb-12 text-white max-w-3xl mx-auto font-light leading-relaxed tracking-[0.02em]"
+          className="text-[1.35rem] sm:text-[1.45rem] mb-12 text-white max-w-3xl mx-auto font-light leading-relaxed tracking-[0.02em] [text-shadow:0px_2px_4px_rgba(0,0,0,0.1)]"
         />
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
           <CTAButton 
