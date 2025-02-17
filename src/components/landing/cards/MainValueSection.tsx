@@ -38,7 +38,7 @@ const MainValueSection: React.FC = () => {
   };
 
   return (
-    <section className="w-full min-h-screen flex items-center relative bg-gradient-to-br from-gray-900 to-black py-24">
+    <section className="w-full h-[100vh] h-[100svh] min-h-[600px] flex items-center relative bg-gradient-to-br from-gray-900 to-black overflow-hidden">
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-10" />
       <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden select-none">
         <div className="shooting-star">
@@ -47,7 +47,7 @@ const MainValueSection: React.FC = () => {
         </div>
       </div>
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
-        <div className="text-center lg:text-left">
+        <div className="text-white text-center lg:text-left">
           <h2 className="text-3xl sm:text-4xl lg:text-6xl font-light mb-8">
             <EditableText
               content={localContent.title || 'Start Songs'}
@@ -63,7 +63,7 @@ const MainValueSection: React.FC = () => {
           <EditableText
             content={localContent.description || "Eliminate uncertainty at the beginning of the songwriting process. Get inspired by AI-generated themes, chord progressions, and melody ideas to kickstart your creation."}
             onChange={(value: string) => updateContent('mainValue.description', value)}
-            className="text-xl lg:text-2xl mb-12 text-gray-300 max-w-xl"
+            className="text-xl lg:text-2xl mb-12 text-white/80 max-w-xl"
           />
 
           <div className="bg-white/[0.12] backdrop-blur-sm rounded-2xl p-8 mb-12 max-w-2xl mx-auto shadow-[0_4px_12px_rgba(0,0,0,0.1),inset_0px_2px_10px_rgba(0,0,0,0.1)] border border-white/10">
