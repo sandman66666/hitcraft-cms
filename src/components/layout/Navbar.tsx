@@ -22,9 +22,9 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
             <img
-              src="/assets/images/logo.svg"
+              src="/assets/images/home-logo.webp"
               alt="HitCraft"
-              className={`h-8 w-auto ${isScrolled ? '' : 'filter invert brightness-0 invert'}`}
+              className={`h-24 w-auto ${isScrolled ? '' : 'filter invert brightness-0 invert'}`}
             />
           </Link>
 
