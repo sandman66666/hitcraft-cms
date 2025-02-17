@@ -122,10 +122,22 @@ app.post('/api/save-content', async (req: Request, res: Response) => {
     });
 
     if (currentContent) {
-      await Backup.create({ content: currentContent.content });
-      // Deactivate the current content
-      currentContent.isActive = false;
-      await currentContent.save();
+      try {
+        await Backup.create({ 
+          content: currentContent.content,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        });
+        // Deactivate the current content
+        currentContent.isActive = false;
+        await currentContent.save();
+      } catch (backupError) {
+        console.error('Error creating backup:', backupError);
+        return res.status(500).json({ 
+          success: false, 
+          error: 'Failed to create backup' 
+        });
+      }
     }
 
     // Save new content

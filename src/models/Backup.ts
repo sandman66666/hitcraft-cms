@@ -5,6 +5,7 @@ class Backup extends Model<any> {
   public id!: number;
   public content!: any;
   public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
 Backup.init({
@@ -21,7 +22,6 @@ Backup.init({
   sequelize,
   modelName: 'Backup',
   timestamps: true,
-  updatedAt: false,
 });
 
 export { Backup };
