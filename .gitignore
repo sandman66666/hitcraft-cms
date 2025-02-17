@@ -34,3 +34,6 @@ public/audio/**/*
 !public/assets/images/favicon.ico
 !public/assets/images/logo.png
 !public/assets/images/logo-small.png
+
+# Exclude Songwriters-LP folder
+Songwriters-LP/
