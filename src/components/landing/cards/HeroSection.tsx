@@ -3,8 +3,8 @@ import { CTAButton } from "@/components/shared/CTAButton";
 import { ContentLoader } from "@/utils/content-loader";
 import EditableText from '../../shared/EditableText';
 import { useEdit } from '../../../contexts/EditContext';
-import PixieDust from '../../shared/PixieDust';
 import { useState, useEffect } from 'react';
+import '@/styles/components/shooting-star.css';
 
 interface HeroSectionProps {
   content?: HeroContent;
@@ -49,7 +49,22 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
       aria-label="Hero"
     >
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-10" />
-      <PixieDust enabled={true} particleCount={200} />
+      <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
+        {[...Array(3)].map((_, i) => (
+          <div 
+            key={i} 
+            className="shooting-star" 
+            style={{ 
+              animationDelay: `${i * 4 + Math.random() * 2}s`,
+              bottom: `${Math.random() * 20}%`,
+              left: `${Math.random() * 10}%`
+            }}
+          >
+            <div className="star"></div>
+            <div className="star-trail"></div>
+          </div>
+        ))}
+      </div>
       <div className="text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <EditableText
           content={initialContent?.title || ''}
@@ -69,7 +84,7 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
         <EditableText
           content={initialContent?.description || ''}
           onChange={(value) => updateContent('hero.description', value)}
-          className="text-[1.35rem] sm:text-[1.45rem] mb-12 text-gray-300 max-w-3xl mx-auto font-light leading-relaxed tracking-[0.02em]"
+          className="text-[1.35rem] sm:text-[1.45rem] mb-12 text-white max-w-3xl mx-auto font-light leading-relaxed tracking-[0.02em]"
         />
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
           <CTAButton 
