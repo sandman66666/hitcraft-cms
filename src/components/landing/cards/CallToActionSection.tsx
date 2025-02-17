@@ -66,22 +66,24 @@ export default function CallToActionSection({ content: propContent }: CallToActi
               variant="dark" 
             />
           </div>
-          <div className="mt-6 text-gray-600 text-sm sm:text-base">
-            {(localContent.features || []).map((feature: string, index: number) => (
-              <EditableText
-                key={index}
-                content={feature}
-                onChange={(value) => {
-                  const newFeatures = [...(localContent.features || [])];
-                  newFeatures[index] = value;
-                  updateContent('callToAction.features', newFeatures);
-                }}
-                className="inline-block"
-              />
-            )).reduce((prev: React.ReactNode, curr: React.ReactNode) => (
-              <>{prev} • {curr}</>
-            ))}
-          </div>
+          {(localContent.features || []).length > 0 && (
+            <div className="mt-6 text-gray-600 text-sm sm:text-base">
+              {(localContent.features || []).map((feature: string, index: number) => (
+                <EditableText
+                  key={index}
+                  content={feature}
+                  onChange={(value) => {
+                    const newFeatures = [...(localContent.features || [])];
+                    newFeatures[index] = value;
+                    updateContent('callToAction.features', newFeatures);
+                  }}
+                  className="inline-block"
+                />
+              )).reduce((prev: React.ReactNode, curr: React.ReactNode) => (
+                <>{prev} • {curr}</>
+              ), <></>)}
+            </div>
+          )}
         </div>
       </div>
     </section>
