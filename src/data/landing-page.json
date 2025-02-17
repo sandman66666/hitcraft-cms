@@ -6,9 +6,7 @@
     "button": {
       "text": "START CREATING NOW"
     },
-    "secondaryButton": {
-      "text": "No credit card required • Try it free"
-    }
+    "secondaryText": "No credit card required • Try it free"
   },
   "mainValue": {
     "title": "Start Songs",
