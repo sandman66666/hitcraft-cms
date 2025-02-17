@@ -57,11 +57,14 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
           className="text-xl sm:text-2xl italic text-white mb-12 animate-fade-in font-poppins"
         />
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[6rem] font-extralight mb-12 font-poppins bg-gradient-to-r from-[#A533FF] to-[#ff3366] text-transparent bg-clip-text leading-[1.15] max-w-4xl mx-auto">
-          {initialContent?.subtitle?.split(' ').map((word, index) => (
-            <span key={index} className={word === "AI-POWERED" ? 'font-black' : ''}>
-              {word}{' '}
-            </span>
-          ))}
+          {initialContent?.subtitle?.split(' ').map((word, index) => {
+            const isAIPowered = word.includes("AI-") || word.includes("Powered");
+            return (
+              <span key={index} className={isAIPowered ? 'font-black' : ''}>
+                {word}{' '}
+              </span>
+            );
+          })}
         </h1>
         <EditableText
           content={initialContent?.description || ''}
