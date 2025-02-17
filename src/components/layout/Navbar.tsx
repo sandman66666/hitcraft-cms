@@ -25,11 +25,11 @@ export default function Navbar() {
       isScrolled ? 'bg-white/80 backdrop-blur-md' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-48">
+        <div className={`flex justify-between items-center ${isScrolled ? 'h-20' : 'h-32'} transition-all duration-300`}>
           <img
-            src="/assets/images/home-logo.webp"
+            src="/assets/images/logo.webp"
             alt="HitCraft"
-            className={`h-[180px] w-auto ${isScrolled ? '' : 'filter invert brightness-0 invert'}`}
+            className={`${isScrolled ? 'h-12' : 'h-16'} w-auto transition-all duration-300 ${isScrolled ? '' : 'filter invert brightness-0 invert'}`}
           />
 
           <div className="flex items-center space-x-6">
@@ -45,14 +45,14 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`inline-flex items-center justify-center p-2 rounded-md focus:outline-none transition-colors ${
+              className={`inline-flex items-center justify-center p-2 rounded-md focus:outline-none transition-all duration-300 ${
                 isScrolled ? 'text-black hover:text-black/70' : 'text-white hover:text-white/70'
               }`}
               aria-expanded={isMenuOpen}
             >
               <span className="sr-only">Open main menu</span>
               <svg
-                className="block h-8 w-8"
+                className={`block ${isScrolled ? 'h-6 w-6' : 'h-8 w-8'} transition-all duration-300`}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"

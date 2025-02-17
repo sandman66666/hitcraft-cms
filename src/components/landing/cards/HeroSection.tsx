@@ -28,7 +28,7 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
 
   return (
     <section 
-      className="w-full h-[100vh] h-[100svh] min-h-[600px] flex items-center justify-center relative bg-gradient-to-br from-gray-900 to-black overflow-hidden" 
+      className="w-full h-[100vh] h-[100svh] min-h-[600px] flex items-center relative bg-gradient-to-br from-gray-900 to-black overflow-hidden"
       aria-label="Hero"
     >
       <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-10" />
@@ -39,26 +39,26 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
         </div>
       </div>
       <div className="text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-light mb-16 leading-[1.3]">
+        <h1 className="text-6xl sm:text-7xl lg:text-9xl font-extralight mb-8 leading-[1.2]">
           <EditableText
             content={initialContent?.title || 'Turn Your Ideas'}
             onChange={(value) => updateContent('hero.title', value)}
-            className="bg-clip-text text-transparent bg-gradient-to-r from-[#8a44c8] to-[#df0c39] animate-fade-in"
+            className="bg-clip-text text-transparent bg-gradient-to-r from-[#8a44c8] to-[#df0c39] animate-fade-in block"
           />
           <EditableText
             content={initialContent?.subtitle || 'Into Finished Songs'}
             onChange={(value) => updateContent('hero.subtitle', value)}
-            className="font-bold block mt-6 mb-6 pb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#8a44c8] to-[#df0c39]"
+            className="font-bold block mt-4 bg-clip-text text-transparent bg-gradient-to-r from-[#8a44c8] to-[#df0c39]"
           />
         </h1>
         <EditableText
           content={initialContent?.description || "Whether you're stuck on lyrics, need help composing melodies, or want to bring your song to life—HitCraft helps you write songs, effortlessly"}
           onChange={(value: string) => updateContent('hero.description', value)}
-          className="text-xl sm:text-2xl lg:text-3xl font-light mb-16 text-white max-w-3xl mx-auto animate-fade-in-delay"
+          className="text-xl sm:text-2xl lg:text-3xl font-light mb-12 text-white/80 max-w-3xl mx-auto animate-fade-in-delay leading-relaxed"
         />
         <div className="inline-flex flex-col items-center animate-fade-in-delay-2">
           <CTAButton 
-            className="text-xl bg-gradient-to-r from-[#8a44c8] to-[#df0c39] text-white px-8 py-4 rounded-full font-black transition-all duration-300 hover:scale-105 hover:shadow-[0px_4px_12px_rgba(138,68,200,0.3)] hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px]"
+            className="text-lg sm:text-xl bg-gradient-to-r from-[#8a44c8] to-[#df0c39] text-white px-8 py-4 rounded-full font-black transition-all duration-300 hover:scale-105 hover:shadow-[0px_4px_12px_rgba(138,68,200,0.3)] hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[240px]"
             text={initialContent?.button?.text || 'START CREATING NOW'}
             variant="light"
           />

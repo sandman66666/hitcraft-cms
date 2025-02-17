@@ -49,13 +49,20 @@ export default function CoreBenefitsSection({ content: initialContent }: CoreBen
   };
 
   return (
-    <section className="w-full min-h-[100vh] min-h-[100svh] py-16 sm:py-24 pb-[74px] relative bg-gradient-to-br from-purple-50 to-white overflow-hidden scroll-snap-align-start">
+    <section className="w-full h-[100vh] h-[100svh] py-16 sm:py-24 pb-[74px] relative bg-gradient-to-br from-gray-900 to-black overflow-hidden">
+      <div className="absolute inset-0 bg-[url('/assets/images/bg/2xl_bg.png')] bg-cover bg-center opacity-10" />
+      <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden select-none">
+        <div className="shooting-star">
+          <div className="star"></div>
+          <div className="star-trail"></div>
+        </div>
+      </div>
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16 sm:mb-20">
           <EditableText
             content={initialContent.title}
             onChange={(value) => updateContent('coreBenefits.title', value)}
-            className="text-4xl sm:text-5xl lg:text-[72px] font-extralight mb-12 text-gray-900 font-poppins [text-shadow:1px_1px_4px_rgba(0,0,0,0.15)]"
+            className="text-4xl sm:text-5xl lg:text-[72px] font-extralight mb-12 text-white font-poppins bg-clip-text text-transparent bg-gradient-to-r from-[#8a44c8] to-[#df0c39] [text-shadow:1px_1px_4px_rgba(0,0,0,0.15)]"
             as="h2"
           />
         </div>
@@ -64,7 +71,7 @@ export default function CoreBenefitsSection({ content: initialContent }: CoreBen
           {initialContent.benefits.map((benefit: Benefit, index: number) => (
             <div 
               key={index} 
-              className="text-center p-6 sm:p-8 rounded-2xl bg-white/90 backdrop-blur-sm shadow-[0px_4px_12px_rgba(0,0,0,0.1)] hover:shadow-[0px_6px_16px_rgba(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-1"
+              className="text-center p-6 sm:p-8 rounded-2xl bg-white/[0.12] backdrop-blur-sm shadow-[0px_4px_12px_rgba(0,0,0,0.1)] hover:shadow-[0px_6px_16px_rgba(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-1 border border-white/10"
             >
               <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-gradient-to-r from-[#A533FF] to-[#ff3366] rounded-full flex items-center justify-center shadow-[0px_4px_8px_rgba(0,0,0,0.15)]">
                 {iconMap[benefit.icon]}
@@ -72,13 +79,13 @@ export default function CoreBenefitsSection({ content: initialContent }: CoreBen
               <EditableText
                 content={benefit.title}
                 onChange={(value) => updateContent(`coreBenefits.benefits[${index}].title`, value)}
-                className="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 leading-tight"
+                className="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 text-white leading-tight"
                 as="h3"
               />
               <EditableText
                 content={benefit.description}
                 onChange={(value) => updateContent(`coreBenefits.benefits[${index}].description`, value)}
-                className="text-base sm:text-lg text-gray-600 leading-relaxed"
+                className="text-base sm:text-lg text-gray-300 leading-relaxed"
               />
             </div>
           ))}
@@ -89,7 +96,7 @@ export default function CoreBenefitsSection({ content: initialContent }: CoreBen
           <CTAButton 
             text="LET'S GO!"
             variant="light"
-            className="bg-white !text-purple-700 px-8 py-4 rounded-full text-lg font-[700] transition-all duration-300 hover:scale-105 shadow-[0px_4px_12px_rgba(0,0,0,0.2)] hover:shadow-[0px_6px_16px_rgba(0,0,0,0.3)] transform hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px] mx-auto"
+            className="bg-gradient-to-r from-[#8a44c8] to-[#df0c39] text-white px-8 py-4 rounded-full text-lg font-[700] transition-all duration-300 hover:scale-105 shadow-[0px_4px_12px_rgba(0,0,0,0.2)] hover:shadow-[0px_6px_16px_rgba(0,0,0,0.3)] transform hover:-translate-y-0.5 flex items-center justify-center w-full sm:w-auto min-w-[200px] mx-auto"
           />
         </div>
       </div>
