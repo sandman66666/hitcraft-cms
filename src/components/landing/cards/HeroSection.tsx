@@ -38,7 +38,7 @@ export default function HeroSection({ content: initialContent }: HeroSectionProp
           <div className="star-trail"></div>
         </div>
       </div>
-      <div className="text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="text-center max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 relative z-10">
         <h1 className="text-7xl sm:text-8xl lg:text-[120px] font-extralight mb-12 leading-[1.1]">
           <EditableText
             content={initialContent?.title || 'Turn Your Ideas'}
