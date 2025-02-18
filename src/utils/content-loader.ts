@@ -17,7 +17,12 @@ export class ContentLoader {
     const now = Date.now();
     if (!this.content || now - this.lastFetchTime > this.cacheDuration) {
       try {
-        const response = await fetch('/api/get-content');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/get-content`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch content');
         }

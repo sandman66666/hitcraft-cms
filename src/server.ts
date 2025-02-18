@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from 'express-serve-static-core';
 const express = require('express');
+const cors = require('cors');
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
@@ -12,6 +13,17 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+// Configure CORS
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'development' ? 'http://localhost:5173' : process.env.VITE_APP_URL,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  maxAge: 86400
+};
+
+app.use(cors(corsOptions));
 
 import { LandingPageContent } from './types/landing';
 
@@ -112,8 +124,11 @@ const initializeDatabase = async () => {
   }
 };
 
+// Create API router
+const apiRouter = express.Router();
+
 // API Routes
-app.post('/api/save-content', async (req: Request, res: Response) => {
+apiRouter.post('/save-content', async (req: Request, res: Response) => {
   try {
     const { content } = req.body;
 
@@ -160,7 +175,7 @@ app.post('/api/save-content', async (req: Request, res: Response) => {
   }
 });
 
-app.get('/api/get-content', async (_req: Request, res: Response) => {
+apiRouter.get('/get-content', async (_req: Request, res: Response) => {
   try {
     // Get the most recent active content
     const content = await Content.findOne({
@@ -192,7 +207,7 @@ app.get('/api/get-content', async (_req: Request, res: Response) => {
   }
 });
 
-app.get('/api/get-backups', async (_req: Request, res: Response) => {
+apiRouter.get('/get-backups', async (_req: Request, res: Response) => {
   try {
     const backups = await Backup.findAll({
       order: [['createdAt', 'DESC']]
@@ -203,6 +218,9 @@ app.get('/api/get-backups', async (_req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to get backups' });
   }
 });
+
+// Mount API router
+app.use('/api', apiRouter);
 
 // Serve static files from the vite build output
 const clientPath = path.join(process.cwd(), 'dist/client');
@@ -219,7 +237,7 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).send('Something broke!');
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5176;
 
 // Initialize database and start server
 initializeDatabase().then(() => {

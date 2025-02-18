@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@descope/react-sdk": "^2.6.0",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/express-serve-static-core": "^5.0.6",
     "@types/mongoose": "^5.11.96",
@@ -11,6 +12,7 @@
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
+    "cors": "^2.8.5",
     "dompurify": "^3.2.4",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
